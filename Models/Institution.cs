@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Metrics;
 
 namespace ProjectManagementAPIB.Models
 {
     public class Institution
     {
-        public int InstitutionID { get; set; }
+        [Key]
+        public string InstitutionID { get; set; }
         public string InstitutionName { get; set; }
-        public int StageID { get; set; }
+        public string StageID { get; set; }
         public InstitutionStage Stage { get; set; }
-        public int StatusID { get; set; }
+        public string StatusID { get; set; }
         public InstitutionStatus Status { get; set; }
         public string InstitutionEmail { get; set; }
         public string InstitutionContact { get; set; }

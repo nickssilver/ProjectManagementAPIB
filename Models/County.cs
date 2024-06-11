@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjectManagementAPIB.Models
 {
     public class County
     {
+        [Key]
         public int CountyID { get; set; }
         public string SubCounty { get; set; }
         public string CountyName { get; set; }

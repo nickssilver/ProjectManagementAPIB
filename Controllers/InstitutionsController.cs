@@ -54,7 +54,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/Institutions/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInstitution(int id, Institution institution)
+        public async Task<IActionResult> PutInstitution(string id, Institution institution)
         {
             if (id != institution.InstitutionID)
             {
@@ -98,7 +98,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool InstitutionExists(int id)
+        private bool InstitutionExists(string id)
         {
             return _context.Institutions.Any(e => e.InstitutionID == id);
         }
