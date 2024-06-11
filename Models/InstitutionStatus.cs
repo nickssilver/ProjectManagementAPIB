@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ProjectManagementAPIB.Models
 {
@@ -9,6 +8,5 @@ namespace ProjectManagementAPIB.Models
         public string StatusID { get; set; }
         public string StatusName { get; set; }
         public string Notes { get; set; }
-        public ICollection<Institution> Institutions { get; set; }
     }
 }

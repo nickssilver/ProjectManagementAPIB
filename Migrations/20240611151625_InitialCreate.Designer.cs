@@ -12,7 +12,7 @@ using ProjectManagementAPIB.Data;
 namespace ProjectManagementAPIB.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    [Migration("20240611143409_InitialCreate")]
+    [Migration("20240611151625_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -98,23 +98,17 @@ namespace ProjectManagementAPIB.Migrations
 
                     b.Property<string>("StageID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StatusID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SubCounty")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("InstitutionID");
-
-                    b.HasIndex("CountyID");
-
-                    b.HasIndex("StageID");
-
-                    b.HasIndex("StatusID");
 
                     b.ToTable("Institutions");
                 });
@@ -153,48 +147,6 @@ namespace ProjectManagementAPIB.Migrations
                     b.HasKey("StatusID");
 
                     b.ToTable("InstitutionStatuses");
-                });
-
-            modelBuilder.Entity("ProjectManagementAPIB.Models.Institution", b =>
-                {
-                    b.HasOne("ProjectManagementAPIB.Models.County", "County")
-                        .WithMany("Institutions")
-                        .HasForeignKey("CountyID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectManagementAPIB.Models.InstitutionStage", "Stage")
-                        .WithMany("Institutions")
-                        .HasForeignKey("StageID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectManagementAPIB.Models.InstitutionStatus", "Status")
-                        .WithMany("Institutions")
-                        .HasForeignKey("StatusID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("County");
-
-                    b.Navigation("Stage");
-
-                    b.Navigation("Status");
-                });
-
-            modelBuilder.Entity("ProjectManagementAPIB.Models.County", b =>
-                {
-                    b.Navigation("Institutions");
-                });
-
-            modelBuilder.Entity("ProjectManagementAPIB.Models.InstitutionStage", b =>
-                {
-                    b.Navigation("Institutions");
-                });
-
-            modelBuilder.Entity("ProjectManagementAPIB.Models.InstitutionStatus", b =>
-                {
-                    b.Navigation("Institutions");
                 });
 #pragma warning restore 612, 618
         }

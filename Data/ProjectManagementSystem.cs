@@ -19,21 +19,6 @@ namespace ProjectManagementAPIB.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Institution>()
-                .HasOne(i => i.Stage)
-                .WithMany(s => s.Institutions)
-                .HasForeignKey(i => i.StageID);
-
-            modelBuilder.Entity<Institution>()
-                .HasOne(i => i.Status)
-                .WithMany(s => s.Institutions)
-                .HasForeignKey(i => i.StatusID);
-
-            modelBuilder.Entity<Institution>()
-                .HasOne(i => i.County)
-                .WithMany(c => c.Institutions)
-                .HasForeignKey(i => i.CountyID);
         }
     }
 }
