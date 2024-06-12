@@ -115,7 +115,7 @@ If you want to contribute to this project, please fork the repository and submit
 
 ## License
 
-This project is licensed under the 'Optimum Computer Systems'. Use of this project outside or elsewhere is prohibited unless with our consent.
+This project is licensed under the ``Optimum Computer Systems``. Use of this project outside or elsewhere is prohibited unless with our consent.
 
 ---
 
