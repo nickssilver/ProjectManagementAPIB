@@ -15,6 +15,8 @@ namespace ProjectManagementAPIB.Data
         public DbSet<InstitutionStage> InstitutionStages { get; set; }
         public DbSet<InstitutionStatus> InstitutionStatuses { get; set; }
         public DbSet<County> Counties { get; set; }
+        public DbSet<Participant> Participants { get; set; }
+        public DbSet<Level> Levels { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

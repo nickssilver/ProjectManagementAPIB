@@ -99,6 +99,25 @@ Press `F5` or click on the `Start` button in Visual Studio to run the applicatio
 - **PUT /api/Counties/{id}**: Update an existing county by ID
 - **DELETE /api/Counties/{id}**: Delete a county by ID
 
+
+#### ParticipantsController
+
+
+- `GET /api/Participants`: Retrieve all participants.
+- `GET /api/Participants/{id}`: Retrieve a specific participant by ID.
+- `POST /api/Participants`: Create a new participant.
+- `PUT /api/Participants/{id}`: Update an existing participant by ID.
+- `DELETE /api/Participants/{id}`: Delete a participant by ID.
+
+#### LevelsController
+
+
+- `GET /api/Levels`: Retrieve all levels.
+- `GET /api/Levels/{id}`: Retrieve a specific level by ID.
+- `POST /api/Levels`: Create a new level.
+- `PUT /api/Levels/{id}`: Update an existing level by ID.
+- `DELETE /api/Levels/{id}`: Delete a level by ID.
+
 ### Using Swagger
 
 The API comes with Swagger integrated for easy testing and documentation. Once the application is running, navigate to `https://localhost:5001/swagger` or `http://localhost:5000/swagger` to access the Swagger UI.
