@@ -10,56 +10,54 @@ namespace ProjectManagementAPIB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DonorsController : ControllerBase
+    public class HelperTypesController : ControllerBase
     {
         private readonly ProjectManagementContext _context;
 
-        public DonorsController(ProjectManagementContext context)
+        public HelperTypesController(ProjectManagementContext context)
         {
             _context = context;
         }
 
-        // GET: api/Donors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Donor>>> GetDonors()
+        public async Task<ActionResult<IEnumerable<HelperType>>> GetHelperTypes()
         {
-            return await _context.Donors.ToListAsync();
+            return await _context.HelperTypes.ToListAsync();
         }
 
-        // GET: api/Donors/{id}
+       
         [HttpGet("{id}")]
-        public async Task<ActionResult<Donor>> GetDonor(int id)
+        public async Task<ActionResult<HelperType>> GetHelperType(int id)
         {
-            var donor = await _context.Donors.FindAsync(id);
+            var helperType = await _context.HelperTypes.FindAsync(id);
 
-            if (donor == null)
+            if (helperType == null)
             {
                 return NotFound();
             }
 
-            return donor;
+            return helperType;
         }
 
-        // POST: api/Donors
         [HttpPost]
-        public async Task<ActionResult<Donor>> PostDonor(Donor donor)
+        public async Task<ActionResult<HelperType>> PostHelperType(HelperType helperType)
         {
-            _context.Donors.Add(donor);
+            _context.HelperTypes.Add(helperType);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDonor", new { id = donor.DonorID }, donor);
+            return CreatedAtAction("GetHelperType", new { id = helperType.TypeID }, helperType);
         }
 
-        // PUT: api/Donors/{id}
+        
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDonor(int id, Donor donor)
+        public async Task<IActionResult> PutHelperType(int id, HelperType helperType)
         {
-            if (id != donor.DonorID)
+            if (id != helperType.TypeID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(donor).State = EntityState.Modified;
+            _context.Entry(helperType).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +65,7 @@ namespace ProjectManagementAPIB.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DonorExists(id))
+                if (!HelperTypeExists(id))
                 {
                     return NotFound();
                 }
@@ -80,25 +78,25 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Donors/{id}
+        
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDonor(int id)
+        public async Task<IActionResult> DeleteHelperType(int id)
         {
-            var donor = await _context.Donors.FindAsync(id);
-            if (donor == null)
+            var helperType = await _context.HelperTypes.FindAsync(id);
+            if (helperType == null)
             {
                 return NotFound();
             }
 
-            _context.Donors.Remove(donor);
+            _context.HelperTypes.Remove(helperType);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool DonorExists(int id)
+        private bool HelperTypeExists(int id)
         {
-            return _context.Donors.Any(e => e.DonorID == id);
+            return _context.HelperTypes.Any(e => e.TypeID == id);
         }
     }
 }

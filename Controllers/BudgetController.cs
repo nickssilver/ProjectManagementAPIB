@@ -10,56 +10,56 @@ namespace ProjectManagementAPIB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DonorsController : ControllerBase
+    public class BudgetController : ControllerBase
     {
         private readonly ProjectManagementContext _context;
 
-        public DonorsController(ProjectManagementContext context)
+        public BudgetController(ProjectManagementContext context)
         {
             _context = context;
         }
 
-        // GET: api/Donors
+        // GET: api/Budget
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Donor>>> GetDonors()
+        public async Task<ActionResult<IEnumerable<Budget>>> GetBudgets()
         {
-            return await _context.Donors.ToListAsync();
+            return await _context.Budgets.ToListAsync();
         }
 
-        // GET: api/Donors/{id}
+        // GET: api/Budget/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Donor>> GetDonor(int id)
+        public async Task<ActionResult<Budget>> GetBudget(int id)
         {
-            var donor = await _context.Donors.FindAsync(id);
+            var budget = await _context.Budgets.FindAsync(id);
 
-            if (donor == null)
+            if (budget == null)
             {
                 return NotFound();
             }
 
-            return donor;
+            return budget;
         }
 
-        // POST: api/Donors
+        // POST: api/Budget
         [HttpPost]
-        public async Task<ActionResult<Donor>> PostDonor(Donor donor)
+        public async Task<ActionResult<Budget>> PostBudget(Budget budget)
         {
-            _context.Donors.Add(donor);
+            _context.Budgets.Add(budget);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDonor", new { id = donor.DonorID }, donor);
+            return CreatedAtAction("GetBudget", new { id = budget.ProjectID }, budget);
         }
 
-        // PUT: api/Donors/{id}
+        // PUT: api/Budget/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDonor(int id, Donor donor)
+        public async Task<IActionResult> PutBudget(int id, Budget budget)
         {
-            if (id != donor.DonorID)
+            if (id != budget.ProjectID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(donor).State = EntityState.Modified;
+            _context.Entry(budget).State = EntityState.Modified;
 
             try
             {
@@ -67,7 +67,7 @@ namespace ProjectManagementAPIB.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DonorExists(id))
+                if (!BudgetExists(id))
                 {
                     return NotFound();
                 }
@@ -80,25 +80,25 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Donors/{id}
+        // DELETE: api/Budget/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDonor(int id)
+        public async Task<IActionResult> DeleteBudget(int id)
         {
-            var donor = await _context.Donors.FindAsync(id);
-            if (donor == null)
+            var budget = await _context.Budgets.FindAsync(id);
+            if (budget == null)
             {
                 return NotFound();
             }
 
-            _context.Donors.Remove(donor);
+            _context.Budgets.Remove(budget);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool DonorExists(int id)
+        private bool BudgetExists(int id)
         {
-            return _context.Donors.Any(e => e.DonorID == id);
+            return _context.Budgets.Any(e => e.ProjectID == id);
         }
     }
 }
