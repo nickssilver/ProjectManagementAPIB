@@ -90,7 +90,7 @@ cd ProjectManagementAPIB
    Update-Database
    ```
 
-### Running the Application
+### Running the Application :truck:
 
 Press `F5` or click on the `Start` button in Visual Studio to run the application. The API will be hosted at `https://localhost:5001` or `http://localhost:5000`.
 
