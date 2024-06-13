@@ -28,7 +28,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/PartnerTypes/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<PartnerType>> GetPartnerType(int id)
+        public async Task<ActionResult<PartnerType>> GetPartnerType(string id)
         {
             var partnerType = await _context.PartnerTypes.FindAsync(id);
 
@@ -52,7 +52,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/PartnerTypes/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPartnerType(int id, PartnerType partnerType)
+        public async Task<IActionResult> PutPartnerType(string id, PartnerType partnerType)
         {
             if (id != partnerType.TypeID)
             {
@@ -82,7 +82,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/PartnerTypes/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePartnerType(int id)
+        public async Task<IActionResult> DeletePartnerType(string id)
         {
             var partnerType = await _context.PartnerTypes.FindAsync(id);
             if (partnerType == null)
@@ -96,7 +96,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool PartnerTypeExists(int id)
+        private bool PartnerTypeExists(string id)
         {
             return _context.PartnerTypes.Any(e => e.TypeID == id);
         }

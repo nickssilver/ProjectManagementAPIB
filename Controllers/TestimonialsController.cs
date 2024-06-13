@@ -28,7 +28,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/Testimonials/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Testimonial>> GetTestimonial(int id)
+        public async Task<ActionResult<Testimonial>> GetTestimonial(string id)
         {
             var testimonial = await _context.Testimonials.FindAsync(id);
 
@@ -52,7 +52,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/Testimonials/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTestimonial(int id, Testimonial testimonial)
+        public async Task<IActionResult> PutTestimonial(string id, Testimonial testimonial)
         {
             if (id != testimonial.UserID)
             {
@@ -82,7 +82,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/Testimonials/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTestimonial(int id)
+        public async Task<IActionResult> DeleteTestimonial(string id)
         {
             var testimonial = await _context.Testimonials.FindAsync(id);
             if (testimonial == null)
@@ -96,7 +96,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool TestimonialExists(int id)
+        private bool TestimonialExists(string id)
         {
             return _context.Testimonials.Any(e => e.UserID == id);
         }

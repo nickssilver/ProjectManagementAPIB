@@ -28,7 +28,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/Levels/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Level>> GetLevel(int id)
+        public async Task<ActionResult<Level>> GetLevel(string id)
         {
             var level = await _context.Levels.FindAsync(id);
 
@@ -52,7 +52,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/Levels/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLevel(int id, Level level)
+        public async Task<IActionResult> PutLevel(string id, Level level)
         {
             if (id != level.LevelID)
             {
@@ -82,7 +82,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/Levels/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLevel(int id)
+        public async Task<IActionResult> DeleteLevel(string id)
         {
             var level = await _context.Levels.FindAsync(id);
             if (level == null)
@@ -96,7 +96,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool LevelExists(int id)
+        private bool LevelExists(string id)
         {
             return _context.Levels.Any(e => e.LevelID == id);
         }

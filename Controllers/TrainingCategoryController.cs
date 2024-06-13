@@ -28,7 +28,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/TrainingCategory/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<TrainingCategory>> GetTrainingCategory(int id)
+        public async Task<ActionResult<TrainingCategory>> GetTrainingCategory(string id)
         {
             var trainingCategory = await _context.TrainingCategories.FindAsync(id);
 
@@ -52,7 +52,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/TrainingCategory/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTrainingCategory(int id, TrainingCategory trainingCategory)
+        public async Task<IActionResult> PutTrainingCategory(string id, TrainingCategory trainingCategory)
         {
             if (id != trainingCategory.CategoryID)
             {
@@ -82,7 +82,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/TrainingCategory/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTrainingCategory(int id)
+        public async Task<IActionResult> DeleteTrainingCategory(string id)
         {
             var trainingCategory = await _context.TrainingCategories.FindAsync(id);
             if (trainingCategory == null)
@@ -96,7 +96,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool TrainingCategoryExists(int id)
+        private bool TrainingCategoryExists(string id)
         {
             return _context.TrainingCategories.Any(e => e.CategoryID == id);
         }

@@ -28,7 +28,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/Donors/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Donor>> GetDonor(int id)
+        public async Task<ActionResult<Donor>> GetDonor(string id)
         {
             var donor = await _context.Donors.FindAsync(id);
 
@@ -52,7 +52,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/Donors/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDonor(int id, Donor donor)
+        public async Task<IActionResult> PutDonor(string id, Donor donor)
         {
             if (id != donor.DonorID)
             {
@@ -96,7 +96,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool DonorExists(int id)
+        private bool DonorExists(string id)
         {
             return _context.Donors.Any(e => e.DonorID == id);
         }

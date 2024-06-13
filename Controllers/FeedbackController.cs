@@ -26,9 +26,9 @@ namespace ProjectManagementAPIB.Controllers
             return await _context.Feedbacks.ToListAsync();
         }
 
-        // GET: api/Feedback/5
+        // GET: api/Feedback/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Feedback>> GetFeedback(int id)
+        public async Task<ActionResult<Feedback>> GetFeedback(string id)
         {
             var feedback = await _context.Feedbacks.FindAsync(id);
 
@@ -50,9 +50,9 @@ namespace ProjectManagementAPIB.Controllers
             return CreatedAtAction(nameof(GetFeedback), new { id = feedback.RespondentID }, feedback);
         }
 
-        // PUT: api/Feedback/5
+        // PUT: api/Feedback/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFeedback(int id, Feedback feedback)
+        public async Task<IActionResult> PutFeedback(string id, Feedback feedback)
         {
             if (id != feedback.RespondentID)
             {
@@ -80,9 +80,9 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Feedback/5
+        // DELETE: api/Feedback/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFeedback(int id)
+        public async Task<IActionResult> DeleteFeedback(string id)
         {
             var feedback = await _context.Feedbacks.FindAsync(id);
             if (feedback == null)
@@ -96,7 +96,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool FeedbackExists(int id)
+        private bool FeedbackExists(string id)
         {
             return _context.Feedbacks.Any(e => e.RespondentID == id);
         }

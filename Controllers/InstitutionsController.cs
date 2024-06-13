@@ -30,7 +30,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/Institutions/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Institution>> GetInstitution(int id)
+        public async Task<ActionResult<Institution>> GetInstitution(string id)
         {
             var institution = await _context.Institutions.FindAsync(id);
 
@@ -84,7 +84,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/Institutions/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteInstitution(int id)
+        public async Task<IActionResult> DeleteInstitution(string id)
         {
             var institution = await _context.Institutions.FindAsync(id);
             if (institution == null)

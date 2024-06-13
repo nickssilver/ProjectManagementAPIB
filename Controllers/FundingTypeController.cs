@@ -28,7 +28,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/FundingType/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<FundingType>> GetFundingType(int id)
+        public async Task<ActionResult<FundingType>> GetFundingType(string id)
         {
             var fundingType = await _context.FundingTypes.FindAsync(id);
 
@@ -52,7 +52,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/FundingType/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFundingType(int id, FundingType fundingType)
+        public async Task<IActionResult> PutFundingType(string id, FundingType fundingType)
         {
             if (id != fundingType.FundingID)
             {
@@ -82,7 +82,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/FundingType/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFundingType(int id)
+        public async Task<IActionResult> DeleteFundingType(string id)
         {
             var fundingType = await _context.FundingTypes.FindAsync(id);
             if (fundingType == null)
@@ -96,7 +96,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool FundingTypeExists(int id)
+        private bool FundingTypeExists(string id)
         {
             return _context.FundingTypes.Any(e => e.FundingID == id);
         }

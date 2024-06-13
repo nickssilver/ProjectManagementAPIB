@@ -52,7 +52,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/TrainingType/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTrainingType(int id, TrainingType trainingType)
+        public async Task<IActionResult> PutTrainingType(string id, TrainingType trainingType)
         {
             if (id != trainingType.TypeID)
             {
@@ -82,7 +82,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/TrainingType/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTrainingType(int id)
+        public async Task<IActionResult> DeleteTrainingType(string id)
         {
             var trainingType = await _context.TrainingTypes.FindAsync(id);
             if (trainingType == null)
@@ -96,7 +96,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool TrainingTypeExists(int id)
+        private bool TrainingTypeExists(string id)
         {
             return _context.TrainingTypes.Any(e => e.TypeID == id);
         }

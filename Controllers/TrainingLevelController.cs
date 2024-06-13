@@ -52,7 +52,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/TrainingLevel/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTrainingLevel(int id, TrainingLevel trainingLevel)
+        public async Task<IActionResult> PutTrainingLevel(string id, TrainingLevel trainingLevel)
         {
             if (id != trainingLevel.TrainingLevelID)
             {
@@ -82,7 +82,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/TrainingLevel/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTrainingLevel(int id)
+        public async Task<IActionResult> DeleteTrainingLevel(string id)
         {
             var trainingLevel = await _context.TrainingLevels.FindAsync(id);
             if (trainingLevel == null)
@@ -96,7 +96,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool TrainingLevelExists(int id)
+        private bool TrainingLevelExists(string id)
         {
             return _context.TrainingLevels.Any(e => e.TrainingLevelID == id);
         }

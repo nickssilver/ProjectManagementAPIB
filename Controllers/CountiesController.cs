@@ -53,7 +53,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/Counties/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCounty(int id, County county)
+        public async Task<IActionResult> PutCounty(string id, County county)
         {
             if (id != county.CountyID)
             {
@@ -83,7 +83,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/Counties/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCounty(int id)
+        public async Task<IActionResult> DeleteCounty(string id)
         {
             var county = await _context.Counties.FindAsync(id);
             if (county == null)
@@ -97,7 +97,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool CountyExists(int id)
+        private bool CountyExists(string id)
         {
             return _context.Counties.Any(e => e.CountyID == id);
         }

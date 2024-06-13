@@ -50,7 +50,7 @@ namespace ProjectManagementAPIB.Controllers
 
         
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHelperType(int id, HelperType helperType)
+        public async Task<IActionResult> PutHelperType(string id, HelperType helperType)
         {
             if (id != helperType.TypeID)
             {
@@ -80,7 +80,7 @@ namespace ProjectManagementAPIB.Controllers
 
         
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteHelperType(int id)
+        public async Task<IActionResult> DeleteHelperType(string id)
         {
             var helperType = await _context.HelperTypes.FindAsync(id);
             if (helperType == null)
@@ -94,7 +94,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool HelperTypeExists(int id)
+        private bool HelperTypeExists(string id)
         {
             return _context.HelperTypes.Any(e => e.TypeID == id);
         }

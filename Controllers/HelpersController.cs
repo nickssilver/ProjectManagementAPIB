@@ -27,7 +27,7 @@ namespace ProjectManagementAPIB.Controllers
 
         
         [HttpGet("{id}")]
-        public async Task<ActionResult<Helper>> GetHelper(int id)
+        public async Task<ActionResult<Helper>> GetHelper(string id)
         {
             var helper = await _context.Helpers.FindAsync(id);
 
@@ -51,7 +51,7 @@ namespace ProjectManagementAPIB.Controllers
 
         
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHelper(int id, Helper helper)
+        public async Task<IActionResult> PutHelper(string id, Helper helper)
         {
             if (id != helper.HelperID)
             {
@@ -81,7 +81,7 @@ namespace ProjectManagementAPIB.Controllers
 
     
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteHelper(int id)
+        public async Task<IActionResult> DeleteHelper(string id)
         {
             var helper = await _context.Helpers.FindAsync(id);
             if (helper == null)
@@ -95,7 +95,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool HelperExists(int id)
+        private bool HelperExists(string id)
         {
             return _context.Helpers.Any(e => e.HelperID == id);
         }
