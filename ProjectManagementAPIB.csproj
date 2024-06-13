@@ -20,7 +20,6 @@
   <ItemGroup>
     <Folder Include="DTOs\" />
     <Folder Include="Migrations\" />
-    <Folder Include="image\" />
     <Folder Include="Utilities\" />
     <Folder Include="Repositories\" />
     <Folder Include="Services\" />

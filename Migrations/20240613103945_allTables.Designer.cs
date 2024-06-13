@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectManagementAPIB.Data;
 
@@ -11,9 +12,11 @@ using ProjectManagementAPIB.Data;
 namespace ProjectManagementAPIB.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    partial class ProjectManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20240613103945_allTables")]
+    partial class allTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

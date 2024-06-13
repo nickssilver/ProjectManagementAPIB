@@ -35,6 +35,19 @@ namespace ProjectManagementAPIB.Data
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<User> Users { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) => base.OnModelCreating(modelBuilder);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Programm>()
+            .Property(p => p.Cost)
+            .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<Budget>()
+                .Property(b => b.Cost)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<Project>()
+                .Property(p => p.Cost)
+                .HasColumnType("decimal(18,2)");
+        }
     }
 }
