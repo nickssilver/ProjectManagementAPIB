@@ -5,7 +5,7 @@ namespace ProjectManagementAPIB.Models
     public class Project
     {
         [Key]
-        public int ProjectID { get; set; }
+        public string ProjectID { get; set; }
         public string ProjectName { get; set; }
         public string InstitutionName { get; set; }
         public DateTime StartDate { get; set; }

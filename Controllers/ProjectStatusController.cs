@@ -52,7 +52,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/ProjectStatuses/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProjectStatus(int id, ProjectStatus projectStatus)
+        public async Task<IActionResult> PutProjectStatus(string id, ProjectStatus projectStatus)
         {
             if (id != projectStatus.ProjectStatusID)
             {
@@ -96,7 +96,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool ProjectStatusExists(int id)
+        private bool ProjectStatusExists(string id)
         {
             return _context.ProjectStatuses.Any(e => e.ProjectStatusID == id);
         }

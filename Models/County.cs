@@ -5,7 +5,7 @@ namespace ProjectManagementAPIB.Models
     public class County
     {
         [Required]
-        public int CountyID { get; set; }
+        public string CountyID { get; set; }
         public string SubCounty { get; set; }
         public string CountyName { get; set; }
         public string Region { get; set; }

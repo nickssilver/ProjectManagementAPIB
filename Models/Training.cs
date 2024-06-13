@@ -5,7 +5,7 @@ namespace ProjectManagementAPIB.Models
     public class Training
     {
         [Key]
-        public int TrainingID { get; set; }
+        public string TrainingID { get; set; }
         public string TrainingName { get; set; }
         public string InstitutionName { get; set; }
         public string Venue { get; set; }

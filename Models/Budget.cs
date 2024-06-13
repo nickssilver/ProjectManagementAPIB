@@ -5,7 +5,7 @@ namespace ProjectManagementAPIB.Models
     public class Budget
     {
         [Key]
-        public int ProjectID { get; set; }
+        public string ProjectID { get; set; }
         public string ProjectName { get; set; }
         public string Coordinator { get; set; }
         public DateTime StartDate { get; set; }

@@ -5,7 +5,7 @@ namespace ProjectManagementAPIB.Models
     public class Helper
     {
         [Key]
-        public int HelperID { get; set; }
+        public string HelperID { get; set; }
         public string HelperName { get; set; }
         public string InstitutionName { get; set; }
         public string Gender { get; set; }

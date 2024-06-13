@@ -5,7 +5,7 @@ namespace ProjectManagementAPIB.Models
     public class Feedback
     {
         [Key]
-        public int RespondentID { get; set; }
+        public string RespondentID { get; set; }
         public string TitleName { get; set; }
         public string Description { get; set; }
         public string RespondentType { get; set; }

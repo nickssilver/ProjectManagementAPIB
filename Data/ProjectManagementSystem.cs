@@ -21,7 +21,7 @@ namespace ProjectManagementAPIB.Data
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<Donor> Donors { get; set; }
         public DbSet<ProjectReporting> ProjectReportings { get; set; }
-        public DbSet<Program> Programs { get; set; }
+        public DbSet<Programm> Programs { get; set; }
         public DbSet<Helper> Helpers { get; set; }
         public DbSet<HelperType> HelperTypes { get; set; }
         public DbSet<Training> Trainings { get; set; }
@@ -35,9 +35,6 @@ namespace ProjectManagementAPIB.Data
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<User> Users { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder) => base.OnModelCreating(modelBuilder);
     }
 }

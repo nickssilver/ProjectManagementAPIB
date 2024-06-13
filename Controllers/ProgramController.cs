@@ -21,14 +21,14 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/Programs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Program>>> GetPrograms()
+        public async Task<ActionResult<IEnumerable<Programm>>> GetPrograms()
         {
             return await _context.Programs.ToListAsync();
         }
 
         // GET: api/Programs/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Program>> GetProgram(string id)
+        public async Task<ActionResult<Programm>> GetProgram(string id)
         {
             var program = await _context.Programs.FindAsync(id);
 
@@ -42,7 +42,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // POST: api/Programs
         [HttpPost]
-        public async Task<ActionResult<Program>> PostProgram(Program program)
+        public async Task<ActionResult<Programm>> PostProgram(Programm program)
         {
             _context.Programs.Add(program);
             await _context.SaveChangesAsync();
@@ -52,7 +52,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/Programs/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProgram(string id, Program program)
+        public async Task<IActionResult> PutProgram(string id, Programm program)
         {
             if (id != program.ProgramID)
             {
