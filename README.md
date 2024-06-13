@@ -1,16 +1,18 @@
 
 
-
+<div align="center">
+   
 # Project Management System API :construction_worker:
-
+</div>
 <hr>
 
-![GitHub Logo](./images/pms.jpeg)
+![GitHub Logo](./image/pms.jpeg)
 <div align="center">
 
 ## Overview :bulb:
 
 This project is a Project Management System API built using ASP.NET Core Web API. It provides endpoints for managing institutions, their stages, statuses, counties, participants, levels, projects, project statuses, testimonials, donors, project reportings, programs, helpers, helper types, trainings, training levels, training categories, training types, budgets, funding types, partnerships, partner types, feedback, and users. This API allows CRUD operations on the following entities:
+</div>
 
 - Institutions
 - Institution Stages
@@ -36,7 +38,7 @@ This project is a Project Management System API built using ASP.NET Core Web API
 - Partner Types
 - Feedback
 - Users
-</div>
+
 ## Prerequisites :monocle_face:
 
 Before you begin, ensure you have the following installed:
@@ -311,6 +313,8 @@ Press `F5` or click on the `Start` button in Visual Studio to run the applicatio
 - **PUT /api/Users/{username}**: Update an existing user entry by username
 - **DELETE /api/Users/{username}**: Delete a user entry by username
 </details>
+
+
 
 ## Using Swagger :test_tube:
 
