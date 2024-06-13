@@ -332,6 +332,6 @@ If you want to contribute to this project, please fork the repository and submit
 
 ## License :page_facing_up:
 
-This project is licensed under the ``Optimum Computer Systems``. Use of this project outside or elsewhere is prohibited unless with our consent.
+This project is licensed under the [Optimum Computer Systems](https://optimumsystems.co.ke/). Use of this project outside or elsewhere is prohibited unless with our consent.
 
 ---
