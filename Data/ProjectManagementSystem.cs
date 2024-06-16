@@ -5,11 +5,15 @@ using System.Reflection.Emit;
 
 namespace ProjectManagementAPIB.Data
 {
+    // Represents the database context for the Project Management System API
     public class ProjectManagementContext : DbContext
     {
+        // Constructor to pass the options to the base DbContext class
         public ProjectManagementContext(DbContextOptions<ProjectManagementContext> options) : base(options)
         {
         }
+
+        // DbSet properties for each entity in the system, representing tables in the database
         public DbSet<Institution> Institutions { get; set; }
         public DbSet<InstitutionStage> InstitutionStages { get; set; }
         public DbSet<InstitutionStatus> InstitutionStatuses { get; set; }
@@ -35,16 +39,20 @@ namespace ProjectManagementAPIB.Data
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<User> Users { get; set; }
 
+        // Configure the model properties and relationships
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Set the precision and scale for the 'Cost' property in the 'Programm' entity
             modelBuilder.Entity<Programm>()
-            .Property(p => p.Cost)
-            .HasColumnType("decimal(18,2)");
+                .Property(p => p.Cost)
+                .HasColumnType("decimal(18,2)");
 
+            // Set the precision and scale for the 'Cost' property in the 'Budget' entity
             modelBuilder.Entity<Budget>()
                 .Property(b => b.Cost)
                 .HasColumnType("decimal(18,2)");
 
+            // Set the precision and scale for the 'Cost' property in the 'Project' entity
             modelBuilder.Entity<Project>()
                 .Property(p => p.Cost)
                 .HasColumnType("decimal(18,2)");
