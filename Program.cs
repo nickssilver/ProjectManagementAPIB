@@ -21,7 +21,7 @@ builder.Services.AddCors(options =>
         });
 });
 
-// configuring Swagger/OpenAPI 
+// Configure Swagger/OpenAPI 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -37,7 +37,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowAll");
 
-app.UseHttpsRedirection();
+// Commented out for HTTP use only
+// app.UseHttpsRedirection();
 
 app.UseRouting();
 
