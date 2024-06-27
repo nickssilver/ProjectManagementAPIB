@@ -12,8 +12,8 @@ using ProjectManagementAPIB.Data;
 namespace ProjectManagementAPIB.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    [Migration("20240613103945_allTables")]
-    partial class allTables
+    [Migration("20240627181523_AllTables")]
+    partial class AllTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -249,8 +249,9 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CountyID")
-                        .HasColumnType("int");
+                    b.Property<string>("CountyID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InstitutionContact")
                         .IsRequired()
@@ -738,8 +739,9 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleID")
-                        .HasColumnType("int");
+                    b.Property<string>("RoleID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Username");
 

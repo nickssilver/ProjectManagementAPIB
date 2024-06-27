@@ -28,7 +28,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/Projects/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Project>> GetProject(int id)
+        public async Task<ActionResult<Project>> GetProject(string id)
         {
             var project = await _context.Projects.FindAsync(id);
 

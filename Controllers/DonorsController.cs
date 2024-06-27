@@ -82,7 +82,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/Donors/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDonor(int id)
+        public async Task<IActionResult> DeleteDonor(string id)
         {
             var donor = await _context.Donors.FindAsync(id);
             if (donor == null)

@@ -29,7 +29,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/Counties/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<County>> GetCounty(int id)
+        public async Task<ActionResult<County>> GetCounty(string id)
         {
             var county = await _context.Counties.FindAsync(id);
 

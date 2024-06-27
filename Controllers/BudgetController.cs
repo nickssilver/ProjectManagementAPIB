@@ -28,7 +28,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/Budget/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Budget>> GetBudget(int id)
+        public async Task<ActionResult<Budget>> GetBudget(string id)
         {
             var budget = await _context.Budgets.FindAsync(id);
 

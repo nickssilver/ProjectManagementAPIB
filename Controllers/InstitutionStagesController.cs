@@ -29,7 +29,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/InstitutionStages/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<InstitutionStage>> GetInstitutionStage(int id)
+        public async Task<ActionResult<InstitutionStage>> GetInstitutionStage(string id)
         {
             var institutionStage = await _context.InstitutionStages.FindAsync(id);
 

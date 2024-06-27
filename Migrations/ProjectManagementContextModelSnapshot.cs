@@ -246,8 +246,9 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CountyID")
-                        .HasColumnType("int");
+                    b.Property<string>("CountyID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InstitutionContact")
                         .IsRequired()
@@ -735,8 +736,9 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleID")
-                        .HasColumnType("int");
+                    b.Property<string>("RoleID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Username");
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectManagementAPIB.Migrations
 {
     /// <inheritdoc />
-    public partial class allTables : Migration
+    public partial class AllTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -134,7 +134,7 @@ namespace ProjectManagementAPIB.Migrations
                     InstitutionEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InstitutionContact = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CountyID = table.Column<int>(type: "int", nullable: false),
+                    CountyID = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LicenseStartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -387,7 +387,7 @@ namespace ProjectManagementAPIB.Migrations
                 {
                     Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RoleID = table.Column<int>(type: "int", nullable: false),
+                    RoleID = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
