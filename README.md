@@ -92,6 +92,12 @@ cd ProjectManagementAPIB
    dotnet ef database update
 
    ```
+#### Bonus
+Incase of an error in migrations you can use this command to clear all tables in SQLServer and re-run
+
+```
+EXEC sp_msforeachtable 'DROP TABLE ?'
+```
 
 ### Running the Application :truck:
 
