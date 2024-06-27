@@ -86,8 +86,11 @@ cd ProjectManagementAPIB
    Open the **Package Manager Console** (Tools > NuGet Package Manager > Package Manager Console) and run the following commands to apply migrations and create the database:
 
    ```bash
-   Add-Migration InitialCreate
-   Update-Database
+
+   dotnet ef migrations add <NameOfYourMigration>
+
+   dotnet ef database update
+
    ```
 
 ### Running the Application :truck:
