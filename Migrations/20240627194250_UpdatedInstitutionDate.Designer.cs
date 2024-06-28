@@ -12,7 +12,7 @@ using ProjectManagementAPIB.Data;
 namespace ProjectManagementAPIB.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    [Migration("20240627193524_UpdatedInstitutionDate")]
+    [Migration("20240627194250_UpdatedInstitutionDate")]
     partial class UpdatedInstitutionDate
     {
         /// <inheritdoc />

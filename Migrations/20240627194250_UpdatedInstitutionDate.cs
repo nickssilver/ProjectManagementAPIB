@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectManagementAPIB.Migrations
 {
     /// <inheritdoc />
-    public partial class AllTables : Migration
+    public partial class UpdatedInstitutionDate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,8 +36,8 @@ namespace ProjectManagementAPIB.Migrations
                 columns: table => new
                 {
                     CountyID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CountyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
