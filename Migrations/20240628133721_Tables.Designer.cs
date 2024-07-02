@@ -12,8 +12,8 @@ using ProjectManagementAPIB.Data;
 namespace ProjectManagementAPIB.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    [Migration("20240627194250_UpdatedInstitutionDate")]
-    partial class UpdatedInstitutionDate
+    [Migration("20240628133721_Tables")]
+    partial class Tables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

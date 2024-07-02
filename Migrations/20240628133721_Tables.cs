@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectManagementAPIB.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdatedInstitutionDate : Migration
+    public partial class Tables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
