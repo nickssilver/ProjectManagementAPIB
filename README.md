@@ -17,7 +17,7 @@ This project is a Project Management System API built using ASP.NET Core Web API
 - Institutions
 - Institution Stages
 - Institution Statuses
-- Counties
+- Counties /sub counties
 - Participants
 - Levels
 - Projects
@@ -136,11 +136,13 @@ Press `F5` or click on the `Start` button in Visual Studio to run the applicatio
 <details>
   <summary>Counties</summary>
 
-- **GET /api/Counties**: Retrieve all counties
-- **GET /api/Counties/{id}**: Retrieve a specific county by ID
-- **POST /api/Counties**: Create a new county
-- **PUT /api/Counties/{id}**: Update an existing county by ID
-- **DELETE /api/Counties/{id}**: Delete a county by ID
+- **GetCounties**: Retrieves a list of all counties.
+- **GetCounty**: Retrieves a specific county by its ID.
+- **GetSubCountiesByCountyId**: Retrieves all subcounties under a specific county.
+- **PostCounty**: Adds a new county.
+- **PutCounty**: Updates an existing county.
+- **DeleteCounty**: Deletes a county by its ID.
+- **CountyExists**: Checks if a county exists by its ID.
 </details>
 <details>
   <summary>Participants</summary>
