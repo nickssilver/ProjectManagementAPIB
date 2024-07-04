@@ -9,6 +9,7 @@ namespace ProjectManagementAPIB.Models
         public string TrainingName { get; set; }
         public string InstitutionName { get; set; }
         public string Venue { get; set; }
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
         public string Categories { get; set; }
         public string SubCounty { get; set; }
