@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using ProjectManagementAPIB.Data;
 using ProjectManagementAPIB.Models;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ProjectManagementAPIB.Controllers
@@ -41,7 +43,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/County/5/SubCounties
         [HttpGet("{id}/SubCounties")]
-        public async Task<ActionResult<IEnumerable<SubCounty>>> GetSubCountiesByCountyId(int id)
+        public async Task<IActionResult> GetSubCountiesByCountyId(int id)
         {
             var county = await _context.Counties
                 .Include(c => c.SubCounties)
@@ -52,7 +54,20 @@ namespace ProjectManagementAPIB.Controllers
                 return NotFound();
             }
 
-            return Ok(county.SubCounties);
+            // Use custom JSON options for this specific response
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+
+            var result = new ContentResult
+            {
+                Content = JsonSerializer.Serialize(county.SubCounties, options),
+                ContentType = "application/json",
+                StatusCode = 200
+            };
+
+            return result;
         }
 
         // POST: api/County
