@@ -1,10 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using ProjectManagementAPIB.Data;
 using ProjectManagementAPIB.Models;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace ProjectManagementAPIB.Controllers
 {
@@ -13,10 +19,12 @@ namespace ProjectManagementAPIB.Controllers
     public class UserController : ControllerBase
     {
         private readonly ProjectManagementContext _context;
+        private readonly IConfiguration _configuration;
 
-        public UserController(ProjectManagementContext context)
+        public UserController(ProjectManagementContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         // GET: api/User
@@ -26,7 +34,7 @@ namespace ProjectManagementAPIB.Controllers
             return await _context.Users.ToListAsync();
         }
 
-        // GET: api/User/5
+        // GET: api/User/{username}
         [HttpGet("{username}")]
         public async Task<ActionResult<User>> GetUser(string username)
         {
@@ -50,7 +58,7 @@ namespace ProjectManagementAPIB.Controllers
             return CreatedAtAction(nameof(GetUser), new { username = user.Username }, user);
         }
 
-        // PUT: api/User/5
+        // PUT: api/User/{username}
         [HttpPut("{username}")]
         public async Task<IActionResult> PutUser(string username, User user)
         {
@@ -80,7 +88,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        // DELETE: api/User/5
+        // DELETE: api/User/{username}
         [HttpDelete("{username}")]
         public async Task<IActionResult> DeleteUser(string username)
         {
@@ -96,9 +104,63 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
+        // POST: api/User/Login
+        [HttpPost("Login")]
+        public async Task<ActionResult<object>> Login([FromBody] Login loginModel)
+        {
+            var user = await _context.Users
+                .Where(u => u.Username == loginModel.Username && u.Password == loginModel.Password)
+                .Select(u => new
+                {
+                    u.Username,
+                    u.Email,
+                    u.RoleID
+                })
+                .FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            // Generate JWT token
+            var token = GenerateJwtToken(user);
+
+            // Return both token and user details
+            return Ok(new
+            {
+                token,
+                user
+            });
+        }
+        private string GenerateJwtToken(dynamic user)
+        {
+            var claims = new[]
+            {
+        new Claim(JwtRegisteredClaimNames.Sub, user.Username),
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+        new Claim(ClaimTypes.Name, user.Username),
+        new Claim(ClaimTypes.Role, user.RoleID)
+    };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(30),
+                signingCredentials: creds);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+
         private bool UserExists(string username)
         {
             return _context.Users.Any(e => e.Username == username);
         }
     }
+
 }

@@ -1,6 +1,8 @@
 using ProjectManagementAPIB.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,7 @@ builder.Services.AddDbContext<ProjectManagementContext>(options =>
 
 builder.Services.AddControllers();
 
-// CORS Configuration 
+// CORS Configuration
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
@@ -22,7 +24,36 @@ builder.Services.AddCors(options =>
         });
 });
 
-// Configure Swagger/OpenAPI 
+// Ensure JWT configuration values are present
+var jwtKey = builder.Configuration["Jwt:Key"];
+var jwtIssuer = builder.Configuration["Jwt:Issuer"];
+var jwtAudience = builder.Configuration["Jwt:Audience"];
+
+if (string.IsNullOrEmpty(jwtKey) || string.IsNullOrEmpty(jwtIssuer) || string.IsNullOrEmpty(jwtAudience))
+{
+    throw new ArgumentNullException("Jwt configuration values cannot be null or empty.");
+}
+
+// Configure authentication with JWT
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtIssuer,
+        ValidAudience = jwtAudience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+    };
+});
+
+// Configure Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -43,6 +74,7 @@ app.UseCors("AllowAll");
 
 app.UseRouting();
 
+app.UseAuthentication(); // Ensure this is called before UseAuthorization
 app.UseAuthorization();
 
 app.MapControllers();
