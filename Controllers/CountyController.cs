@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectManagementAPIB.Data;
 using ProjectManagementAPIB.Models;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,23 +9,23 @@ namespace ProjectManagementAPIB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CountiesController : ControllerBase
+    public class CountyController : ControllerBase
     {
         private readonly ProjectManagementContext _context;
 
-        public CountiesController(ProjectManagementContext context)
+        public CountyController(ProjectManagementContext context)
         {
             _context = context;
         }
 
-        // GET: api/Counties
+        // GET: api/County
         [HttpGet]
         public async Task<ActionResult<IEnumerable<County>>> GetCounties()
         {
             return await _context.Counties.ToListAsync();
         }
 
-        // GET: api/Counties/5
+        // GET: api/County/5
         [HttpGet("{id}")]
         public async Task<ActionResult<County>> GetCounty(int id)
         {
@@ -41,19 +39,35 @@ namespace ProjectManagementAPIB.Controllers
             return county;
         }
 
-        // POST: api/Counties
+        // GET: api/County/5/SubCounties
+        [HttpGet("{id}/SubCounties")]
+        public async Task<ActionResult<IEnumerable<SubCounty>>> GetSubCountiesByCountyId(int id)
+        {
+            var county = await _context.Counties
+                .Include(c => c.SubCounties)
+                .FirstOrDefaultAsync(c => c.CountyID == id);
+
+            if (county == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(county.SubCounties);
+        }
+
+        // POST: api/County
         [HttpPost]
         public async Task<ActionResult<County>> PostCounty(County county)
         {
             _context.Counties.Add(county);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCounty), new { id = county.CountyID }, county);
+            return CreatedAtAction("GetCounty", new { id = county.CountyID }, county);
         }
 
-        // PUT: api/Counties/5
+        // PUT: api/County/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCounty(string id, County county)
+        public async Task<IActionResult> PutCounty(int id, County county)
         {
             if (id != county.CountyID)
             {
@@ -81,9 +95,9 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Counties/5
+        // DELETE: api/County/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCounty(string id)
+        public async Task<IActionResult> DeleteCounty(int id)
         {
             var county = await _context.Counties.FindAsync(id);
             if (county == null)
@@ -97,7 +111,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool CountyExists(string id)
+        private bool CountyExists(int id)
         {
             return _context.Counties.Any(e => e.CountyID == id);
         }

@@ -28,7 +28,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/TrainingLevel/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<TrainingLevel>> GetTrainingLevel(int id)
+        public async Task<ActionResult<TrainingLevel>> GetTrainingLevel(string id)
         {
             var trainingLevel = await _context.TrainingLevels.FindAsync(id);
 

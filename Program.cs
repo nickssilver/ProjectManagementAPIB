@@ -1,5 +1,6 @@
 using ProjectManagementAPIB.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ProjectManagementContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectManagementConnection")));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+});
 
 // CORS Configuration 
 builder.Services.AddCors(options =>
@@ -21,7 +25,7 @@ builder.Services.AddCors(options =>
         });
 });
 
-// configuring Swagger/OpenAPI 
+// Configure Swagger/OpenAPI 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -37,7 +41,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowAll");
 
-app.UseHttpsRedirection();
+// Commented out for HTTP use only
+// app.UseHttpsRedirection();
 
 app.UseRouting();
 

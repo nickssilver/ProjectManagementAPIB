@@ -18,6 +18,7 @@ namespace ProjectManagementAPIB.Data
         public DbSet<InstitutionStage> InstitutionStages { get; set; }
         public DbSet<InstitutionStatus> InstitutionStatuses { get; set; }
         public DbSet<County> Counties { get; set; }
+        public DbSet<SubCounty> SubCounties { get; set; }
         public DbSet<Participant> Participants { get; set; }
         public DbSet<Level> Levels { get; set; }
         public DbSet<Project> Projects { get; set; }
@@ -56,6 +57,13 @@ namespace ProjectManagementAPIB.Data
             modelBuilder.Entity<Project>()
                 .Property(p => p.Cost)
                 .HasColumnType("decimal(18,2)");
+
+            //sets and configure the foreignkey relationship
+
+            modelBuilder.Entity<SubCounty>()
+                .HasOne(sc => sc.County)
+                .WithMany(c => c.SubCounties)
+                .HasForeignKey(sc => sc.CountyID);
         }
     }
 }

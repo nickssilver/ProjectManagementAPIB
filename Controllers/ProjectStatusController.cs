@@ -28,7 +28,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/ProjectStatuses/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProjectStatus>> GetProjectStatus(int id)
+        public async Task<ActionResult<ProjectStatus>> GetProjectStatus(string id)
         {
             var projectStatus = await _context.ProjectStatuses.FindAsync(id);
 
@@ -82,7 +82,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/ProjectStatuses/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProjectStatus(int id)
+        public async Task<IActionResult> DeleteProjectStatus(string id)
         {
             var projectStatus = await _context.ProjectStatuses.FindAsync(id);
             if (projectStatus == null)

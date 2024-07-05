@@ -27,7 +27,7 @@ namespace ProjectManagementAPIB.Controllers
 
        
         [HttpGet("{id}")]
-        public async Task<ActionResult<HelperType>> GetHelperType(int id)
+        public async Task<ActionResult<HelperType>> GetHelperType(string id)
         {
             var helperType = await _context.HelperTypes.FindAsync(id);
 

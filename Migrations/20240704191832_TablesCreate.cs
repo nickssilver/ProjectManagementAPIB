@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectManagementAPIB.Migrations
 {
     /// <inheritdoc />
-    public partial class allTables : Migration
+    public partial class TablesCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,11 +35,9 @@ namespace ProjectManagementAPIB.Migrations
                 name: "Counties",
                 columns: table => new
                 {
-                    CountyID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CountyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CountyID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CountyName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -134,7 +132,7 @@ namespace ProjectManagementAPIB.Migrations
                     InstitutionEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InstitutionContact = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CountyID = table.Column<int>(type: "int", nullable: false),
+                    CountyID = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LicenseStartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -387,7 +385,7 @@ namespace ProjectManagementAPIB.Migrations
                 {
                     Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RoleID = table.Column<int>(type: "int", nullable: false),
+                    RoleID = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -398,6 +396,31 @@ namespace ProjectManagementAPIB.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Username);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "SubCounties",
+                columns: table => new
+                {
+                    SubCountyID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SubCountyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CountyID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SubCounties", x => x.SubCountyID);
+                    table.ForeignKey(
+                        name: "FK_SubCounties_Counties_CountyID",
+                        column: x => x.CountyID,
+                        principalTable: "Counties",
+                        principalColumn: "CountyID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubCounties_CountyID",
+                table: "SubCounties",
+                column: "CountyID");
         }
 
         /// <inheritdoc />
@@ -405,9 +428,6 @@ namespace ProjectManagementAPIB.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Budgets");
-
-            migrationBuilder.DropTable(
-                name: "Counties");
 
             migrationBuilder.DropTable(
                 name: "Donors");
@@ -458,6 +478,9 @@ namespace ProjectManagementAPIB.Migrations
                 name: "ProjectStatuses");
 
             migrationBuilder.DropTable(
+                name: "SubCounties");
+
+            migrationBuilder.DropTable(
                 name: "Testimonials");
 
             migrationBuilder.DropTable(
@@ -474,6 +497,9 @@ namespace ProjectManagementAPIB.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Counties");
         }
     }
 }

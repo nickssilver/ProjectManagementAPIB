@@ -67,22 +67,13 @@ namespace ProjectManagementAPIB.Migrations
 
             modelBuilder.Entity("ProjectManagementAPIB.Models.County", b =>
                 {
-                    b.Property<string>("CountyID")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CountyID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CountyID"));
 
                     b.Property<string>("CountyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Region")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubCounty")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -246,8 +237,9 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CountyID")
-                        .HasColumnType("int");
+                    b.Property<string>("CountyID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InstitutionContact")
                         .IsRequired()
@@ -573,6 +565,28 @@ namespace ProjectManagementAPIB.Migrations
                     b.ToTable("ProjectStatuses");
                 });
 
+            modelBuilder.Entity("ProjectManagementAPIB.Models.SubCounty", b =>
+                {
+                    b.Property<int>("SubCountyID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCountyID"));
+
+                    b.Property<int>("CountyID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SubCountyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SubCountyID");
+
+                    b.HasIndex("CountyID");
+
+                    b.ToTable("SubCounties");
+                });
+
             modelBuilder.Entity("ProjectManagementAPIB.Models.Testimonial", b =>
                 {
                     b.Property<string>("UserID")
@@ -735,12 +749,29 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleID")
-                        .HasColumnType("int");
+                    b.Property<string>("RoleID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Username");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("ProjectManagementAPIB.Models.SubCounty", b =>
+                {
+                    b.HasOne("ProjectManagementAPIB.Models.County", "County")
+                        .WithMany("SubCounties")
+                        .HasForeignKey("CountyID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("County");
+                });
+
+            modelBuilder.Entity("ProjectManagementAPIB.Models.County", b =>
+                {
+                    b.Navigation("SubCounties");
                 });
 #pragma warning restore 612, 618
         }

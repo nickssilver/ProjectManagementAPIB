@@ -9,7 +9,7 @@ namespace ProjectManagementAPIB.Models
         [Key]
         public string Username { get; set; }
         public string Name { get; set; }
-        public int RoleID { get; set; }  // Foreign key reference
+        public string RoleID { get; set; }  // Foreign key reference
         public string Gender { get; set; }
         public string IdNo { get; set; }
         public string PhoneNo { get; set; }

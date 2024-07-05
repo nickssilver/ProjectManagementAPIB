@@ -8,7 +8,9 @@ namespace ProjectManagementAPIB.Models
         public string ProjectID { get; set; }
         public string ProjectName { get; set; }
         public string InstitutionName { get; set; }
+        [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
+        [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
         public decimal Cost { get; set; }
         public string SubCounty { get; set; }
