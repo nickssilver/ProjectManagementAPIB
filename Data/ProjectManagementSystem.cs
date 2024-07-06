@@ -20,7 +20,10 @@ namespace ProjectManagementAPIB.Data
         public DbSet<County> Counties { get; set; }
         public DbSet<SubCounty> SubCounties { get; set; }
         public DbSet<Participant> Participants { get; set; }
-        public DbSet<Level> Levels { get; set; }
+        public DbSet<ParticipantAward>ParticipantAwards { get; set; }
+        public DbSet<ParticipantProject> ParticipantProjects { get; set; }
+        public DbSet<ParticipantLevel> ParticipantLevels { get; set; }
+        public DbSet<ParticipantStatus> ParticipantStatus { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectStatus> ProjectStatuses { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
@@ -43,11 +46,7 @@ namespace ProjectManagementAPIB.Data
         // Configure the model properties and relationships
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Set the precision and scale for the 'Cost' property in the 'Programm' entity
-            modelBuilder.Entity<Programm>()
-                .Property(p => p.Cost)
-                .HasColumnType("decimal(18,2)");
-
+    
             // Set the precision and scale for the 'Cost' property in the 'Budget' entity
             modelBuilder.Entity<Budget>()
                 .Property(b => b.Cost)
