@@ -19,6 +19,9 @@ This project is a Project Management System API built using ASP.NET Core Web API
 - Institution Statuses
 - Counties /sub counties
 - Participants
+- Participants Levels
+- Participants Status
+- Participant Projects
 - Levels
 - Projects
 - Project Statuses
@@ -157,6 +160,39 @@ Press `F5` or click on the `Start` button in Visual Studio to run the applicatio
 - **PUT /api/Participants/{id}**: Update an existing participant by ID
 - **DELETE /api/Participants/{id}**: Delete a participant by ID
 </details>
+
+<details>
+  <summary>ParticipantAward </summary>
+
+- GetParticipantAwards: Retrieves all participant awards.
+- GetParticipantAward: Retrieves a participant award by its AwardID.
+- PostParticipantAward: Creates a new participant award.
+- PutParticipantAward: Updates an existing participant award by its AwardID.
+- DeleteParticipantAward: Deletes a participant award by its AwardID.
+
+  </details>
+
+<details>
+  <summary>Participants</summary>
+
+- GetParticipantProjects: Retrieves all participant projects.
+- GetParticipantProject: Retrieves a participant project by its ParticipantID.
+- PostParticipantProject: Creates a new participant project.
+- PutParticipantProject: Updates an existing participant project by its ParticipantID.
+- DeleteParticipantProject: Deletes a participant project by its ParticipantID.
+  </details>
+
+  
+<details>
+  <summary>Participants</summary>
+
+- GetParticipantStatuses: Retrieves all participant statuses.
+- GetParticipantStatus: Retrieves a participant status by its StatusID.
+- PostParticipantStatus: Creates a new participant status.
+- PutParticipantStatus: Updates an existing participant status by its StatusID.
+- DeleteParticipantStatus: Deletes a participant status by its StatusID.
+  </details>
+
 <details>
   <summary>Levels</summary>
 
