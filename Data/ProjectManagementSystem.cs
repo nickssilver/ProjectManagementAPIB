@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectManagementAPIB.Models;
-using System.Collections.Generic;
-using System.Reflection.Emit;
 
 namespace ProjectManagementAPIB.Data
 {
@@ -20,10 +18,10 @@ namespace ProjectManagementAPIB.Data
         public DbSet<County> Counties { get; set; }
         public DbSet<SubCounty> SubCounties { get; set; }
         public DbSet<Participant> Participants { get; set; }
-        public DbSet<ParticipantAward>ParticipantAwards { get; set; }
+        public DbSet<ParticipantAward> ParticipantAwards { get; set; }
         public DbSet<ParticipantProject> ParticipantProjects { get; set; }
         public DbSet<ParticipantLevel> ParticipantLevels { get; set; }
-        public DbSet<ParticipantStatus> ParticipantStatus { get; set; }
+        public DbSet<ParticipantStatus> ParticipantStatuses { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectStatus> ProjectStatuses { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
@@ -46,7 +44,6 @@ namespace ProjectManagementAPIB.Data
         // Configure the model properties and relationships
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-    
             // Set the precision and scale for the 'Cost' property in the 'Budget' entity
             modelBuilder.Entity<Budget>()
                 .Property(b => b.Cost)
@@ -57,12 +54,45 @@ namespace ProjectManagementAPIB.Data
                 .Property(p => p.Cost)
                 .HasColumnType("decimal(18,2)");
 
-            //sets and configure the foreignkey relationship
-
+            // Set and configure the foreign key relationship
             modelBuilder.Entity<SubCounty>()
                 .HasOne(sc => sc.County)
                 .WithMany(c => c.SubCounties)
                 .HasForeignKey(sc => sc.CountyID);
+
+            // Configure User entity properties
+            modelBuilder.Entity<User>()
+                .Property(u => u.Password)
+                .HasColumnName("Password");
+
+            // Add further entity configurations here if necessary
+        }
+
+        // Override SaveChanges to hash passwords before saving to the database
+        public override int SaveChanges()
+        {
+            // Hash passwords before saving changes
+            HashPasswords();
+            return base.SaveChanges();
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            // Hash passwords before saving changes
+            HashPasswords();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void HashPasswords()
+        {
+            foreach (var entry in ChangeTracker.Entries<User>().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified))
+            {
+                var user = entry.Entity;
+                if (!string.IsNullOrEmpty(user.Password) && !user.Password.StartsWith("$2a$"))
+                {
+                    user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                }
+            }
         }
     }
 }

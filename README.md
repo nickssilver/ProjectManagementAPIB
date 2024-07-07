@@ -96,7 +96,11 @@ cd ProjectManagementAPIB
 Incase of an error in migrations you can use this command to clear all tables in SQLServer and re-run
 
 ```
-EXEC sp_msforeachtable 'DROP TABLE ?'
+-- Step 1: Drop all foreign key constraints
+EXEC sp_msforeachtable @command1='ALTER TABLE ? NOCHECK CONSTRAINT ALL'
+
+-- Step 2: Drop all tables
+EXEC sp_msforeachtable @command1='DROP TABLE ?'
 ```
 
 ### Running the Application :truck:

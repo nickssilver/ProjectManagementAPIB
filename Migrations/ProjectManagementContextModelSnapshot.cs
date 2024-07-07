@@ -316,24 +316,6 @@ namespace ProjectManagementAPIB.Migrations
                     b.ToTable("InstitutionStatuses");
                 });
 
-            modelBuilder.Entity("ProjectManagementAPIB.Models.Level", b =>
-                {
-                    b.Property<string>("LevelID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LevelName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("LevelID");
-
-                    b.ToTable("Levels");
-                });
-
             modelBuilder.Entity("ProjectManagementAPIB.Models.Participant", b =>
                 {
                     b.Property<string>("AdminNumber")
@@ -381,6 +363,108 @@ namespace ProjectManagementAPIB.Migrations
                     b.HasKey("AdminNumber");
 
                     b.ToTable("Participants");
+                });
+
+            modelBuilder.Entity("ProjectManagementAPIB.Models.ParticipantAward", b =>
+                {
+                    b.Property<string>("AwardID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AdminNo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("InstitutionName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LevelName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AwardID");
+
+                    b.ToTable("ParticipantAwards");
+                });
+
+            modelBuilder.Entity("ProjectManagementAPIB.Models.ParticipantLevel", b =>
+                {
+                    b.Property<string>("LevelID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LevelName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LevelID");
+
+                    b.ToTable("ParticipantLevels");
+                });
+
+            modelBuilder.Entity("ProjectManagementAPIB.Models.ParticipantProject", b =>
+                {
+                    b.Property<string>("ParticipantID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("InstitutionName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ParticipantName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProjectID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ParticipantID");
+
+                    b.ToTable("ParticipantProjects");
+                });
+
+            modelBuilder.Entity("ProjectManagementAPIB.Models.ParticipantStatus", b =>
+                {
+                    b.Property<string>("StatusID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StatusName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StatusID");
+
+                    b.ToTable("ParticipantStatus");
                 });
 
             modelBuilder.Entity("ProjectManagementAPIB.Models.PartnerType", b =>
@@ -436,9 +520,6 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Cost")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<string>("County")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -446,9 +527,6 @@ namespace ProjectManagementAPIB.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("InstitutionName")
                         .IsRequired()

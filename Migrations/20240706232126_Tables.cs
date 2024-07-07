@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectManagementAPIB.Migrations
 {
     /// <inheritdoc />
-    public partial class TablesCreate : Migration
+    public partial class Tables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -172,16 +172,50 @@ namespace ProjectManagementAPIB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Levels",
+                name: "ParticipantAwards",
                 columns: table => new
                 {
-                    LevelID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AwardID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AdminNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StudentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InstitutionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LevelName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Levels", x => x.LevelID);
+                    table.PrimaryKey("PK_ParticipantAwards", x => x.AwardID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ParticipantLevels",
+                columns: table => new
+                {
+                    LevelID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LevelName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Duration = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ParticipantLevels", x => x.LevelID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ParticipantProjects",
+                columns: table => new
+                {
+                    ParticipantID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ParticipantName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InstitutionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProjectID = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ParticipantProjects", x => x.ParticipantID);
                 });
 
             migrationBuilder.CreateTable(
@@ -203,6 +237,19 @@ namespace ProjectManagementAPIB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Participants", x => x.AdminNumber);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ParticipantStatus",
+                columns: table => new
+                {
+                    StatusID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StatusName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ParticipantStatus", x => x.StatusID);
                 });
 
             migrationBuilder.CreateTable(
@@ -241,8 +288,6 @@ namespace ProjectManagementAPIB.Migrations
                     ProgramName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InstitutionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     County = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -454,10 +499,19 @@ namespace ProjectManagementAPIB.Migrations
                 name: "InstitutionStatuses");
 
             migrationBuilder.DropTable(
-                name: "Levels");
+                name: "ParticipantAwards");
+
+            migrationBuilder.DropTable(
+                name: "ParticipantLevels");
+
+            migrationBuilder.DropTable(
+                name: "ParticipantProjects");
 
             migrationBuilder.DropTable(
                 name: "Participants");
+
+            migrationBuilder.DropTable(
+                name: "ParticipantStatus");
 
             migrationBuilder.DropTable(
                 name: "Partnerships");

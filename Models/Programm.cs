@@ -7,7 +7,6 @@ namespace ProjectManagementAPIB.Models
     {
         [Key]
         public string ProgramID { get; set; }
-
         public string ProgramName { get; set; }
         public string InstitutionName { get; set; }
         [DataType(DataType.Date)]
