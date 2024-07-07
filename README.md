@@ -173,7 +173,7 @@ Press `F5` or click on the `Start` button in Visual Studio to run the applicatio
   </details>
 
 <details>
-  <summary>Participants</summary>
+  <summary>ParticipantProjects</summary>
 
 - GetParticipantProjects: Retrieves all participant projects.
 - GetParticipantProject: Retrieves a participant project by its ParticipantID.
@@ -184,7 +184,7 @@ Press `F5` or click on the `Start` button in Visual Studio to run the applicatio
 
   
 <details>
-  <summary>Participants</summary>
+  <summary>ParticipantStatuses</summary>
 
 - GetParticipantStatuses: Retrieves all participant statuses.
 - GetParticipantStatus: Retrieves a participant status by its StatusID.
@@ -194,7 +194,7 @@ Press `F5` or click on the `Start` button in Visual Studio to run the applicatio
   </details>
 
 <details>
-  <summary>Levels</summary>
+  <summary>ParticipantLevels</summary>
 
 - **GET /api/Levels**: Retrieve all levels
 - **GET /api/Levels/{id}**: Retrieve a specific level by ID
