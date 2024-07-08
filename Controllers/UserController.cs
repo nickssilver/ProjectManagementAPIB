@@ -52,6 +52,12 @@ namespace ProjectManagementAPIB.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            // Hash the password before saving
+            if (!string.IsNullOrEmpty(user.Password) && !user.Password.StartsWith("$2a$"))
+            {
+                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            }
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
@@ -109,16 +115,17 @@ namespace ProjectManagementAPIB.Controllers
         public async Task<ActionResult<object>> Login([FromBody] Login loginModel)
         {
             var user = await _context.Users
-                .Where(u => u.Username == loginModel.Username && u.Password == loginModel.Password)
+                .Where(u => u.Username == loginModel.Username)
                 .Select(u => new
                 {
                     u.Username,
+                    u.Password,
                     u.Email,
                     u.RoleID
                 })
                 .FirstOrDefaultAsync();
 
-            if (user == null)
+            if (user == null || !BCrypt.Net.BCrypt.Verify(loginModel.Password, user.Password))
             {
                 return Unauthorized();
             }
@@ -130,18 +137,24 @@ namespace ProjectManagementAPIB.Controllers
             return Ok(new
             {
                 token,
-                user
+                user = new
+                {
+                    user.Username,
+                    user.Email,
+                    user.RoleID
+                }
             });
         }
+
         private string GenerateJwtToken(dynamic user)
         {
             var claims = new[]
             {
-        new Claim(JwtRegisteredClaimNames.Sub, user.Username),
-        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-        new Claim(ClaimTypes.Name, user.Username),
-        new Claim(ClaimTypes.Role, user.RoleID)
-    };
+                new Claim(JwtRegisteredClaimNames.Sub, user.Username),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Role, user.RoleID)
+            };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -156,11 +169,9 @@ namespace ProjectManagementAPIB.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-
         private bool UserExists(string username)
         {
             return _context.Users.Any(e => e.Username == username);
         }
     }
-
 }
