@@ -1,0 +1,209 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="InstitutionsReport" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="91b5eb37-5aec-402f-9bff-b6882ac2611a">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SqlServer"/>
+	<query language="SQL"><![CDATA[select * from Institutions
+]]></query>
+	<field name="InstitutionID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="InstitutionID"/>
+		<property name="com.jaspersoft.studio.field.label" value="InstitutionID"/>
+	</field>
+	<field name="InstitutionName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="InstitutionName"/>
+		<property name="com.jaspersoft.studio.field.label" value="InstitutionName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Institutions"/>
+	</field>
+	<field name="StageID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="StageID"/>
+		<property name="com.jaspersoft.studio.field.label" value="StageID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Institutions"/>
+	</field>
+	<field name="StatusID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="StatusID"/>
+		<property name="com.jaspersoft.studio.field.label" value="StatusID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Institutions"/>
+	</field>
+	<field name="InstitutionEmail" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="InstitutionEmail"/>
+		<property name="com.jaspersoft.studio.field.label" value="InstitutionEmail"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Institutions"/>
+	</field>
+	<field name="InstitutionContact" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="InstitutionContact"/>
+		<property name="com.jaspersoft.studio.field.label" value="InstitutionContact"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Institutions"/>
+	</field>
+	<field name="SubCounty" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="SubCounty"/>
+		<property name="com.jaspersoft.studio.field.label" value="SubCounty"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Institutions"/>
+	</field>
+	<field name="CountyID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="CountyID"/>
+		<property name="com.jaspersoft.studio.field.label" value="CountyID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Institutions"/>
+	</field>
+	<field name="ContactPerson" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ContactPerson"/>
+		<property name="com.jaspersoft.studio.field.label" value="ContactPerson"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Institutions"/>
+	</field>
+	<field name="ContactNumber" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ContactNumber"/>
+		<property name="com.jaspersoft.studio.field.label" value="ContactNumber"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Institutions"/>
+	</field>
+	<field name="LicenseStartDate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="LicenseStartDate"/>
+		<property name="com.jaspersoft.studio.field.label" value="LicenseStartDate"/>
+	</field>
+	<field name="LicenseEndDate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="LicenseEndDate"/>
+		<property name="com.jaspersoft.studio.field.label" value="LicenseEndDate"/>
+	</field>
+	<field name="AwardLeader" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="AwardLeader"/>
+		<property name="com.jaspersoft.studio.field.label" value="AwardLeader"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Institutions"/>
+	</field>
+	<background/>
+	<title height="72">
+		<element kind="frame" uuid="fad78f43-90a5-4f5f-b03b-6216cd18e329" mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699">
+			<element kind="staticText" uuid="39c46f03-ca94-4c73-bb37-9e7fa2c60c8b" x="20" y="20" width="234" height="43" forecolor="#FFFFFF" fontSize="26.0" bold="true">
+				<text><![CDATA[Institutions]]></text>
+			</element>
+			<element kind="staticText" uuid="091e8eff-a705-4a27-8b91-3eda307a428c" x="398" y="61" width="180" height="20" forecolor="#FFFFFF" fontSize="12.0" bold="false" hTextAlign="Center">
+				<text><![CDATA[President's Awards - Kenya]]></text>
+			</element>
+			<element kind="image" uuid="3537aed7-84c8-438f-ad67-74b84a82b0fc" x="460" y="10" width="50" height="50">
+				<expression><![CDATA["C:/Users/Software Engineer/Downloads/President's Award/President's Award Logo..png"]]></expression>
+			</element>
+		</element>
+	</title>
+	<pageHeader height="13"/>
+	<columnHeader height="21">
+		<element kind="line" uuid="211ee753-d4ac-459f-a816-b4ec0020b4f2" x="-20" y="20" width="595" height="1" forecolor="#666666"/>
+		<element kind="staticText" uuid="f7feb5d4-b862-4631-ab6a-708e400c937b" positionType="Float" stretchType="NoStretch" mode="Opaque" x="0" y="0" width="20" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[ID]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="64e4bdd9-941a-4bab-acec-a1cb720988e3"/>
+		</element>
+		<element kind="staticText" uuid="8b604da9-d3cf-49f2-8209-7e2ce8430f96" positionType="Float" stretchType="NoStretch" mode="Opaque" x="20" y="0" width="62" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Institution Name]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="736b3533-59a0-4129-b522-c226febd6a8c"/>
+		</element>
+		<element kind="staticText" uuid="b0c53630-315f-45fb-99f6-1d6f2c68bfb8" positionType="Float" stretchType="NoStretch" mode="Opaque" x="84" y="0" width="42" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Stage]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ec5995d5-6142-4ebb-b9de-826f5d1dcb70"/>
+		</element>
+		<element kind="staticText" uuid="d8df1597-2217-4716-9fa8-b1882b14ef5d" positionType="Float" stretchType="NoStretch" mode="Opaque" x="126" y="0" width="42" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Status]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="26844bfe-9db0-4171-8627-c74101cf5652"/>
+		</element>
+		<element kind="staticText" uuid="93d8e60e-21ab-4273-9d7d-8715d92e990c" positionType="Float" stretchType="NoStretch" mode="Opaque" x="168" y="0" width="42" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Email]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b0a9e054-e303-40e7-8a1f-81e4afbca56f"/>
+		</element>
+		<element kind="staticText" uuid="0611dc4e-8649-4c26-a003-ca4e6d5ffc96" positionType="Float" stretchType="NoStretch" mode="Opaque" x="210" y="0" width="42" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Contact]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="93961413-b063-40db-ab1c-14923dd33431"/>
+		</element>
+		<element kind="staticText" uuid="dca57ca5-92b9-4cc1-bca2-73d542794623" positionType="Float" stretchType="NoStretch" mode="Opaque" x="252" y="0" width="42" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[SubCounty]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="18cf7ff7-8915-4756-a8c3-28ac5111c797"/>
+		</element>
+		<element kind="staticText" uuid="afcc5a5d-2603-47ea-8e15-3a5f372c66b2" positionType="Float" stretchType="NoStretch" mode="Opaque" x="294" y="0" width="42" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[County]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a5937dce-c8f0-4296-9469-b7c3ce126717"/>
+		</element>
+		<element kind="staticText" uuid="bd0db0f5-c0a9-4924-9050-df82a8430bb1" positionType="Float" stretchType="NoStretch" mode="Opaque" x="336" y="0" width="42" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Contact Person]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d2597c95-3647-481a-876d-950a79727778"/>
+		</element>
+		<element kind="staticText" uuid="c5521a02-86b9-4ffb-8ec3-aea07e1095c1" positionType="Float" stretchType="NoStretch" mode="Opaque" x="378" y="0" width="42" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Phone Number]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="15d5a918-da70-4831-9d4b-d5c4f5333f16"/>
+		</element>
+		<element kind="staticText" uuid="d5361ea3-d93f-4420-838b-32c0e6faadea" positionType="Float" stretchType="NoStretch" mode="Opaque" x="420" y="0" width="42" height="20" forecolor="#006699" backcolor="#E6E6E6" markup="none" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[LicenseStartDate]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f187e798-d4f7-43c2-a33e-eeb8160fc188"/>
+		</element>
+		<element kind="staticText" uuid="623d2dc7-8ead-465b-bcf7-e4e4c3fe5d10" positionType="Float" stretchType="NoStretch" mode="Opaque" x="462" y="0" width="42" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[LicenseEndDate]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a38d4973-c561-4397-af4f-c5309d1be4ce"/>
+		</element>
+		<element kind="staticText" uuid="e9f86199-531b-46ae-b6c9-75530be88eed" positionType="Float" stretchType="NoStretch" mode="Opaque" x="504" y="0" width="42" height="20" forecolor="#006699" backcolor="#E6E6E6" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[AwardLeader]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b16f1928-aa92-4e04-aa6b-7d52af12019f"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<element kind="line" uuid="1c427fce-c2ea-45a2-8bca-313ccb1fddcf" positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1"/>
+			<element kind="textField" uuid="fb2b691f-7560-44e6-a08c-d046c0a77b04" x="0" y="0" width="20" height="20" fontSize="8.0" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{InstitutionID}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="64e4bdd9-941a-4bab-acec-a1cb720988e3"/>
+			</element>
+			<element kind="textField" uuid="145f707c-f663-43fd-9caa-248c5a5cc604" x="20" y="0" width="62" height="20" fontSize="8.0" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{InstitutionName}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="736b3533-59a0-4129-b522-c226febd6a8c"/>
+			</element>
+			<element kind="textField" uuid="a958aff3-feee-412f-9caa-8b30be6aa52b" x="84" y="0" width="42" height="20" fontSize="8.0" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{StageID}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ec5995d5-6142-4ebb-b9de-826f5d1dcb70"/>
+			</element>
+			<element kind="textField" uuid="3c136103-0781-4d8a-bf4a-2a04fc0bd54a" x="126" y="0" width="42" height="20" fontSize="8.0" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{StatusID}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="26844bfe-9db0-4171-8627-c74101cf5652"/>
+			</element>
+			<element kind="textField" uuid="8449f173-da81-4ed6-84b7-4dac54e9ec82" x="168" y="0" width="42" height="20" fontSize="8.0" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{InstitutionEmail}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b0a9e054-e303-40e7-8a1f-81e4afbca56f"/>
+			</element>
+			<element kind="textField" uuid="f3dc57cd-c5ff-477f-9e30-7182689122af" x="210" y="0" width="42" height="20" fontSize="8.0" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{InstitutionContact}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="93961413-b063-40db-ab1c-14923dd33431"/>
+			</element>
+			<element kind="textField" uuid="8dee9686-835f-40d7-8254-8b61091ee7ca" x="252" y="0" width="42" height="20" fontSize="8.0" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{SubCounty}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="18cf7ff7-8915-4756-a8c3-28ac5111c797"/>
+			</element>
+			<element kind="textField" uuid="f4123737-5ac6-4d8f-96b9-30c47530c226" x="294" y="0" width="42" height="20" fontSize="8.0" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{CountyID}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a5937dce-c8f0-4296-9469-b7c3ce126717"/>
+			</element>
+			<element kind="textField" uuid="17751a43-a372-419a-89e1-6de872ca4656" x="336" y="0" width="42" height="20" fontSize="8.0" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{ContactPerson}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d2597c95-3647-481a-876d-950a79727778"/>
+			</element>
+			<element kind="textField" uuid="4d67516f-2680-4268-a4c5-b3af469e161c" x="378" y="0" width="42" height="20" fontSize="8.0" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{ContactNumber}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="15d5a918-da70-4831-9d4b-d5c4f5333f16"/>
+			</element>
+			<element kind="textField" uuid="799bb955-48b5-4b2d-8830-f377e14b039b" x="420" y="0" width="42" height="20" fontSize="8.0" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{LicenseStartDate}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f187e798-d4f7-43c2-a33e-eeb8160fc188"/>
+			</element>
+			<element kind="textField" uuid="d8e355ac-d119-4ee9-bbba-662e293d7801" x="462" y="0" width="42" height="20" fontSize="8.0" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{LicenseEndDate}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a38d4973-c561-4397-af4f-c5309d1be4ce"/>
+			</element>
+			<element kind="textField" uuid="e11faa64-db5c-41c1-b3e4-22a2fb768ab0" x="504" y="0" width="42" height="20" fontSize="8.0" textAdjust="StretchHeight" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{AwardLeader}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b16f1928-aa92-4e04-aa6b-7d52af12019f"/>
+			</element>
+		</band>
+	</detail>
+	<columnFooter/>
+	<pageFooter height="17">
+		<element kind="textField" uuid="d91563d5-57d7-400a-b9a4-b4cf556ce57c" mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" hTextAlign="Right">
+			<expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
+		</element>
+		<element kind="textField" uuid="2c77b8e3-7180-4757-820f-d9e8e6c954b5" mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" evaluationTime="Report">
+			<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+		</element>
+		<element kind="textField" uuid="61dbfefa-7df9-4540-8423-6937186468b8" x="0" y="4" width="100" height="13" pattern="EEEEE dd MMMMM yyyy">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+	</pageFooter>
+	<summary/>
+</jasperReport>

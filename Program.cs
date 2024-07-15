@@ -1,7 +1,8 @@
-using ProjectManagementAPIB.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using ProjectManagementAPIB.Data;
+using ProjectManagementAPIB.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,10 @@ builder.Services.AddDbContext<ProjectManagementContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectManagementConnection")));
 
 builder.Services.AddControllers();
+
+// Register the ReportHelper and ReportService
+builder.Services.AddTransient<ReportHelper>();
+builder.Services.AddTransient<ReportService>();
 
 // CORS Configuration
 builder.Services.AddCors(options =>
