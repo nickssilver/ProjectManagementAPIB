@@ -23,10 +23,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
-		<PackageReference Include="IKVM" Version="8.9.1" />
-		<PackageReference Include="IKVM.OpenJDK.Core" Version="7.2.4630.5" />
-		<PackageReference Include="IKVM.OpenJDK.Naming" Version="7.2.4630.5" />
-		<PackageReference Include="JasperServer.Client" Version="1.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.17" />
 		<PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
@@ -42,18 +38,6 @@
 
 	<ItemGroup>
 		<Folder Include="Migrations\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Reference Include="commons-collections4-4.4">
-	    <HintPath>libs\commons-collections4-4.4.dll</HintPath>
-	  </Reference>
-	  <Reference Include="jasperreports-7.0.0">
-	    <HintPath>libs\jasperreports-7.0.0.dll</HintPath>
-	  </Reference>
-	  <Reference Include="jasperreports-fonts-7.0.0">
-	    <HintPath>libs\jasperreports-fonts-7.0.0.dll</HintPath>
-	  </Reference>
 	</ItemGroup>
 
 </Project>

@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjectManagementAPIB.Data;
 using ProjectManagementAPIB.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectManagementAPIB.Controllers
 {
@@ -7,20 +10,25 @@ namespace ProjectManagementAPIB.Controllers
     [ApiController]
     public class ParticipantLevelController : ControllerBase
     {
-        private static List<ParticipantLevel> participantLevels = new List<ParticipantLevel>();
+        private readonly ProjectManagementContext _context;
+
+        public ParticipantLevelController(ProjectManagementContext context)
+        {
+            _context = context;
+        }
 
         // GET: api/ParticipantLevel
         [HttpGet]
         public ActionResult<IEnumerable<ParticipantLevel>> GetParticipantLevels()
         {
-            return Ok(participantLevels);
+            return Ok(_context.ParticipantLevels.ToList());
         }
 
         // GET: api/ParticipantLevel/{id}
         [HttpGet("{id}")]
         public ActionResult<ParticipantLevel> GetParticipantLevel(string id)
         {
-            var participantLevel = participantLevels.FirstOrDefault(pl => pl.LevelID == id);
+            var participantLevel = _context.ParticipantLevels.Find(id);
             if (participantLevel == null)
             {
                 return NotFound();
@@ -32,7 +40,8 @@ namespace ProjectManagementAPIB.Controllers
         [HttpPost]
         public ActionResult<ParticipantLevel> PostParticipantLevel([FromBody] ParticipantLevel participantLevel)
         {
-            participantLevels.Add(participantLevel);
+            _context.ParticipantLevels.Add(participantLevel);
+            _context.SaveChanges();
             return CreatedAtAction(nameof(GetParticipantLevel), new { id = participantLevel.LevelID }, participantLevel);
         }
 
@@ -40,7 +49,7 @@ namespace ProjectManagementAPIB.Controllers
         [HttpPut("{id}")]
         public IActionResult PutParticipantLevel(string id, [FromBody] ParticipantLevel updatedParticipantLevel)
         {
-            var participantLevel = participantLevels.FirstOrDefault(pl => pl.LevelID == id);
+            var participantLevel = _context.ParticipantLevels.Find(id);
             if (participantLevel == null)
             {
                 return NotFound();
@@ -50,6 +59,9 @@ namespace ProjectManagementAPIB.Controllers
             participantLevel.Duration = updatedParticipantLevel.Duration;
             participantLevel.Notes = updatedParticipantLevel.Notes;
 
+            _context.ParticipantLevels.Update(participantLevel);
+            _context.SaveChanges();
+
             return NoContent();
         }
 
@@ -57,13 +69,15 @@ namespace ProjectManagementAPIB.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteParticipantLevel(string id)
         {
-            var participantLevel = participantLevels.FirstOrDefault(pl => pl.LevelID == id);
+            var participantLevel = _context.ParticipantLevels.Find(id);
             if (participantLevel == null)
             {
                 return NotFound();
             }
 
-            participantLevels.Remove(participantLevel);
+            _context.ParticipantLevels.Remove(participantLevel);
+            _context.SaveChanges();
+
             return NoContent();
         }
     }

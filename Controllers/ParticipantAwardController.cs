@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using ProjectManagementAPIB.Data;
 using ProjectManagementAPIB.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectManagementAPIB.Controllers
 {
@@ -8,20 +10,25 @@ namespace ProjectManagementAPIB.Controllers
     [ApiController]
     public class ParticipantAwardController : ControllerBase
     {
-        private static List<ParticipantAward> participantAwards = new List<ParticipantAward>();
+        private readonly ProjectManagementContext _context;
+
+        public ParticipantAwardController(ProjectManagementContext context)
+        {
+            _context = context;
+        }
 
         // GET: api/ParticipantAward
         [HttpGet]
         public ActionResult<IEnumerable<ParticipantAward>> GetParticipantAwards()
         {
-            return Ok(participantAwards);
+            return Ok(_context.ParticipantAwards.ToList());
         }
 
         // GET: api/ParticipantAward/{id}
         [HttpGet("{id}")]
         public ActionResult<ParticipantAward> GetParticipantAward(string id)
         {
-            var participantAward = participantAwards.FirstOrDefault(pa => pa.AwardID == id);
+            var participantAward = _context.ParticipantAwards.Find(id);
             if (participantAward == null)
             {
                 return NotFound();
@@ -33,7 +40,8 @@ namespace ProjectManagementAPIB.Controllers
         [HttpPost]
         public ActionResult<ParticipantAward> PostParticipantAward([FromBody] ParticipantAward participantAward)
         {
-            participantAwards.Add(participantAward);
+            _context.ParticipantAwards.Add(participantAward);
+            _context.SaveChanges();
             return CreatedAtAction(nameof(GetParticipantAward), new { id = participantAward.AwardID }, participantAward);
         }
 
@@ -41,7 +49,7 @@ namespace ProjectManagementAPIB.Controllers
         [HttpPut("{id}")]
         public IActionResult PutParticipantAward(string id, [FromBody] ParticipantAward updatedParticipantAward)
         {
-            var participantAward = participantAwards.FirstOrDefault(pa => pa.AwardID == id);
+            var participantAward = _context.ParticipantAwards.Find(id);
             if (participantAward == null)
             {
                 return NotFound();
@@ -56,6 +64,9 @@ namespace ProjectManagementAPIB.Controllers
             participantAward.Status = updatedParticipantAward.Status;
             participantAward.Notes = updatedParticipantAward.Notes;
 
+            _context.ParticipantAwards.Update(participantAward);
+            _context.SaveChanges();
+
             return NoContent();
         }
 
@@ -63,13 +74,15 @@ namespace ProjectManagementAPIB.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteParticipantAward(string id)
         {
-            var participantAward = participantAwards.FirstOrDefault(pa => pa.AwardID == id);
+            var participantAward = _context.ParticipantAwards.Find(id);
             if (participantAward == null)
             {
                 return NotFound();
             }
 
-            participantAwards.Remove(participantAward);
+            _context.ParticipantAwards.Remove(participantAward);
+            _context.SaveChanges();
+
             return NoContent();
         }
     }
