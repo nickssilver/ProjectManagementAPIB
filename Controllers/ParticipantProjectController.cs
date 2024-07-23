@@ -1,71 +1,104 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ProjectManagementAPIB.Data;
 using ProjectManagementAPIB.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjectManagementAPIB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ParticipantProjectController : ControllerBase
+    public class ParticipantProjectsController : ControllerBase
     {
-        private static List<ParticipantProject> participantProjects = new List<ParticipantProject>();
+        private readonly ProjectManagementContext _context;
 
-        // GET: api/ParticipantProject
-        [HttpGet]
-        public ActionResult<IEnumerable<ParticipantProject>> GetParticipantProjects()
+        public ParticipantProjectsController(ProjectManagementContext context)
         {
-            return Ok(participantProjects);
+            _context = context;
         }
 
-        // GET: api/ParticipantProject/{id}
-        [HttpGet("{id}")]
-        public ActionResult<ParticipantProject> GetParticipantProject(string id)
+        // GET: api/ParticipantProjects
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ParticipantProject>>> GetParticipantProjects()
         {
-            var participantProject = participantProjects.FirstOrDefault(pp => pp.ParticipantID == id);
+            return await _context.ParticipantProjects.ToListAsync();
+        }
+
+        // GET: api/ParticipantProjects/{id}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ParticipantProject>> GetParticipantProject(string id)
+        {
+            var participantProject = await _context.ParticipantProjects.FindAsync(id);
+
             if (participantProject == null)
             {
                 return NotFound();
             }
-            return Ok(participantProject);
+
+            return participantProject;
         }
 
-        // POST: api/ParticipantProject
+        // POST: api/ParticipantProjects
         [HttpPost]
-        public ActionResult<ParticipantProject> PostParticipantProject([FromBody] ParticipantProject participantProject)
+        public async Task<ActionResult<ParticipantProject>> PostParticipantProject(ParticipantProject participantProject)
         {
-            participantProjects.Add(participantProject);
+            _context.ParticipantProjects.Add(participantProject);
+            await _context.SaveChangesAsync();
+
             return CreatedAtAction(nameof(GetParticipantProject), new { id = participantProject.ParticipantID }, participantProject);
         }
 
-        // PUT: api/ParticipantProject/{id}
+        // PUT: api/ParticipantProjects/{id}
         [HttpPut("{id}")]
-        public IActionResult PutParticipantProject(string id, [FromBody] ParticipantProject updatedParticipantProject)
+        public async Task<IActionResult> PutParticipantProject(string id, ParticipantProject participantProject)
         {
-            var participantProject = participantProjects.FirstOrDefault(pp => pp.ParticipantID == id);
-            if (participantProject == null)
+            if (id != participantProject.ParticipantID)
             {
-                return NotFound();
+                return BadRequest();
             }
 
-            participantProject.ParticipantName = updatedParticipantProject.ParticipantName;
-            participantProject.InstitutionName = updatedParticipantProject.InstitutionName;
-            participantProject.ProjectID = updatedParticipantProject.ProjectID;
+            _context.Entry(participantProject).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ParticipantProjectExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return NoContent();
         }
 
-        // DELETE: api/ParticipantProject/{id}
+        // DELETE: api/ParticipantProjects/{id}
         [HttpDelete("{id}")]
-        public IActionResult DeleteParticipantProject(string id)
+        public async Task<IActionResult> DeleteParticipantProject(string id)
         {
-            var participantProject = participantProjects.FirstOrDefault(pp => pp.ParticipantID == id);
+            var participantProject = await _context.ParticipantProjects.FindAsync(id);
             if (participantProject == null)
             {
                 return NotFound();
             }
 
-            participantProjects.Remove(participantProject);
+            _context.ParticipantProjects.Remove(participantProject);
+            await _context.SaveChangesAsync();
+
             return NoContent();
+        }
+
+        private bool ParticipantProjectExists(string id)
+        {
+            return _context.ParticipantProjects.Any(e => e.ParticipantID == id);
         }
     }
 }

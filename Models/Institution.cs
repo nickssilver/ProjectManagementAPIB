@@ -13,7 +13,7 @@ namespace ProjectManagementAPIB.Models
         public string InstitutionEmail { get; set; }
         public string InstitutionContact { get; set; }
         public string SubCounty { get; set; }
-        public string CountyID { get; set; }
+        public string County { get; set; }
         public string ContactPerson { get; set; }
         public string ContactNumber { get; set; }
 

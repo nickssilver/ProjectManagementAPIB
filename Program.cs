@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using ProjectManagementAPIB.Data;
 using System.Text;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,7 +11,6 @@ builder.Services.AddDbContext<ProjectManagementContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectManagementConnection")));
 
 builder.Services.AddControllers();
-
 
 // CORS Configuration
 builder.Services.AddCors(options =>
@@ -55,6 +53,20 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// Register the Telerik Reporting services
+/* builder.Services.AddScoped<IReportServiceConfiguration>(sp =>
+{
+    var reportServiceConfiguration = new ReportServiceConfiguration
+    {
+        HostAppId = "MyApp",
+        Storage = new FileStorage(),
+        ReportResolver = new ReportResolver(),
+        ReportSharingTimeout = 60,
+        ClientSessionTimeout = 20
+    };
+    return reportServiceConfiguration;
+});
+*/
 // Configure Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -81,4 +93,28 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+/*
+// Register the route for the Telerik Reporting REST service
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapReportingService("/api/reports", sp => sp.GetRequiredService<IReportServiceConfiguration>());
+});
+*/
 app.Run();
+
+/*
+
+// Report resolver implementation
+public class ReportResolver : IReportResolver
+{
+    public ReportSource Resolve(string reportId)
+    {
+        var reportSource = new UriReportSource()
+        {
+            Uri = $"~/Reports/{reportId}.trdp"
+        };
+        return reportSource;
+    }
+}
+*/
