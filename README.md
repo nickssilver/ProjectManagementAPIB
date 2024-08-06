@@ -14,7 +14,7 @@
 This project is a Project Management System API built using ASP.NET Core Web API. It provides endpoints for managing institutions, their stages, statuses, counties, participants, levels, projects, project statuses, testimonials, donors, project reportings, programs, helpers, helper types, trainings, training levels, training categories, training types, budgets, funding types, partnerships, partner types, feedback, and users. This API allows CRUD operations on the following entities:
 </div>
 
-- Institutions
+- AwardCenter
 - Institution Stages
 - Institution Statuses
 - Counties /sub counties
@@ -113,13 +113,13 @@ Press `F5` or click on the `Start` button in Visual Studio to run the applicatio
 ### API Endpoints :card_file_box:
 
 <details>
-  <summary>Institutions</summary>
+  <summary>AwardCenter</summary>
 
-- **GET /api/Institutions**: Retrieve all institutions
-- **GET /api/Institutions/{id}**: Retrieve a specific institution by ID
-- **POST /api/Institutions**: Create a new institution
-- **PUT /api/Institutions/{id}**: Update an existing institution by ID
-- **DELETE /api/Institutions/{id}**: Delete an institution by ID
+- **GET /api/AwardCenter**: Retrieve all institutions
+- **GET /api/AwardCenter/{id}**: Retrieve a specific institution by ID
+- **POST /api/AwardCenter**: Create a new institution
+- **PUT /api/AwardCenter/{id}**: Update an existing institution by ID
+- **DELETE /api/AwardCenter/{id}**: Delete an institution by ID
 </details>
 
 <details>

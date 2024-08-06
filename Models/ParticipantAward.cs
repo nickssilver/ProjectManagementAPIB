@@ -6,7 +6,7 @@ namespace ProjectManagementAPIB.Models
     {
         [Key]
         public string AwardID { get; set; }
-        public string AdminNo { get; set; }
+        public string AdminNumber { get; set; }
         public string StudentName { get; set; }
         public string InstitutionName {  get; set; }
         public string LevelName {  get; set; }
@@ -15,7 +15,10 @@ namespace ProjectManagementAPIB.Models
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime EndDate { get; set; }
+        public DateTime ExpectedEndDate { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime ActualEndDate { get; set; }
         public string Status { get; set; }
         public string Notes { get; set; }
 

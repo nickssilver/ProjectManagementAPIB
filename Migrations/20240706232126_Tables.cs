@@ -122,7 +122,7 @@ namespace ProjectManagementAPIB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Institutions",
+                name: "AwardCenter",
                 columns: table => new
                 {
                     InstitutionID = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -490,7 +490,7 @@ namespace ProjectManagementAPIB.Migrations
                 name: "HelperTypes");
 
             migrationBuilder.DropTable(
-                name: "Institutions");
+                name: "AwardCenter");
 
             migrationBuilder.DropTable(
                 name: "InstitutionStages");

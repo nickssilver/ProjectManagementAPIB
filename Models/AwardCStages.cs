@@ -2,11 +2,11 @@
 
 namespace ProjectManagementAPIB.Models
 {
-    public class InstitutionStatus
+    public class AwardCStages
     {
         [Key]
-        public string StatusID { get; set; }
-        public string StatusName { get; set; }
+        public string StageID { get; set; }
+        public string StageName { get; set; }
         public string Notes { get; set; }
     }
 }

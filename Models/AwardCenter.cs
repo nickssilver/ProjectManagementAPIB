@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProjectManagementAPIB.Models
 {
-    public class Institution
+    public class AwardCenter
     {
         [Key]
         public string InstitutionID { get; set; }
         public string InstitutionName { get; set; }
-        public string StageID { get; set; }
-        public string StatusID { get; set; }
+        public string Stage { get; set; }
+        public string Status { get; set; }
         public string InstitutionEmail { get; set; }
         public string InstitutionContact { get; set; }
         public string SubCounty { get; set; }
@@ -22,8 +22,10 @@ namespace ProjectManagementAPIB.Models
 
         [DataType(DataType.Date)]
         public DateTime LicenseEndDate { get; set; }
-
-        public string AwardLeader { get; set; }
+        public string LevelType { get; set; }
+        public string GroupType { get; set; }
+        public string Source { get; set; }
+        public string Marginalised { get; set; }
         public string Notes { get; set; }
     }
 }

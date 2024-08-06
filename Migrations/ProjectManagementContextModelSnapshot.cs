@@ -277,7 +277,7 @@ namespace ProjectManagementAPIB.Migrations
 
                     b.HasKey("InstitutionID");
 
-                    b.ToTable("Institutions");
+                    b.ToTable("AwardCenter");
                 });
 
             modelBuilder.Entity("ProjectManagementAPIB.Models.InstitutionStage", b =>

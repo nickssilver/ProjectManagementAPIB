@@ -22,14 +22,14 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/InstitutionStages
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<InstitutionStage>>> GetInstitutionStages()
+        public async Task<ActionResult<IEnumerable<AwardCStages>>> GetInstitutionStages()
         {
             return await _context.InstitutionStages.ToListAsync();
         }
 
         // GET: api/InstitutionStages/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<InstitutionStage>> GetInstitutionStage(string id)
+        public async Task<ActionResult<AwardCStages>> GetInstitutionStage(string id)
         {
             var institutionStage = await _context.InstitutionStages.FindAsync(id);
 
@@ -43,7 +43,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // POST: api/InstitutionStages
         [HttpPost]
-        public async Task<ActionResult<InstitutionStage>> PostInstitutionStage(InstitutionStage institutionStage)
+        public async Task<ActionResult<AwardCStages>> PostInstitutionStage(AwardCStages institutionStage)
         {
             _context.InstitutionStages.Add(institutionStage);
             await _context.SaveChangesAsync();
@@ -53,7 +53,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/InstitutionStages/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInstitutionStage(string id, InstitutionStage institutionStage)
+        public async Task<IActionResult> PutInstitutionStage(string id, AwardCStages institutionStage)
         {
             if (id != institutionStage.StageID)
             {

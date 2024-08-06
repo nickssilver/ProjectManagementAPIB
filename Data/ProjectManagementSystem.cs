@@ -12,14 +12,14 @@ namespace ProjectManagementAPIB.Data
         }
 
         // DbSet properties for each entity in the system, representing tables in the database
-        public DbSet<Institution> Institutions { get; set; }
-        public DbSet<InstitutionStage> InstitutionStages { get; set; }
-        public DbSet<InstitutionStatus> InstitutionStatuses { get; set; }
+        public DbSet<AwardCenter> AwardCenters { get; set; }
+        public DbSet<AwardCStages> AwardCenterStages { get; set; }
+        public DbSet<AwardCStatus> AwardCenterStatus { get; set; }
         public DbSet<County> Counties { get; set; }
         public DbSet<SubCounty> SubCounties { get; set; }
         public DbSet<Participant> Participants { get; set; }
         public DbSet<ParticipantAward> ParticipantAwards { get; set; }
-        public DbSet<ParticipantProject> ParticipantProjects { get; set; }
+        public DbSet<ParticipantActivity> ParticipantProjects { get; set; }
         public DbSet<ParticipantLevel> ParticipantLevels { get; set; }
         public DbSet<ParticipantStatus> ParticipantStatuses { get; set; }
         public DbSet<Project> Projects { get; set; }
