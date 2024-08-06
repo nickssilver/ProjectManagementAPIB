@@ -16,7 +16,8 @@ namespace ProjectManagementAPIB.Data
         public DbSet<AwardCenterStages> AwardCenterStages { get; set; }
         public DbSet<AwardCenterStatus> AwardCenterStatus { get; set; }
         public DbSet<CenterLeaders> CenterLeaders { get; set; }
-        public DbSet<GroupType> GroupType { get; set; }
+        public DbSet<CentersLType> CentersLTypes { get; set; }
+        public DbSet<GroupType> GroupTypes { get; set; }
         public DbSet<County> Counties { get; set; }
         public DbSet<SubCounty> SubCounties { get; set; }
         public DbSet<Participant> Participants { get; set; }
