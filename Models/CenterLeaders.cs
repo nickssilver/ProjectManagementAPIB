@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectManagementAPIB.Models
 {
     public class CenterLeaders
     {
-
         [Key]
-        public string ID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
         public string AwardLeader { get; set; }
         public string Award { get; set; }
         public string Notes { get; set; }

@@ -52,7 +52,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/ParticipantActivity/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutParticipantProject(string id, ParticipantActivity participantProject)
+        public async Task<IActionResult> PutParticipantProject(int id, ParticipantActivity participantProject)
         {
             if (id != participantProject.ID)
             {
@@ -82,7 +82,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/ParticipantActivity/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteParticipantProject(string id)
+        public async Task<IActionResult> DeleteParticipantProject(int id)
         {
             var participantProject = await _context.ParticipantActivity.FindAsync(id);
             if (participantProject == null)
@@ -96,7 +96,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool ParticipantProjectExists(string id)
+        private bool ParticipantProjectExists(int id)
         {
             return _context.ParticipantActivity.Any(e => e.ID == id);
         }

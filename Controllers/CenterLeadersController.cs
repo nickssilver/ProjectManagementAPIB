@@ -53,7 +53,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/CenterLeaders/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCenterLeader(string id, CenterLeaders centerLeader)
+        public async Task<IActionResult> PutCenterLeader(int id, CenterLeaders centerLeader)
         {
             if (id != centerLeader.ID)
             {
@@ -83,7 +83,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/CenterLeaders/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCenterLeader(string id)
+        public async Task<IActionResult> DeleteCenterLeader(int id)
         {
             var centerLeader = await _context.CenterLeaders.FindAsync(id);
             if (centerLeader == null)
@@ -97,7 +97,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool CenterLeaderExists(string id)
+        private bool CenterLeaderExists(int id)
         {
             return _context.CenterLeaders.Any(e => e.ID == id);
         }

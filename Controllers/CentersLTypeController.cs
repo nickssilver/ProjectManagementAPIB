@@ -53,7 +53,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/CentersLType/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCentersLType(string id, CentersLType centersLType)
+        public async Task<IActionResult> PutCentersLType(int id, CentersLType centersLType)
         {
             if (id != centersLType.ID)
             {
@@ -83,7 +83,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/CentersLType/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCentersLType(string id)
+        public async Task<IActionResult> DeleteCentersLType(int id)
         {
             var centersLType = await _context.CentersLTypes.FindAsync(id);
             if (centersLType == null)
@@ -97,7 +97,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool CentersLTypeExists(string id)
+        private bool CentersLTypeExists(int id)
         {
             return _context.CentersLTypes.Any(e => e.ID == id);
         }
