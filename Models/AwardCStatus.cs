@@ -2,7 +2,7 @@
 
 namespace ProjectManagementAPIB.Models
 {
-    public class AwardCStatus
+    public class AwardCenterStatus
     {
         [Key]
         public string StatusID { get; set; }

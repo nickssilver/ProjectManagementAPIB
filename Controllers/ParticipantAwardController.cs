@@ -55,12 +55,13 @@ namespace ProjectManagementAPIB.Controllers
                 return NotFound();
             }
 
-            participantAward.AdminNo = updatedParticipantAward.AdminNo;
+            participantAward.AdminNumber = updatedParticipantAward.AdminNumber;
             participantAward.StudentName = updatedParticipantAward.StudentName;
             participantAward.InstitutionName = updatedParticipantAward.InstitutionName;
             participantAward.LevelName = updatedParticipantAward.LevelName;
             participantAward.StartDate = updatedParticipantAward.StartDate;
-            participantAward.EndDate = updatedParticipantAward.EndDate;
+            participantAward.ExpectedEndDate = updatedParticipantAward.ExpectedEndDate;
+            participantAward.ActualEndDate = updatedParticipantAward.ActualEndDate;
             participantAward.Status = updatedParticipantAward.Status;
             participantAward.Notes = updatedParticipantAward.Notes;
 

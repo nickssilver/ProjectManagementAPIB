@@ -15,8 +15,8 @@ This project is a Project Management System API built using ASP.NET Core Web API
 </div>
 
 - AwardCenter
-- Institution Stages
-- Institution Statuses
+- Award Stages
+- Award Statuses
 - Counties /sub counties
 - Participants
 - Participants Levels
@@ -116,29 +116,29 @@ Press `F5` or click on the `Start` button in Visual Studio to run the applicatio
   <summary>AwardCenter</summary>
 
 - **GET /api/AwardCenter**: Retrieve all institutions
-- **GET /api/AwardCenter/{id}**: Retrieve a specific institution by ID
-- **POST /api/AwardCenter**: Create a new institution
-- **PUT /api/AwardCenter/{id}**: Update an existing institution by ID
-- **DELETE /api/AwardCenter/{id}**: Delete an institution by ID
+- **GET /api/AwardCenter/{id}**: Retrieve a specific award by ID
+- **POST /api/AwardCenter**: Create a new award
+- **PUT /api/AwardCenter/{id}**: Update an existing award by ID
+- **DELETE /api/AwardCenter/{id}**: Delete an award by ID
 </details>
 
 <details>
-  <summary>Institution Stages</summary>
+  <summary>Award Stages</summary>
 
-- **GET /api/InstitutionStages**: Retrieve all institution stages
-- **GET /api/InstitutionStages/{id}**: Retrieve a specific institution stage by ID
-- **POST /api/InstitutionStages**: Create a new institution stage
-- **PUT /api/InstitutionStages/{id}**: Update an existing institution stage by ID
-- **DELETE /api/InstitutionStages/{id}**: Delete an institution stage by ID
+- **GET /api/AwardCenterStages**: Retrieve all award stages
+- **GET /api/AwardCenterStages/{id}**: Retrieve a specific award stage by ID
+- **POST /api/AwardCenterStages**: Create a new award stage
+- **PUT /api/AwardCenterStages/{id}**: Update an existing award stage by ID
+- **DELETE /api/AwardCenterStages/{id}**: Delete an award stage by ID
 </details>
 <details>
-  <summary>Institution Statuses</summary>
+  <summary>Award Statuses</summary>
 
-- **GET /api/InstitutionStatuses**: Retrieve all institution statuses
-- **GET /api/InstitutionStatuses/{id}**: Retrieve a specific institution status by ID
-- **POST /api/InstitutionStatuses**: Create a new institution status
-- **PUT /api/InstitutionStatuses/{id}**: Update an existing institution status by ID
-- **DELETE /api/InstitutionStatuses/{id}**: Delete an institution status by ID
+- **GET /api/AwardCenterStatus**: Retrieve all award statuses
+- **GET /api/AwardCenterStatus/{id}**: Retrieve a specific award status by ID
+- **POST /api/AwardCenterStatus**: Create a new award status
+- **PUT /api/AwardCenterStatus/{id}**: Update an existing award status by ID
+- **DELETE /api/AwardCenterStatus/{id}**: Delete an award status by ID
 </details>
 <details>
   <summary>Counties</summary>
@@ -173,7 +173,7 @@ Press `F5` or click on the `Start` button in Visual Studio to run the applicatio
   </details>
 
 <details>
-  <summary>ParticipantProjects</summary>
+  <summary>ParticipantActivity</summary>
 
 - GetParticipantProjects: Retrieves all participant projects.
 - GetParticipantProject: Retrieves a participant project by its ParticipantID.

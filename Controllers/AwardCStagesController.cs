@@ -11,56 +11,56 @@ namespace ProjectManagementAPIB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InstitutionStagesController : ControllerBase
+    public class AwardCStagesController : ControllerBase
     {
         private readonly ProjectManagementContext _context;
 
-        public InstitutionStagesController(ProjectManagementContext context)
+        public AwardCStagesController(ProjectManagementContext context)
         {
             _context = context;
         }
 
-        // GET: api/InstitutionStages
+        // GET: api/AwardCenterStages
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AwardCStages>>> GetInstitutionStages()
+        public async Task<ActionResult<IEnumerable<AwardCenterStages>>> GetInstitutionStages()
         {
-            return await _context.InstitutionStages.ToListAsync();
+            return await _context.AwardCenterStages.ToListAsync();
         }
 
-        // GET: api/InstitutionStages/5
+        // GET: api/AwardCenterStages/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<AwardCStages>> GetInstitutionStage(string id)
+        public async Task<ActionResult<AwardCenterStages>> GetInstitutionStage(string id)
         {
-            var institutionStage = await _context.InstitutionStages.FindAsync(id);
+            var awardStage = await _context.AwardCenterStages.FindAsync(id);
 
-            if (institutionStage == null)
+            if (awardStage == null)
             {
                 return NotFound();
             }
 
-            return institutionStage;
+            return awardStage;
         }
 
-        // POST: api/InstitutionStages
+        // POST: api/AwardCenterStages
         [HttpPost]
-        public async Task<ActionResult<AwardCStages>> PostInstitutionStage(AwardCStages institutionStage)
+        public async Task<ActionResult<AwardCenterStages>> PostInstitutionStage(AwardCenterStages awardStage)
         {
-            _context.InstitutionStages.Add(institutionStage);
+            _context.AwardCenterStages.Add(awardStage);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetInstitutionStage), new { id = institutionStage.StageID }, institutionStage);
+            return CreatedAtAction(nameof(GetInstitutionStage), new { id = awardStage.StageID }, awardStage);
         }
 
-        // PUT: api/InstitutionStages/5
+        // PUT: api/AwardCenterStages/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInstitutionStage(string id, AwardCStages institutionStage)
+        public async Task<IActionResult> PutInstitutionStage(string id, AwardCenterStages awardStage)
         {
-            if (id != institutionStage.StageID)
+            if (id != awardStage.StageID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(institutionStage).State = EntityState.Modified;
+            _context.Entry(awardStage).State = EntityState.Modified;
 
             try
             {
@@ -81,17 +81,17 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        // DELETE: api/InstitutionStages/5
+        // DELETE: api/AwardCenterStages/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteInstitutionStage(string id)
         {
-            var institutionStage = await _context.InstitutionStages.FindAsync(id);
-            if (institutionStage == null)
+            var awardStage = await _context.AwardCenterStages.FindAsync(id);
+            if (awardStage == null)
             {
                 return NotFound();
             }
 
-            _context.InstitutionStages.Remove(institutionStage);
+            _context.AwardCenterStages.Remove(awardStage);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -99,7 +99,7 @@ namespace ProjectManagementAPIB.Controllers
 
         private bool InstitutionStageExists(string id)
         {
-            return _context.InstitutionStages.Any(e => e.StageID == id);
+            return _context.AwardCenterStages.Any(e => e.StageID == id);
         }
     }
 }

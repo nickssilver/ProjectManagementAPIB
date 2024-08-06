@@ -23,14 +23,14 @@ namespace ProjectManagementAPIB.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Partnership>>> GetPartnerships()
         {
-            return await _context.Partnerships.ToListAsync();
+            return await _context.Partners.ToListAsync();
         }
 
         // GET: api/Partnerships/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Partnership>> GetPartnership(string id)
         {
-            var partnership = await _context.Partnerships.FindAsync(id);
+            var partnership = await _context.Partners.FindAsync(id);
 
             if (partnership == null)
             {
@@ -44,7 +44,7 @@ namespace ProjectManagementAPIB.Controllers
         [HttpPost]
         public async Task<ActionResult<Partnership>> PostPartnership(Partnership partnership)
         {
-            _context.Partnerships.Add(partnership);
+            _context.Partners.Add(partnership);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPartnership", new { id = partnership.PartnerID }, partnership);
@@ -84,13 +84,13 @@ namespace ProjectManagementAPIB.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePartnership(string id)
         {
-            var partnership = await _context.Partnerships.FindAsync(id);
+            var partnership = await _context.Partners.FindAsync(id);
             if (partnership == null)
             {
                 return NotFound();
             }
 
-            _context.Partnerships.Remove(partnership);
+            _context.Partners.Remove(partnership);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -98,7 +98,7 @@ namespace ProjectManagementAPIB.Controllers
 
         private bool PartnershipExists(string id)
         {
-            return _context.Partnerships.Any(e => e.PartnerID == id);
+            return _context.Partners.Any(e => e.PartnerID == id);
         }
     }
 }

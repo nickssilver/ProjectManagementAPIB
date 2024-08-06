@@ -11,27 +11,27 @@ namespace ProjectManagementAPIB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InstitutionStatusesController : ControllerBase
+    public class AwardCStatusController : ControllerBase
     {
         private readonly ProjectManagementContext _context;
 
-        public InstitutionStatusesController(ProjectManagementContext context)
+        public AwardCStatusController(ProjectManagementContext context)
         {
             _context = context;
-        }
+        } 
 
-        // GET: api/InstitutionStatuses
+        // GET: api/AwardCenterStatus
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AwardCStatus>>> GetInstitutionStatuses()
+        public async Task<ActionResult<IEnumerable<AwardCenterStatus>>> GetInstitutionStatuses()
         {
-            return await _context.InstitutionStatuses.ToListAsync();
+            return await _context.AwardCenterStatus.ToListAsync();
         }
 
-        // GET: api/InstitutionStatuses/5
+        // GET: api/AwardCenterStatus/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<AwardCStatus>> GetInstitutionStatus(string id)
+        public async Task<ActionResult<AwardCenterStatus>> GetInstitutionStatus(string id)
         {
-            var institutionStatus = await _context.InstitutionStatuses.FindAsync(id);
+            var institutionStatus = await _context.AwardCenterStatus.FindAsync(id);
 
             if (institutionStatus == null)
             {
@@ -41,19 +41,19 @@ namespace ProjectManagementAPIB.Controllers
             return institutionStatus;
         }
 
-        // POST: api/InstitutionStatuses
+        // POST: api/AwardCenterStatus
         [HttpPost]
-        public async Task<ActionResult<AwardCStatus>> PostInstitutionStatus(AwardCStatus institutionStatus)
+        public async Task<ActionResult<AwardCenterStatus>> PostInstitutionStatus(AwardCenterStatus institutionStatus)
         {
-            _context.InstitutionStatuses.Add(institutionStatus);
+            _context.AwardCenterStatus.Add(institutionStatus);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetInstitutionStatus), new { id = institutionStatus.StatusID }, institutionStatus);
         }
 
-        // PUT: api/InstitutionStatuses/5
+        // PUT: api/AwardCenterStatus/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutInstitutionStatus(string id, AwardCStatus institutionStatus)
+        public async Task<IActionResult> PutInstitutionStatus(string id, AwardCenterStatus institutionStatus)
         {
             if (id != institutionStatus.StatusID)
             {
@@ -81,17 +81,17 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        // DELETE: api/InstitutionStatuses/5
+        // DELETE: api/AwardCenterStatus/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteInstitutionStatus(string id)
         {
-            var institutionStatus = await _context.InstitutionStatuses.FindAsync(id);
+            var institutionStatus = await _context.AwardCenterStatus.FindAsync(id);
             if (institutionStatus == null)
             {
                 return NotFound();
             }
 
-            _context.InstitutionStatuses.Remove(institutionStatus);
+            _context.AwardCenterStatus.Remove(institutionStatus);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -99,7 +99,7 @@ namespace ProjectManagementAPIB.Controllers
 
         private bool InstitutionStatusExists(string id)
         {
-            return _context.InstitutionStatuses.Any(e => e.StatusID == id);
+            return _context.AwardCenterStatus.Any(e => e.StatusID == id);
         }
     }
 }

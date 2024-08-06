@@ -2,7 +2,7 @@
 
 namespace ProjectManagementAPIB.Models
 {
-    public class AwardCStages
+    public class AwardCenterStages
     {
         [Key]
         public string StageID { get; set; }

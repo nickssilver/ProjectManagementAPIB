@@ -13,13 +13,15 @@ namespace ProjectManagementAPIB.Data
 
         // DbSet properties for each entity in the system, representing tables in the database
         public DbSet<AwardCenter> AwardCenters { get; set; }
-        public DbSet<AwardCStages> AwardCenterStages { get; set; }
-        public DbSet<AwardCStatus> AwardCenterStatus { get; set; }
+        public DbSet<AwardCenterStages> AwardCenterStages { get; set; }
+        public DbSet<AwardCenterStatus> AwardCenterStatus { get; set; }
+        public DbSet<CenterLeaders> CenterLeaders { get; set; }
+        public DbSet<GroupType> GroupType { get; set; }
         public DbSet<County> Counties { get; set; }
         public DbSet<SubCounty> SubCounties { get; set; }
         public DbSet<Participant> Participants { get; set; }
         public DbSet<ParticipantAward> ParticipantAwards { get; set; }
-        public DbSet<ParticipantActivity> ParticipantProjects { get; set; }
+        public DbSet<ParticipantActivity> ParticipantActivity { get; set; }
         public DbSet<ParticipantLevel> ParticipantLevels { get; set; }
         public DbSet<ParticipantStatus> ParticipantStatuses { get; set; }
         public DbSet<Project> Projects { get; set; }
@@ -36,7 +38,7 @@ namespace ProjectManagementAPIB.Data
         public DbSet<TrainingType> TrainingTypes { get; set; }
         public DbSet<Budget> Budgets { get; set; }
         public DbSet<FundingType> FundingTypes { get; set; }
-        public DbSet<Partnership> Partnerships { get; set; }
+        public DbSet<Partnership> Partners { get; set; }
         public DbSet<PartnerType> PartnerTypes { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<User> Users { get; set; }
