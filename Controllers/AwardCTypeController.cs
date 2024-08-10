@@ -11,27 +11,27 @@ namespace ProjectManagementAPIB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CentersLTypeController : ControllerBase
+    public class AwardCTypeController : ControllerBase
     {
         private readonly ProjectManagementContext _context;
 
-        public CentersLTypeController(ProjectManagementContext context)
+        public AwardCTypeController(ProjectManagementContext context)
         {
             _context = context;
         }
 
         // GET: api/CentersLType
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CentersLType>>> GetCentersLTypes()
+        public async Task<ActionResult<IEnumerable<AwardCType>>> GetCentersLTypes()
         {
-            return await _context.CentersLTypes.ToListAsync();
+            return await _context.AwardCTypes.ToListAsync();
         }
 
         // GET: api/CentersLType/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CentersLType>> GetCentersLType(string id)
+        public async Task<ActionResult<AwardCType>> GetCentersLType(string id)
         {
-            var centersLType = await _context.CentersLTypes.FindAsync(id);
+            var centersLType = await _context.AwardCTypes.FindAsync(id);
 
             if (centersLType == null)
             {
@@ -43,9 +43,9 @@ namespace ProjectManagementAPIB.Controllers
 
         // POST: api/CentersLType
         [HttpPost]
-        public async Task<ActionResult<CentersLType>> PostCentersLType(CentersLType centersLType)
+        public async Task<ActionResult<AwardCType>> PostCentersLType(AwardCType centersLType)
         {
-            _context.CentersLTypes.Add(centersLType);
+            _context.AwardCTypes.Add(centersLType);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetCentersLType), new { id = centersLType.ID }, centersLType);
@@ -53,7 +53,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/CentersLType/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCentersLType(int id, CentersLType centersLType)
+        public async Task<IActionResult> PutCentersLType(int id, AwardCType centersLType)
         {
             if (id != centersLType.ID)
             {
@@ -85,13 +85,13 @@ namespace ProjectManagementAPIB.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCentersLType(int id)
         {
-            var centersLType = await _context.CentersLTypes.FindAsync(id);
+            var centersLType = await _context.AwardCTypes.FindAsync(id);
             if (centersLType == null)
             {
                 return NotFound();
             }
 
-            _context.CentersLTypes.Remove(centersLType);
+            _context.AwardCTypes.Remove(centersLType);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -99,7 +99,7 @@ namespace ProjectManagementAPIB.Controllers
 
         private bool CentersLTypeExists(int id)
         {
-            return _context.CentersLTypes.Any(e => e.ID == id);
+            return _context.AwardCTypes.Any(e => e.ID == id);
         }
     }
 }

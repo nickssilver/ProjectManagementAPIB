@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectManagementAPIB.Migrations
 {
     /// <inheritdoc />
-    public partial class changesTables : Migration
+    public partial class tablesUpdate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,6 +65,20 @@ namespace ProjectManagementAPIB.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AwardCTypes",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CenterName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AwardCTypes", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Budgets",
                 columns: table => new
                 {
@@ -97,20 +111,6 @@ namespace ProjectManagementAPIB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CenterLeaders", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CentersLTypes",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LevelName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CentersLTypes", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,19 +167,6 @@ namespace ProjectManagementAPIB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FundingTypes", x => x.FundingID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GroupTypes",
-                columns: table => new
-                {
-                    GroupID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    GroupName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GroupTypes", x => x.GroupID);
                 });
 
             migrationBuilder.CreateTable(
@@ -276,6 +263,10 @@ namespace ProjectManagementAPIB.Migrations
                     DOB = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Age = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Level = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Religion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Ethnicity = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nationality = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InstitutionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -290,6 +281,7 @@ namespace ProjectManagementAPIB.Migrations
                     EmergencyCRelation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Marginalised = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AtRisk = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -537,13 +529,13 @@ namespace ProjectManagementAPIB.Migrations
                 name: "AwardCenterStatus");
 
             migrationBuilder.DropTable(
+                name: "AwardCTypes");
+
+            migrationBuilder.DropTable(
                 name: "Budgets");
 
             migrationBuilder.DropTable(
                 name: "CenterLeaders");
-
-            migrationBuilder.DropTable(
-                name: "CentersLTypes");
 
             migrationBuilder.DropTable(
                 name: "Donors");
@@ -553,9 +545,6 @@ namespace ProjectManagementAPIB.Migrations
 
             migrationBuilder.DropTable(
                 name: "FundingTypes");
-
-            migrationBuilder.DropTable(
-                name: "GroupTypes");
 
             migrationBuilder.DropTable(
                 name: "Helpers");

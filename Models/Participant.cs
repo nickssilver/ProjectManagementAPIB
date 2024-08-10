@@ -10,6 +10,10 @@ namespace ProjectManagementAPIB.Models
         public DateTime DOB { get; set; }
         public string Gender { get; set; }
         public string Age { get; set; }
+        public string Level { get; set; }
+        public string Religion { get; set; }
+        public string Ethnicity { get; set; }
+        public string Nationality { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string InstitutionName { get; set; }
@@ -24,6 +28,7 @@ namespace ProjectManagementAPIB.Models
         public string EmergencyCRelation { get; set; }
         public string PaymentStatus { get; set; }
         public string Marginalised { get; set; }
+        public string AtRisk { get; set; }
         public string Notes { get; set; }
 
     }

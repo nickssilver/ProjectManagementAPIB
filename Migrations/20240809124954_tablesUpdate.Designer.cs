@@ -12,8 +12,8 @@ using ProjectManagementAPIB.Data;
 namespace ProjectManagementAPIB.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    [Migration("20240806231330_changesTables")]
-    partial class changesTables
+    [Migration("20240809124954_tablesUpdate")]
+    partial class tablesUpdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,27 @@ namespace ProjectManagementAPIB.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ProjectManagementAPIB.Models.AwardCType", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("CenterName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("AwardCTypes");
+                });
 
             modelBuilder.Entity("ProjectManagementAPIB.Models.AwardCenter", b =>
                 {
@@ -201,27 +222,6 @@ namespace ProjectManagementAPIB.Migrations
                     b.ToTable("CenterLeaders");
                 });
 
-            modelBuilder.Entity("ProjectManagementAPIB.Models.CentersLType", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("LevelName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("CentersLTypes");
-                });
-
             modelBuilder.Entity("ProjectManagementAPIB.Models.County", b =>
                 {
                     b.Property<int>("CountyID")
@@ -309,24 +309,6 @@ namespace ProjectManagementAPIB.Migrations
                     b.ToTable("FundingTypes");
                 });
 
-            modelBuilder.Entity("ProjectManagementAPIB.Models.GroupType", b =>
-                {
-                    b.Property<string>("GroupID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GroupName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("GroupID");
-
-                    b.ToTable("GroupTypes");
-                });
-
             modelBuilder.Entity("ProjectManagementAPIB.Models.Helper", b =>
                 {
                     b.Property<string>("HelperID")
@@ -404,6 +386,10 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AtRisk")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("AwardLeader")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -435,6 +421,10 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Ethnicity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -451,11 +441,19 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Marginalised")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -468,6 +466,10 @@ namespace ProjectManagementAPIB.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Religion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
