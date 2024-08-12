@@ -10,7 +10,6 @@ namespace ProjectManagementAPIB.Models
         public DateTime DOB { get; set; }
         public string Gender { get; set; }
         public string Age { get; set; }
-        public string Level { get; set; }
         public string Religion { get; set; }
         public string Ethnicity { get; set; }
         public string Nationality { get; set; }
@@ -20,7 +19,6 @@ namespace ProjectManagementAPIB.Models
         public string County { get; set; }
         public string SubCounty { get; set; }
         public string AwardLevel { get; set; }
-        public string AwardLeader { get; set; }
         public string GuardianName { get; set; }
         public string GuardianContact { get; set; }
         public string EmergencyCName { get; set; }

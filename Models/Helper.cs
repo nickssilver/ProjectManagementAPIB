@@ -11,6 +11,7 @@ namespace ProjectManagementAPIB.Models
         public string Gender { get; set; }
         public string IdNo { get; set; }
         public string PhoneNo { get; set; }
+        public string Nationality { get; set; }
         public string Email { get; set; }
         public string SubCounty { get; set; }
         public string County { get; set; }

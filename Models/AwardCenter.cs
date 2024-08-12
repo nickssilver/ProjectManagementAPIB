@@ -22,8 +22,8 @@ namespace ProjectManagementAPIB.Models
 
         [DataType(DataType.Date)]
         public DateTime LicenseEndDate { get; set; }
-        public string LevelType { get; set; }
-        public string GroupType { get; set; }
+  
+        public string AwardCType { get; set; }
         public string Source { get; set; }
         public string Marginalised { get; set; }
         public string Notes { get; set; }
