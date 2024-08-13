@@ -10,11 +10,11 @@ namespace ProjectManagementAPIB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ParticipantProjectsController : ControllerBase
+    public class ParticipantActivityController : ControllerBase
     {
         private readonly ProjectManagementContext _context;
 
-        public ParticipantProjectsController(ProjectManagementContext context)
+        public ParticipantActivityController(ProjectManagementContext context)
         {
             _context = context;
         }

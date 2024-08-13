@@ -11,7 +11,6 @@ namespace ProjectManagementAPIB.Models
         public string AdminNumber { get; set;}
         public string StudentName { get; set;}
         public string InstitutionName { get; set; }
-        public string ProjectName { get; set;}
         public string ActivityName { get; set; }
 
     }
