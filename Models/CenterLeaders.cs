@@ -9,7 +9,7 @@ namespace ProjectManagementAPIB.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public string AwardLeader { get; set; }
-        public string Award { get; set; }
+        public string Institution { get; set; }
         public string Notes { get; set; }
     }
 }
