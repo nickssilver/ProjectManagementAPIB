@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0" version="24.7.6">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0" version="24.7.7">
   <diagram name="Page-1" id="zOwgOoTB0SKEGVwLiWKL">
-    <mxGraphModel dx="2284" dy="2012" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1644" dy="1533" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1784,7 +1784,7 @@
             <mxRectangle width="150" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="_ph9itU2wbhxBn9si0oa-555" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;10. User Module&lt;br&gt;&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+        <mxCell id="_ph9itU2wbhxBn9si0oa-555" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;11. User Module&lt;br&gt;&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="-800" y="4330" width="260" height="40" as="geometry" />
         </mxCell>
         <mxCell id="_ph9itU2wbhxBn9si0oa-556" value="Users" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
@@ -2579,6 +2579,9 @@
         </mxCell>
         <mxCell id="08FlH-vMS59kMMs5MXfE-80" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;10. Activity Module&lt;br&gt;&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="-820" y="3930" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="yYM1YV2wgZMjXPXXIZQ8-1" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;12. Company&lt;br&gt;&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-800" y="4680" width="260" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
