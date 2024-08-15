@@ -29,7 +29,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/CentersLType/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<AwardCType>> GetCentersLType(string id)
+        public async Task<ActionResult<AwardCType>> GetCentersLType(int id)
         {
             var centersLType = await _context.AwardCTypes.FindAsync(id);
 

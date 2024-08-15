@@ -29,7 +29,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/CenterLeaders/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CenterLeaders>> GetCenterLeader(string id)
+        public async Task<ActionResult<CenterLeaders>> GetCenterLeader(int id)
         {
             var centerLeader = await _context.CenterLeaders.FindAsync(id);
 
