@@ -42,6 +42,8 @@ namespace ProjectManagementAPIB.Data
         public DbSet<PartnerType> PartnerTypes { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<SystemLogs> SysLogs { get; set; }
+        public DbSet<Settings> Settings { get; set; }
 
         // Configure the model properties and relationships
         protected override void OnModelCreating(ModelBuilder modelBuilder)
