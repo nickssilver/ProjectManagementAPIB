@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProjectManagementAPIB.Models
 {
-    public class ActivityAprroval
+    public class ActivityApproval
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -12,6 +12,40 @@ namespace ProjectManagementAPIB.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ActivityApproval",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AwardCentre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AwardLeader = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ActivityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UploadForm = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Consent = table.Column<bool>(type: "bit", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActivityApproval", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ActivityReporting",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AwardCentre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AwardLeader = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UploadReport = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActivityReporting", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AwardCenters",
                 columns: table => new
                 {
@@ -104,7 +138,7 @@ namespace ProjectManagementAPIB.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AwardLeader = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Award = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Institution = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -211,9 +245,11 @@ namespace ProjectManagementAPIB.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AdminNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StudentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InstitutionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProjectName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ActivityName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AwardLevel = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AwardCenter = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ActivityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MedicalForm = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -259,6 +295,7 @@ namespace ProjectManagementAPIB.Migrations
                 columns: table => new
                 {
                     AdminNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    PassportPhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DOB = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -280,6 +317,7 @@ namespace ProjectManagementAPIB.Migrations
                     PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Marginalised = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AtRisk = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DocUpload = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -392,6 +430,44 @@ namespace ProjectManagementAPIB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProjectStatuses", x => x.ProjectStatusID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Settings",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Profile = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LegalName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TaxNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Footer = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Settings", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SysLogs",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ActionType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EntityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IPAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Browser = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SysLogs", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -518,6 +594,12 @@ namespace ProjectManagementAPIB.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ActivityApproval");
+
+            migrationBuilder.DropTable(
+                name: "ActivityReporting");
+
+            migrationBuilder.DropTable(
                 name: "AwardCenters");
 
             migrationBuilder.DropTable(
@@ -584,7 +666,13 @@ namespace ProjectManagementAPIB.Migrations
                 name: "ProjectStatuses");
 
             migrationBuilder.DropTable(
+                name: "Settings");
+
+            migrationBuilder.DropTable(
                 name: "SubCounties");
+
+            migrationBuilder.DropTable(
+                name: "SysLogs");
 
             migrationBuilder.DropTable(
                 name: "Testimonials");

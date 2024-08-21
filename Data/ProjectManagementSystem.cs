@@ -22,6 +22,8 @@ namespace ProjectManagementAPIB.Data
         public DbSet<Participant> Participants { get; set; }
         public DbSet<ParticipantAward> ParticipantAwards { get; set; }
         public DbSet<ParticipantActivity> ParticipantActivity { get; set; }
+        public DbSet<ActivityApproval> ActivityApprovals { get; set; }
+        public DbSet<ActivityReporting> ActivityReporting { get; set; }
         public DbSet<ParticipantLevel> ParticipantLevels { get; set; }
         public DbSet<ParticipantStatus> ParticipantStatuses { get; set; }
         public DbSet<Project> Projects { get; set; }
