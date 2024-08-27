@@ -10,6 +10,7 @@ namespace ProjectManagementAPIB.Models
         public int ID { get; set; }
         public string AwardCentre { get; set; }
         public string AwardLeader { get; set; }
+        public string ActivityName { get; set; }
         public string UploadReport { get; set; }
         public string Notes { get; set; }
     }

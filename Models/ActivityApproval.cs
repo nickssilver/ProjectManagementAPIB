@@ -13,6 +13,7 @@ namespace ProjectManagementAPIB.Models
         public string ActivityName { get; set; }
         public string UploadForm { get; set; }
         public bool Consent { get; set; }
+        public bool Approval { get; set; }
         public string Notes { get; set; }
     }
 }
