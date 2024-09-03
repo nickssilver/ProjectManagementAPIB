@@ -13,6 +13,8 @@ namespace ProjectManagementAPIB.Models
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
         public decimal Cost { get; set; }
+        public string Region { get; set; }
+
         public string SubCounty { get; set; }
         public string County { get; set; }
         public string Description { get; set; }

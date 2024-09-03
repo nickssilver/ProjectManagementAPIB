@@ -17,6 +17,8 @@ namespace ProjectManagementAPIB.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string InstitutionName { get; set; }
+        public string Region { get; set; }
+
         public string County { get; set; }
         public string SubCounty { get; set; }
         public string GuardianName { get; set; }

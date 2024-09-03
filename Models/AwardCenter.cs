@@ -12,6 +12,7 @@ namespace ProjectManagementAPIB.Models
         public string Status { get; set; }
         public string InstitutionEmail { get; set; }
         public string InstitutionContact { get; set; }
+        public string Region { get; set; }
         public string SubCounty { get; set; }
         public string County { get; set; }
         public string ContactPerson { get; set; }

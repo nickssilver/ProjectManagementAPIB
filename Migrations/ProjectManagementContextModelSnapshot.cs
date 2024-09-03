@@ -34,6 +34,9 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Approval")
+                        .HasColumnType("bit");
+
                     b.Property<string>("AwardCentre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -65,6 +68,10 @@ namespace ProjectManagementAPIB.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("ActivityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AwardCentre")
                         .IsRequired()
@@ -449,10 +456,6 @@ namespace ProjectManagementAPIB.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AtRisk")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AwardLevel")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
