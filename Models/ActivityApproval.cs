@@ -12,6 +12,11 @@ namespace ProjectManagementAPIB.Models
         public string AwardLeader { get; set; }
         public string ActivityName { get; set; }
         public string ParticipantsNo { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime ApplyDate { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime ActivityDate { get; set; }
         public string Region { get; set; }
         public bool Consent { get; set; }
         public string Assessors { get; set; }
