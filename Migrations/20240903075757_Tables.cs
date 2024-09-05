@@ -12,7 +12,7 @@ namespace ProjectManagementAPIB.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ActivityApproval",
+                name: "ActivityApprovals",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -22,11 +22,12 @@ namespace ProjectManagementAPIB.Migrations
                     ActivityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UploadForm = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Consent = table.Column<bool>(type: "bit", nullable: false),
+                    Approval = table.Column<bool>(type: "bit", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActivityApproval", x => x.ID);
+                    table.PrimaryKey("PK_ActivityApprovals", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -37,6 +38,7 @@ namespace ProjectManagementAPIB.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AwardCentre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AwardLeader = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ActivityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UploadReport = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -308,7 +310,6 @@ namespace ProjectManagementAPIB.Migrations
                     InstitutionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     County = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AwardLevel = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GuardianName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GuardianContact = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmergencyCName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -594,7 +595,7 @@ namespace ProjectManagementAPIB.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ActivityApproval");
+                name: "ActivityApprovals");
 
             migrationBuilder.DropTable(
                 name: "ActivityReporting");

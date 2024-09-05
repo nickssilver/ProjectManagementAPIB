@@ -20,6 +20,8 @@ namespace ProjectManagementAPIB.Models
         [DataType(DataType.Date)]
         public DateTime ActualEndDate { get; set; }
         public string Status { get; set; }
+        public string CertNo { get; set; }
+
         public string Notes { get; set; }
 
 
