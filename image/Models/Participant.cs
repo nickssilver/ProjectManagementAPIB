@@ -19,7 +19,6 @@ namespace ProjectManagementAPIB.Models
         public string InstitutionName { get; set; }
         public string County { get; set; }
         public string SubCounty { get; set; }
-        public string AwardLevel { get; set; }
         public string GuardianName { get; set; }
         public string GuardianContact { get; set; }
         public string EmergencyCName { get; set; }
