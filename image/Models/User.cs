@@ -19,4 +19,16 @@ namespace ProjectManagementAPIB.Models
 
       
     }
+    public class PasswordResetRequestModel
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+    }
+
+    public class PasswordResetModel
+    {
+        public string Token { get; set; }
+        public string NewPassword { get; set; }
+    }
 }

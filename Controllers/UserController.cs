@@ -11,6 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Net.Mail;
+using System.Net;
+using System.Security.Cryptography;
 
 namespace ProjectManagementAPIB.Controllers
 {
@@ -94,6 +97,7 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
+      
         // DELETE: api/User/{username}
         [HttpDelete("{username}")]
         public async Task<IActionResult> DeleteUser(string username)
@@ -146,6 +150,133 @@ namespace ProjectManagementAPIB.Controllers
             });
         }
 
+        // reset password
+        // POST: api/User/RequestPasswordReset
+        [HttpPost("RequestPasswordReset")]
+        public async Task<IActionResult> RequestPasswordReset([FromBody] PasswordResetRequestModel model)
+        {
+            // Look for a user with the provided email
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+            if (user == null)
+            {
+                return NotFound("User with the provided email not found.");
+            }
+
+            // Generate reset token
+            var token = GenerateEncryptedToken(user);
+
+            // Send the reset email
+            await SendPasswordResetEmail(user.Email, token);
+
+            return Ok("Password reset email sent successfully.");
+        }
+
+        //password update endpoint 
+        // PUT: api/User/ResetPassword
+        [HttpPut("ResetPassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] PasswordResetModel model)
+        {
+            if (string.IsNullOrEmpty(model.Token) || string.IsNullOrEmpty(model.NewPassword))
+            {
+                return BadRequest("Token and new password are required.");
+            }
+
+            // Decrypt the token to retrieve username and email
+            var (username, email) = DecryptEncryptedToken(model.Token);
+            if (username == null || email == null)
+
+            {
+                return BadRequest("token invalid or expired");
+            }
+
+            // Find the user in the database
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username && u.Email == email);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            // Update the password (hash it before saving)
+            user.Password = BCrypt.Net.BCrypt.HashPassword(model.NewPassword);
+
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            return Ok("Password has been reset successfully.");
+        }
+
+
+        private string GenerateEncryptedToken(User user)
+        {
+            var plainText = $"{user.Username}|{user.Email}|{DateTime.UtcNow.AddHours(1)}"; // Concatenate the claims
+
+            // Encrypt using AES
+            var key = Encoding.UTF8.GetBytes(_configuration["EncryptionKey"]); // Use a key from config
+            var iv = new byte[16]; // Initialization vector (IV) of size 16 bytes (AES block size)
+            using (var aes = Aes.Create())
+            {
+                aes.Key = key;
+                aes.IV = iv;
+                aes.Mode = CipherMode.CBC;
+                aes.Padding = PaddingMode.PKCS7;
+
+                using (var encryptor = aes.CreateEncryptor(aes.Key, aes.IV))
+                {
+                    var plainBytes = Encoding.UTF8.GetBytes(plainText);
+                    var encryptedBytes = encryptor.TransformFinalBlock(plainBytes, 0, plainBytes.Length);
+                    var token = Convert.ToBase64String(encryptedBytes);
+                    var urlEncodedToken = Uri.EscapeDataString(token);
+                    return urlEncodedToken;
+                }
+            }
+        }
+
+        private (string Username, string Email) DecryptEncryptedToken(string token)
+        {
+            var key = Encoding.UTF8.GetBytes(_configuration["EncryptionKey"]); // Same key used in encryption
+            var iv = new byte[16]; // IV should be the same (zeros in this case)
+
+            using (var aes = Aes.Create())
+            {
+                aes.Key = key;
+                aes.IV = iv;
+                aes.Mode = CipherMode.CBC;
+                aes.Padding = PaddingMode.PKCS7;
+
+                using (var decryptor = aes.CreateDecryptor(aes.Key, aes.IV))
+                {
+                    try
+                    {
+                        var urlDecodedToken = Uri.UnescapeDataString(token);
+                        var encryptedBytes = Convert.FromBase64String(urlDecodedToken);
+                        var decryptedBytes = decryptor.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
+                        var decryptedText = Encoding.UTF8.GetString(decryptedBytes);
+                        // Decrypted text is in the format: "username:email:expiry"
+                        var parts = decryptedText.Split('|');
+                        var username = parts[0];
+                        var email = parts[1];
+                        var expiry = DateTime.Parse(parts[2]);
+
+                        // Validate token expiration
+                        if (expiry > DateTime.UtcNow)
+                        {
+                            return (username, email); // Return the claims
+                        }
+                        else
+                        {
+                            Console.WriteLine("The token has expired.");
+                            return (null, null);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Token decryption failed: {ex.Message}");
+                        return (null, null);
+                    }
+                }
+            }
+        }
+
         private string GenerateJwtToken(dynamic user)
         {
             var claims = new[]
@@ -173,5 +304,47 @@ namespace ProjectManagementAPIB.Controllers
         {
             return _context.Users.Any(e => e.Username == username);
         }
+
+        private async Task SendPasswordResetEmail(string email, string token)
+        {
+            var resetPasswordLink = $"http://localhost:3000/change-password?token={token}";
+
+            var smtpClient = new SmtpClient(_configuration["Smtp:Host"])
+            {
+                Port = int.Parse(_configuration["Smtp:Port"]),
+                Credentials = new NetworkCredential(_configuration["Smtp:Username"], _configuration["Smtp:Password"]),
+                EnableSsl = true,
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(_configuration["Smtp:Username"]),
+                Subject = "Password Reset Request",
+                Body = $@"
+            <div style='font-family: Arial, sans-serif; padding: 20px;'>
+                <h1 style='color: #007bff;'>Password Reset Request</h1>
+                <p>Hi there,</p>
+                <p>We received a request to reset your password. Click the button below to proceed with the password reset process:</p>
+                <a href='{resetPasswordLink}' style='display: inline-block; background-color: #2B3674; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px;'>Reset Password</a>
+                <p>If you didn't request this, you can safely ignore this email.</p>
+                <p>Thanks,<br/>PAK</p>
+            </div>
+        ",
+                IsBodyHtml = true,
+            };
+
+            mailMessage.To.Add(email);
+
+            try
+            {
+                await smtpClient.SendMailAsync(mailMessage);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                Console.WriteLine($"Error sending password reset email: {ex.Message}");
+            }
+        }
+
     }
 }
