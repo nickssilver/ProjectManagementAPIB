@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectManagementAPIB.Migrations
 {
     /// <inheritdoc />
-    public partial class Tables : Migration
+    public partial class tables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,8 +20,13 @@ namespace ProjectManagementAPIB.Migrations
                     AwardCentre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AwardLeader = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ActivityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UploadForm = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ParticipantsNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApplyDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ActivityDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Consent = table.Column<bool>(type: "bit", nullable: false),
+                    Assessors = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UploadForm = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Approval = table.Column<bool>(type: "bit", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -39,6 +44,8 @@ namespace ProjectManagementAPIB.Migrations
                     AwardCentre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AwardLeader = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ActivityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ParticipantsNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UploadReport = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -57,6 +64,7 @@ namespace ProjectManagementAPIB.Migrations
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InstitutionEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InstitutionContact = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     County = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -271,6 +279,7 @@ namespace ProjectManagementAPIB.Migrations
                     ExpectedEndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ActualEndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CertNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -308,6 +317,7 @@ namespace ProjectManagementAPIB.Migrations
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InstitutionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     County = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GuardianName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -409,6 +419,7 @@ namespace ProjectManagementAPIB.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     County = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -479,6 +490,7 @@ namespace ProjectManagementAPIB.Migrations
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DocUpload = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -522,6 +534,7 @@ namespace ProjectManagementAPIB.Migrations
                     Venue = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Categories = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     County = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Coordinator = table.Column<string>(type: "nvarchar(max)", nullable: false),
