@@ -1930,7 +1930,7 @@
           <mxGeometry x="-280" y="-31" width="180" height="40" as="geometry" />
         </mxCell>
         <mxCell id="YdJw393UNYjvNJX9R_26-1" value="ProjectReporting" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
-          <mxGeometry x="-330" y="1441" width="180" height="220" as="geometry" />
+          <mxGeometry x="-340" y="1456" width="180" height="220" as="geometry" />
         </mxCell>
         <mxCell id="YdJw393UNYjvNJX9R_26-2" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=1;" parent="YdJw393UNYjvNJX9R_26-1" vertex="1">
           <mxGeometry y="30" width="180" height="30" as="geometry" />
