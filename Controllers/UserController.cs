@@ -14,6 +14,7 @@ using System;
 using System.Net.Mail;
 using System.Net;
 using System.Security.Cryptography;
+using ProjectManagementAPIB.DTOs;
 
 namespace ProjectManagementAPIB.Controllers
 {
@@ -34,7 +35,36 @@ namespace ProjectManagementAPIB.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            var usersWithPermissions = await _context.Users
+    .Include(u => u.Role)                       // Include the Role of the User
+        .ThenInclude(r => r.PermissionRoles)    // Include the PermissionRoles of the Role
+            .ThenInclude(pr => pr.Permission)   // Include the Permissions of the PermissionRoles
+    .Select(u => new
+    {
+        u.Name,
+        u.Gender,
+        u.IdNo,
+        u.PhoneNo,
+        u.Email,
+        u.Username,
+        Role = new
+        {
+            u.Role.Id,
+            u.Role.Name,
+            Permissions = u.Role.PermissionRoles
+                .Select(pr => new
+                {
+                    pr.Permission.Id,
+                    pr.Permission.Name
+                }).ToList()
+        }
+    })
+    .ToListAsync();
+
+            return Ok(usersWithPermissions);
+
+
+
         }
 
         // GET: api/User/{username}
@@ -53,19 +83,41 @@ namespace ProjectManagementAPIB.Controllers
 
         // POST: api/User
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public IActionResult CreateUser([FromBody] UserCreateDTO userDto)
         {
-            // Hash the password before saving
-            if (!string.IsNullOrEmpty(user.Password) && !user.Password.StartsWith("$2a$"))
+            if (ModelState.IsValid)
             {
-                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                // Find the role by RoleID
+                var role = _context.Roles.Find(userDto.RoleID);
+                if (role == null)
+                {
+                    return BadRequest("Invalid RoleID");
+                }
+
+                // Map DTO to the User entity
+                var user = new User
+                {
+                    Username = userDto.Username,
+                    Name = userDto.Name,
+                    RoleID = userDto.RoleID,
+                    Role = role,  // Setting up relationship
+                    Gender = userDto.Gender,
+                    IdNo = userDto.IdNo,
+                    PhoneNo = userDto.PhoneNo,
+                    Email = userDto.Email,
+                    Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password)  // Hash the password
+                };
+
+                // Save the new user to the database
+                _context.Users.Add(user);
+                _context.SaveChanges();
+
+                return Ok(user);  // Optionally return the created user
             }
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetUser), new { username = user.Username }, user);
+            return BadRequest(ModelState);
         }
+
 
         // PUT: api/User/{username}
         [HttpPut("{username}")]
@@ -119,14 +171,10 @@ namespace ProjectManagementAPIB.Controllers
         public async Task<ActionResult<object>> Login([FromBody] Login loginModel)
         {
             var user = await _context.Users
+                .Include(u => u.Role)                       // Include the Role of the User
+                    .ThenInclude(r => r.PermissionRoles)    // Include the PermissionRoles of the Role
+                        .ThenInclude(pr => pr.Permission)   // Include the Permissions associated with the Role
                 .Where(u => u.Username == loginModel.Username)
-                .Select(u => new
-                {
-                    u.Username,
-                    u.Password,
-                    u.Email,
-                    u.RoleID
-                })
                 .FirstOrDefaultAsync();
 
             if (user == null || !BCrypt.Net.BCrypt.Verify(loginModel.Password, user.Password))
@@ -137,7 +185,7 @@ namespace ProjectManagementAPIB.Controllers
             // Generate JWT token
             var token = GenerateJwtToken(user);
 
-            // Return both token and user details
+            // Return the token along with the user's details, role, and permissions
             return Ok(new
             {
                 token,
@@ -145,10 +193,21 @@ namespace ProjectManagementAPIB.Controllers
                 {
                     user.Username,
                     user.Email,
-                    user.RoleID
+                    Role = new
+                    {
+                        user.Role.Id,
+                        user.Role.Name,
+                        Permissions = user.Role.PermissionRoles
+                            .Select(pr => new
+                            {
+                                pr.Permission.Id,
+                                pr.Permission.Name
+                            }).ToList()
+                    }
                 }
             });
         }
+
 
         // reset password
         // POST: api/User/RequestPasswordReset
@@ -284,7 +343,7 @@ namespace ProjectManagementAPIB.Controllers
                 new Claim(JwtRegisteredClaimNames.Sub, user.Username),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, user.RoleID)
+               // new Claim(ClaimTypes.Role, user.RoleID)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));

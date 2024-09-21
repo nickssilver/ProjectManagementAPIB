@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectManagementAPIB.Migrations
 {
     /// <inheritdoc />
-    public partial class Tables : Migration
+    public partial class NameOfYourMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,8 +20,13 @@ namespace ProjectManagementAPIB.Migrations
                     AwardCentre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AwardLeader = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ActivityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UploadForm = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ParticipantsNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApplyDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ActivityDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Consent = table.Column<bool>(type: "bit", nullable: false),
+                    Assessors = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UploadForm = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Approval = table.Column<bool>(type: "bit", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -39,6 +44,8 @@ namespace ProjectManagementAPIB.Migrations
                     AwardCentre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AwardLeader = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ActivityName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ParticipantsNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UploadReport = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -57,6 +64,7 @@ namespace ProjectManagementAPIB.Migrations
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InstitutionEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InstitutionContact = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     County = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -271,6 +279,7 @@ namespace ProjectManagementAPIB.Migrations
                     ExpectedEndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ActualEndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CertNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -308,6 +317,7 @@ namespace ProjectManagementAPIB.Migrations
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InstitutionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     County = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GuardianName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -368,6 +378,20 @@ namespace ProjectManagementAPIB.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Permissions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Programs",
                 columns: table => new
                 {
@@ -409,6 +433,7 @@ namespace ProjectManagementAPIB.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     County = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -431,6 +456,19 @@ namespace ProjectManagementAPIB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProjectStatuses", x => x.ProjectStatusID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -479,6 +517,7 @@ namespace ProjectManagementAPIB.Migrations
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DocUpload = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -522,6 +561,7 @@ namespace ProjectManagementAPIB.Migrations
                     Venue = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Categories = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     County = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Coordinator = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -548,24 +588,6 @@ namespace ProjectManagementAPIB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RoleID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Username);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SubCounties",
                 columns: table => new
                 {
@@ -585,10 +607,68 @@ namespace ProjectManagementAPIB.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "PermissionRoles",
+                columns: table => new
+                {
+                    PermissionId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PermissionRoles", x => new { x.PermissionId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_PermissionRoles_Permissions_PermissionId",
+                        column: x => x.PermissionId,
+                        principalTable: "Permissions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PermissionRoles_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoleID = table.Column<int>(type: "int", nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Username);
+                    table.ForeignKey(
+                        name: "FK_Users_Roles_RoleID",
+                        column: x => x.RoleID,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PermissionRoles_RoleId",
+                table: "PermissionRoles",
+                column: "RoleId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_SubCounties_CountyID",
                 table: "SubCounties",
                 column: "CountyID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_RoleID",
+                table: "Users",
+                column: "RoleID");
         }
 
         /// <inheritdoc />
@@ -655,6 +735,9 @@ namespace ProjectManagementAPIB.Migrations
                 name: "PartnerTypes");
 
             migrationBuilder.DropTable(
+                name: "PermissionRoles");
+
+            migrationBuilder.DropTable(
                 name: "Programs");
 
             migrationBuilder.DropTable(
@@ -694,7 +777,13 @@ namespace ProjectManagementAPIB.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
+                name: "Permissions");
+
+            migrationBuilder.DropTable(
                 name: "Counties");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
         }
     }
 }
