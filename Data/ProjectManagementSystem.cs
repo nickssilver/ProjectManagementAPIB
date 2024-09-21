@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProjectManagementAPIB.image.Models;
 using ProjectManagementAPIB.Models;
 
 namespace ProjectManagementAPIB.Data
@@ -46,6 +47,9 @@ namespace ProjectManagementAPIB.Data
         public DbSet<User> Users { get; set; }
         public DbSet<SystemLogs> SysLogs { get; set; }
         public DbSet<Settings> Settings { get; set; }
+        public DbSet<Permissions> Permissions { get; set; }
+        public DbSet<Roles> Roles { get; set; }
+        public DbSet<PermissionRoles> PermissionRoles { get; set; }
 
         // Configure the model properties and relationships
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -72,6 +76,25 @@ namespace ProjectManagementAPIB.Data
                 .HasColumnName("Password");
 
             // Add further entity configurations here if necessary
+            modelBuilder.Entity<User>()
+               .HasOne(u => u.Role)
+               .WithMany(r => r.Users)
+               .HasForeignKey(u => u.RoleID);
+
+            // PermissionRole: Many-to-many relationship between Permission and Role
+            modelBuilder.Entity<PermissionRoles>()
+                .HasKey(pr => new { pr.PermissionId, pr.RoleId });
+
+            modelBuilder.Entity<PermissionRoles>()
+                .HasOne(pr => pr.Permission)
+                .WithMany(p => p.PermissionRoles)
+                .HasForeignKey(pr => pr.PermissionId);
+
+            modelBuilder.Entity<PermissionRoles>()
+                .HasOne(pr => pr.Role)
+                .WithMany(r => r.PermissionRoles)
+                .HasForeignKey(pr => pr.RoleId);
+
         }
 
         // Override SaveChanges to hash passwords before saving to the database

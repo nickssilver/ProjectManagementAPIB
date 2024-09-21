@@ -7,16 +7,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="DTOs\**" />
 		<Compile Remove="Repositories\**" />
 		<Compile Remove="Utilities\**" />
-		<Content Remove="DTOs\**" />
 		<Content Remove="Repositories\**" />
 		<Content Remove="Utilities\**" />
-		<EmbeddedResource Remove="DTOs\**" />
 		<EmbeddedResource Remove="Repositories\**" />
 		<EmbeddedResource Remove="Utilities\**" />
-		<None Remove="DTOs\**" />
 		<None Remove="Repositories\**" />
 		<None Remove="Utilities\**" />
 	</ItemGroup>
