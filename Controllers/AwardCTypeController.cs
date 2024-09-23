@@ -29,7 +29,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // GET: api/CentersLType/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<AwardCType>> GetCentersLType(int id)
+        public async Task<ActionResult<AwardCType>> GetCentersLType(string id)
         {
             var centersLType = await _context.AwardCTypes.FindAsync(id);
 
@@ -48,14 +48,14 @@ namespace ProjectManagementAPIB.Controllers
             _context.AwardCTypes.Add(centersLType);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCentersLType), new { id = centersLType.ID }, centersLType);
+            return CreatedAtAction(nameof(GetCentersLType), new { id = centersLType.AwardCTypeID }, centersLType);
         }
 
         // PUT: api/CentersLType/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCentersLType(int id, AwardCType centersLType)
+        public async Task<IActionResult> PutCentersLType(string id, AwardCType centersLType)
         {
-            if (id != centersLType.ID)
+            if (id != centersLType.AwardCTypeID)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace ProjectManagementAPIB.Controllers
 
         // DELETE: api/CentersLType/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCentersLType(int id)
+        public async Task<IActionResult> DeleteCentersLType(string id)
         {
             var centersLType = await _context.AwardCTypes.FindAsync(id);
             if (centersLType == null)
@@ -97,9 +97,9 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-        private bool CentersLTypeExists(int id)
+        private bool CentersLTypeExists(string id)
         {
-            return _context.AwardCTypes.Any(e => e.ID == id);
+            return _context.AwardCTypes.Any(e => e.AwardCTypeID == id);
         }
     }
 }

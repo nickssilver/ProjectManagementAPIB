@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectManagementAPIB.Migrations
 {
     /// <inheritdoc />
-    public partial class tables : Migration
+    public partial class Tables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -55,6 +55,33 @@ namespace ProjectManagementAPIB.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AwardCenters",
+                columns: table => new
+                {
+                    InstitutionID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    InstitutionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StageID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StatusID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AwardCTypeID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InstitutionEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InstitutionContact = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    County = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LicenseStartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LicenseEndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Source = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Marginalised = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AwardCenters", x => x.InstitutionID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AwardCenterStages",
                 columns: table => new
                 {
@@ -84,14 +111,13 @@ namespace ProjectManagementAPIB.Migrations
                 name: "AwardCTypes",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AwardCTypeID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CenterName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AwardCTypes", x => x.ID);
+                    table.PrimaryKey("PK_AwardCTypes", x => x.AwardCTypeID);
                 });
 
             migrationBuilder.CreateTable(
@@ -561,51 +587,6 @@ namespace ProjectManagementAPIB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AwardCenters",
-                columns: table => new
-                {
-                    InstitutionID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    InstitutionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StageID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    StatusID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    AwardCTypeID = table.Column<int>(type: "int", nullable: false),
-                    InstitutionEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InstitutionContact = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SubCounty = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    County = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LicenseStartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LicenseEndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Source = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Marginalised = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AwardCenters", x => x.InstitutionID);
-                    table.ForeignKey(
-                        name: "FK_AwardCenters_AwardCTypes_AwardCTypeID",
-                        column: x => x.AwardCTypeID,
-                        principalTable: "AwardCTypes",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AwardCenters_AwardCenterStages_StageID",
-                        column: x => x.StageID,
-                        principalTable: "AwardCenterStages",
-                        principalColumn: "StageID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AwardCenters_AwardCenterStatus_StatusID",
-                        column: x => x.StatusID,
-                        principalTable: "AwardCenterStatus",
-                        principalColumn: "StatusID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SubCounties",
                 columns: table => new
                 {
@@ -674,21 +655,6 @@ namespace ProjectManagementAPIB.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AwardCenters_AwardCTypeID",
-                table: "AwardCenters",
-                column: "AwardCTypeID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AwardCenters_StageID",
-                table: "AwardCenters",
-                column: "StageID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AwardCenters_StatusID",
-                table: "AwardCenters",
-                column: "StatusID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PermissionRoles_RoleId",
                 table: "PermissionRoles",
                 column: "RoleId");
@@ -715,6 +681,15 @@ namespace ProjectManagementAPIB.Migrations
 
             migrationBuilder.DropTable(
                 name: "AwardCenters");
+
+            migrationBuilder.DropTable(
+                name: "AwardCenterStages");
+
+            migrationBuilder.DropTable(
+                name: "AwardCenterStatus");
+
+            migrationBuilder.DropTable(
+                name: "AwardCTypes");
 
             migrationBuilder.DropTable(
                 name: "Budgets");
@@ -799,15 +774,6 @@ namespace ProjectManagementAPIB.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "AwardCTypes");
-
-            migrationBuilder.DropTable(
-                name: "AwardCenterStages");
-
-            migrationBuilder.DropTable(
-                name: "AwardCenterStatus");
 
             migrationBuilder.DropTable(
                 name: "Permissions");
