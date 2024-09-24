@@ -9,9 +9,9 @@ namespace ProjectManagementAPIB.Models
         [Key]
         public string InstitutionID { get; set; }
         public string InstitutionName { get; set; }
-        public string StageID { get; set; }
-        public string StatusID { get; set; }
-        public string AwardCTypeID { get; set; }
+        public string Stage { get; set; }
+        public string Status { get; set; }
+        public string AwardCType { get; set; }
         public string InstitutionEmail { get; set; }
         public string InstitutionContact { get; set; }
         public string Region { get; set; }
