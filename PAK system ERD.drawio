@@ -481,7 +481,7 @@
           <mxGeometry x="-830" y="1196" width="260" height="40" as="geometry" />
         </mxCell>
         <mxCell id="_ph9itU2wbhxBn9si0oa-225" value="Projects" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
-          <mxGeometry x="-820" y="1231" width="180" height="390" as="geometry" />
+          <mxGeometry x="-820" y="1235" width="180" height="390" as="geometry" />
         </mxCell>
         <mxCell id="_ph9itU2wbhxBn9si0oa-226" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=1;" parent="_ph9itU2wbhxBn9si0oa-225" vertex="1">
           <mxGeometry y="30" width="180" height="30" as="geometry" />
