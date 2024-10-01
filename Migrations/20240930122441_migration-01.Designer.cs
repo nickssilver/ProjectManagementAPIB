@@ -12,13 +12,8 @@ using ProjectManagementAPIB.Data;
 namespace ProjectManagementAPIB.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-<<<<<<<< HEAD:Migrations/20240914175104_NameOfYourMigration.Designer.cs
-    [Migration("20240914175104_NameOfYourMigration")]
-    partial class NameOfYourMigration
-========
-    [Migration("20240914123602_tables")]
-    partial class tables
->>>>>>>> a6973a8bb90bd804a288408c09e944a959d3d01d:Migrations/20240914123602_tables.Designer.cs
+    [Migration("20240930122441_migration-01")]
+    partial class migration01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -154,9 +149,8 @@ namespace ProjectManagementAPIB.Migrations
                     b.Property<string>("InstitutionID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("AwardCType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AwardCTypeID")
+                        .HasColumnType("int");
 
                     b.Property<string>("ContactNumber")
                         .IsRequired()
@@ -204,19 +198,25 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Stage")
+                    b.Property<string>("StageID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("StatusID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("SubCounty")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("InstitutionID");
+
+                    b.HasIndex("AwardCTypeID");
+
+                    b.HasIndex("StageID");
+
+                    b.HasIndex("StatusID");
 
                     b.ToTable("AwardCenters");
                 });
@@ -1137,6 +1137,9 @@ namespace ProjectManagementAPIB.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("ApprovalStatus")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1223,6 +1226,33 @@ namespace ProjectManagementAPIB.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("ProjectManagementAPIB.Models.AwardCenter", b =>
+                {
+                    b.HasOne("ProjectManagementAPIB.Models.AwardCType", "AwardCType")
+                        .WithMany()
+                        .HasForeignKey("AwardCTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectManagementAPIB.Models.AwardCenterStages", "AwardCenterStage")
+                        .WithMany()
+                        .HasForeignKey("StageID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectManagementAPIB.Models.AwardCenterStatus", "AwardCenterStatus")
+                        .WithMany()
+                        .HasForeignKey("StatusID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AwardCType");
+
+                    b.Navigation("AwardCenterStage");
+
+                    b.Navigation("AwardCenterStatus");
                 });
 
             modelBuilder.Entity("ProjectManagementAPIB.Models.SubCounty", b =>
