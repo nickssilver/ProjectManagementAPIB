@@ -213,6 +213,53 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
+        //update passowrd directly
+        [HttpPut("{username}/update-password")]
+        public async Task<IActionResult> UpdatePassword(string username, [FromBody] PasswordUpdateDTO passwordDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid password data.");
+            }
+
+            // Find the user in the database
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            if (existingUser == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            // Verify if the old password is correct
+            if (!BCrypt.Net.BCrypt.Verify(passwordDto.OldPassword, existingUser.Password))
+            {
+                return BadRequest("Old password is incorrect.");
+            }
+
+            // Update the password to the new one
+            existingUser.Password = BCrypt.Net.BCrypt.HashPassword(passwordDto.NewPassword);
+
+            _context.Entry(existingUser).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(username))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+
         // DELETE: api/User/{username}
         [HttpDelete("{username}")]
         public async Task<IActionResult> DeleteUser(string username)

@@ -12,8 +12,8 @@ using ProjectManagementAPIB.Data;
 namespace ProjectManagementAPIB.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    [Migration("20240930122441_migration-01")]
-    partial class migration01
+    [Migration("20241002154200_Nwemagrate")]
+    partial class Nwemagrate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -125,11 +125,8 @@ namespace ProjectManagementAPIB.Migrations
 
             modelBuilder.Entity("ProjectManagementAPIB.Models.AwardCType", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("AwardCTypeID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CenterName")
                         .IsRequired()
@@ -139,7 +136,7 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("AwardCTypeID");
 
                     b.ToTable("AwardCTypes");
                 });
@@ -149,8 +146,9 @@ namespace ProjectManagementAPIB.Migrations
                     b.Property<string>("InstitutionID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("AwardCTypeID")
-                        .HasColumnType("int");
+                    b.Property<string>("AwardCType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContactNumber")
                         .IsRequired()
@@ -198,25 +196,19 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StageID")
+                    b.Property<string>("Stage")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StatusID")
+                    b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SubCounty")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("InstitutionID");
-
-                    b.HasIndex("AwardCTypeID");
-
-                    b.HasIndex("StageID");
-
-                    b.HasIndex("StatusID");
 
                     b.ToTable("AwardCenters");
                 });
@@ -1226,33 +1218,6 @@ namespace ProjectManagementAPIB.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-                });
-
-            modelBuilder.Entity("ProjectManagementAPIB.Models.AwardCenter", b =>
-                {
-                    b.HasOne("ProjectManagementAPIB.Models.AwardCType", "AwardCType")
-                        .WithMany()
-                        .HasForeignKey("AwardCTypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectManagementAPIB.Models.AwardCenterStages", "AwardCenterStage")
-                        .WithMany()
-                        .HasForeignKey("StageID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectManagementAPIB.Models.AwardCenterStatus", "AwardCenterStatus")
-                        .WithMany()
-                        .HasForeignKey("StatusID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AwardCType");
-
-                    b.Navigation("AwardCenterStage");
-
-                    b.Navigation("AwardCenterStatus");
                 });
 
             modelBuilder.Entity("ProjectManagementAPIB.Models.SubCounty", b =>

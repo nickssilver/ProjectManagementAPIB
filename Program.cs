@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using ProjectManagementAPIB.Data;
-using ProjectManagementAPIB.Services; 
+//using ProjectManagementAPIB.Services; 
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +14,7 @@ builder.Services.AddDbContext<ProjectManagementContext>(options =>
 builder.Services.AddControllers();
 
 // Register ISynchronizationService and its implementation
-builder.Services.AddScoped<ISynchronizationService, SynchronizationService>();
+//builder.Services.AddScoped<ISynchronizationService, SynchronizationService>();
 
 // CORS Configuration
 builder.Services.AddCors(options =>
@@ -77,7 +77,6 @@ app.UseCors("AllowAll");
 // app.UseHttpsRedirection();
 
 app.UseRouting();
-
 app.UseAuthentication(); // Ensure this is called before UseAuthorization
 app.UseAuthorization();
 
