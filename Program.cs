@@ -75,9 +75,9 @@ app.UseCors("AllowAll");
 
 // Commented out for HTTP use only
 // app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthentication(); // Ensure this is called before UseAuthorization
 app.UseAuthorization();
 

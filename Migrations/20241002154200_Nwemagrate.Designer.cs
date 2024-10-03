@@ -12,8 +12,8 @@ using ProjectManagementAPIB.Data;
 namespace ProjectManagementAPIB.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    [Migration("20240923190757_Tables")]
-    partial class Tables
+    [Migration("20241002154200_Nwemagrate")]
+    partial class Nwemagrate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -146,7 +146,7 @@ namespace ProjectManagementAPIB.Migrations
                     b.Property<string>("InstitutionID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("AwardCTypeID")
+                    b.Property<string>("AwardCType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -196,11 +196,11 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StageID")
+                    b.Property<string>("Stage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StatusID")
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -1128,6 +1128,9 @@ namespace ProjectManagementAPIB.Migrations
                 {
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ApprovalStatus")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .IsRequired()

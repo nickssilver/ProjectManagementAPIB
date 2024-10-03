@@ -43,70 +43,96 @@ public class ParticipantsController : ControllerBase
     }
 
     // POST: api/Participants
+
     [HttpPost]
     public async Task<ActionResult<Participant>> PostParticipant([FromForm] ParticipantRequest participantRequest)
     {
-        if (participantRequest.Participant == null)
-        {
-            return BadRequest("Participant data is missing.");
-        }
+        
+        // Define the folder paths for storing passport photos and documents
+        var passportFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "passports");
+        var docsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "docs");
 
-        // Ensure directories exist
+        // Ensure directories exist for saving uploaded files
         if (!Directory.Exists(passportFolder)) Directory.CreateDirectory(passportFolder);
         if (!Directory.Exists(docsFolder)) Directory.CreateDirectory(docsFolder);
 
+        // Create new participant instance to store the data
         var participant = new Participant
         {
-            AdminNumber = participantRequest.Participant.AdminNumber,
-            Name = participantRequest.Participant.Name,
-            DOB = participantRequest.Participant.DOB,
-            Gender = participantRequest.Participant.Gender,
-            Age = participantRequest.Participant.Age,
-            Religion = participantRequest.Participant.Religion,
-            Ethnicity = participantRequest.Participant.Ethnicity,
-            Nationality = participantRequest.Participant.Nationality,
-            PhoneNumber = participantRequest.Participant.PhoneNumber,
-            Email = participantRequest.Participant.Email,
-            InstitutionName = participantRequest.Participant.InstitutionName,
-            Region = participantRequest.Participant.Region,
-            County = participantRequest.Participant.County,
-            SubCounty = participantRequest.Participant.SubCounty,
-            GuardianName = participantRequest.Participant.GuardianName,
-            GuardianContact = participantRequest.Participant.GuardianContact,
-            EmergencyCName = participantRequest.Participant.EmergencyCName,
-            EmergencyCNumber = participantRequest.Participant.EmergencyCNumber,
-            EmergencyCRelation = participantRequest.Participant.EmergencyCRelation,
-            PaymentStatus = participantRequest.Participant.PaymentStatus,
-            Marginalised = participantRequest.Participant.Marginalised,
-            AtRisk = participantRequest.Participant.AtRisk,
-            Notes = participantRequest.Participant.Notes
+            AdminNumber = participantRequest.AdminNumber,
+            Name = participantRequest.Name,
+            DOB = participantRequest.DOB,
+            Gender = participantRequest.Gender,
+            Age = participantRequest.Age,
+            Religion = participantRequest.Religion,
+            Ethnicity = participantRequest.Ethnicity,
+            Nationality = participantRequest.Nationality,
+            PhoneNumber = participantRequest.PhoneNumber,
+            Email = participantRequest.Email,
+            InstitutionName = participantRequest.InstitutionName,
+            Region = participantRequest.Region,
+            County = participantRequest.County,
+            SubCounty = participantRequest.SubCounty,
+            GuardianName = participantRequest.GuardianName,
+            GuardianContact = participantRequest.GuardianContact,
+            EmergencyCName = participantRequest.EmergencyCName,
+            EmergencyCNumber = participantRequest.EmergencyCNumber,
+            EmergencyCRelation = participantRequest.EmergencyCRelation,
+            PaymentStatus = participantRequest.PaymentStatus,
+            Marginalised = participantRequest.Marginalised,
+            AtRisk = participantRequest.AtRisk,
+            Notes = participantRequest.Notes,
         };
 
+
+
         // Handle Passport Photo Upload
-        if (participantRequest.PassportPhoto != null)
+        if (participantRequest.PassportPhoto != null && participantRequest.PassportPhoto.Length > 0)
         {
-            var passportFilePath = Path.Combine(passportFolder, participantRequest.PassportPhoto.FileName);
+            var originalFileName = participantRequest.PassportPhoto.FileName;
+
+            // Create a timestamped file name
+            var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss"); // Format: YYYYMMDD_HHMMSS
+            var passportFileName = $"{Path.GetFileNameWithoutExtension(originalFileName)}_{timestamp}{Path.GetExtension(originalFileName)}";
+
+            var passportFilePath = Path.Combine(passportFolder, passportFileName);
+
+            // Save file to server
             using (var stream = new FileStream(passportFilePath, FileMode.Create))
             {
                 await participantRequest.PassportPhoto.CopyToAsync(stream);
             }
-            participant.PassportPhoto = $"/passports/{participantRequest.PassportPhoto.FileName}";
+
+            // Store relative file path in the participant model
+            participant.PassportPhoto = $"/uploads/passports/{passportFileName}";
         }
 
         // Handle Document Upload
-        if (participantRequest.Doc != null)
+        if (participantRequest.Doc != null && participantRequest.Doc.Length > 0)
         {
-            var docFilePath = Path.Combine(docsFolder, participantRequest.Doc.FileName);
+            var originalDocFileName = participantRequest.Doc.FileName;
+
+            // Create a timestamped file name
+            var docTimestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss"); // Format: YYYYMMDD_HHMMSS
+            var docFileName = $"{Path.GetFileNameWithoutExtension(originalDocFileName)}_{docTimestamp}{Path.GetExtension(originalDocFileName)}";
+
+            var docFilePath = Path.Combine(docsFolder, docFileName);
+
+            // Save file to server
             using (var stream = new FileStream(docFilePath, FileMode.Create))
             {
                 await participantRequest.Doc.CopyToAsync(stream);
             }
-            participant.DocUpload = $"/docs/{participantRequest.Doc.FileName}";
+
+            // Store relative file path in the participant model
+            participant.DocUpload = $"/uploads/docs/{docFileName}";
         }
 
+        // Save participant to the database
         _context.Participants.Add(participant);
         await _context.SaveChangesAsync();
 
+        // Return created response
         return CreatedAtAction("GetParticipant", new { id = participant.AdminNumber }, participant);
     }
 
@@ -114,7 +140,7 @@ public class ParticipantsController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutParticipant(string id, [FromForm] ParticipantRequest participantRequest)
     {
-        if (id != participantRequest.Participant.AdminNumber)
+        if (id != participantRequest.AdminNumber)
         {
             return BadRequest("Admin number mismatch.");
         }
@@ -126,28 +152,28 @@ public class ParticipantsController : ControllerBase
         }
 
         // Update participant fields from DTO
-        participant.Name = participantRequest.Participant.Name;
-        participant.DOB = participantRequest.Participant.DOB;
-        participant.Gender = participantRequest.Participant.Gender;
-        participant.Age = participantRequest.Participant.Age;
-        participant.Religion = participantRequest.Participant.Religion;
-        participant.Ethnicity = participantRequest.Participant.Ethnicity;
-        participant.Nationality = participantRequest.Participant.Nationality;
-        participant.PhoneNumber = participantRequest.Participant.PhoneNumber;
-        participant.Email = participantRequest.Participant.Email;
-        participant.InstitutionName = participantRequest.Participant.InstitutionName;
-        participant.Region = participantRequest.Participant.Region;
-        participant.County = participantRequest.Participant.County;
-        participant.SubCounty = participantRequest.Participant.SubCounty;
-        participant.GuardianName = participantRequest.Participant.GuardianName;
-        participant.GuardianContact = participantRequest.Participant.GuardianContact;
-        participant.EmergencyCName = participantRequest.Participant.EmergencyCName;
-        participant.EmergencyCNumber = participantRequest.Participant.EmergencyCNumber;
-        participant.EmergencyCRelation = participantRequest.Participant.EmergencyCRelation;
-        participant.PaymentStatus = participantRequest.Participant.PaymentStatus;
-        participant.Marginalised = participantRequest.Participant.Marginalised;
-        participant.AtRisk = participantRequest.Participant.AtRisk;
-        participant.Notes = participantRequest.Participant.Notes;
+        participant.Name = participantRequest.Name;
+        participant.DOB = participantRequest.DOB;
+        participant.Gender = participantRequest.Gender;
+        participant.Age = participantRequest.Age;
+        participant.Religion = participantRequest.Religion;
+        participant.Ethnicity = participantRequest.Ethnicity;
+        participant.Nationality = participantRequest.Nationality;
+        participant.PhoneNumber = participantRequest.PhoneNumber;
+        participant.Email = participantRequest.Email;
+        participant.InstitutionName = participantRequest.InstitutionName;
+        participant.Region = participantRequest.Region;
+        participant.County = participantRequest.County;
+        participant.SubCounty = participantRequest.SubCounty;
+        participant.GuardianName = participantRequest.GuardianName;
+        participant.GuardianContact = participantRequest.GuardianContact;
+        participant.EmergencyCName = participantRequest.EmergencyCName;
+        participant.EmergencyCNumber = participantRequest.EmergencyCNumber;
+        participant.EmergencyCRelation = participantRequest.EmergencyCRelation;
+        participant.PaymentStatus = participantRequest.PaymentStatus;
+        participant.Marginalised = participantRequest.Marginalised;
+        participant.AtRisk = participantRequest.AtRisk;
+        participant.Notes = participantRequest.Notes;
 
         // Handle Passport Photo Upload
         if (participantRequest.PassportPhoto != null)

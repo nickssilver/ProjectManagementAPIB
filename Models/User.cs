@@ -17,6 +17,7 @@ namespace ProjectManagementAPIB.Models
         public string Gender { get; set; }
         public string IdNo { get; set; }
         public string PhoneNo { get; set; }
+        public int ApprovalStatus { get; set; }
         public string Email { get; set; }
 
         public string Password { get; set; }

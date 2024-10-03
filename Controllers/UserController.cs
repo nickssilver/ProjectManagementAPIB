@@ -47,6 +47,7 @@ namespace ProjectManagementAPIB.Controllers
         u.PhoneNo,
         u.Email,
         u.Username,
+        u.ApprovalStatus,
         Role = new
         {
             u.Role.Id,
@@ -68,17 +69,36 @@ namespace ProjectManagementAPIB.Controllers
         }
 
         // GET: api/User/{username}
+        // GET: api/User/{username}
         [HttpGet("{username}")]
         public async Task<ActionResult<User>> GetUser(string username)
         {
-            var user = await _context.Users.FindAsync(username);
+            var user = await _context.Users
+                .Include(u => u.Role) // Include the Role of the User
+                .Select(u => new
+                {
+                    u.Name,
+                    u.Gender,
+                    u.IdNo,
+                    u.PhoneNo,
+                    u.Email,
+                    u.Username,
+                    u.ApprovalStatus,
+                    Role = new
+                    {
+                        u.Role.Id,
+                        u.Role.Name
+                        // No Permissions included here
+                    }
+                })
+                .FirstOrDefaultAsync(u => u.Username == username); // Ensure to filter by username
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return Ok(user); // Return the user wrapped in Ok()
         }
 
         // POST: api/User
@@ -119,16 +139,60 @@ namespace ProjectManagementAPIB.Controllers
         }
 
 
-        // PUT: api/User/{username}
         [HttpPut("{username}")]
-        public async Task<IActionResult> PutUser(string username, User user)
+        public async Task<IActionResult> PutUser(string username, [FromBody] UserUpdateDTO userDto)
         {
-            if (username != user.Username)
+
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest("Invalid user data.");
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            // Find the existing user in the database
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            if (existingUser == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            // Conditionally update the user's fields with values from the DTO
+            if (!string.IsNullOrEmpty(userDto.Name))
+            {
+                existingUser.Name = userDto.Name;
+            }
+
+            if (userDto.ApprovalStatus >= 0) // Assuming 0 and positive numbers are valid
+            {
+                existingUser.ApprovalStatus = userDto.ApprovalStatus;
+            }
+
+            if (!string.IsNullOrEmpty(userDto.Gender))
+            {
+                existingUser.Gender = userDto.Gender;
+            }
+
+            if (!string.IsNullOrEmpty(userDto.IdNo))
+            {
+                existingUser.IdNo = userDto.IdNo;
+            }
+
+            if (!string.IsNullOrEmpty(userDto.PhoneNo))
+            {
+                existingUser.PhoneNo = userDto.PhoneNo;
+            }
+
+            if (!string.IsNullOrEmpty(userDto.Email))
+            {
+                existingUser.Email = userDto.Email;
+            }
+
+            if (!string.IsNullOrEmpty(userDto.Password))
+            {
+                // Hash and update the password only if a new password is provided
+                existingUser.Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
+            }
+
+            _context.Entry(existingUser).State = EntityState.Modified;
 
             try
             {
@@ -149,7 +213,53 @@ namespace ProjectManagementAPIB.Controllers
             return NoContent();
         }
 
-      
+        //update passowrd directly
+        [HttpPut("{username}/update-password")]
+        public async Task<IActionResult> UpdatePassword(string username, [FromBody] PasswordUpdateDTO passwordDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid password data.");
+            }
+
+            // Find the user in the database
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            if (existingUser == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            // Verify if the old password is correct
+            if (!BCrypt.Net.BCrypt.Verify(passwordDto.OldPassword, existingUser.Password))
+            {
+                return BadRequest("Old password is incorrect.");
+            }
+
+            // Update the password to the new one
+            existingUser.Password = BCrypt.Net.BCrypt.HashPassword(passwordDto.NewPassword);
+
+            _context.Entry(existingUser).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(username))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+
         // DELETE: api/User/{username}
         [HttpDelete("{username}")]
         public async Task<IActionResult> DeleteUser(string username)
@@ -193,6 +303,7 @@ namespace ProjectManagementAPIB.Controllers
                 {
                     user.Username,
                     user.Email,
+                    user.ApprovalStatus,
                     Role = new
                     {
                         user.Role.Id,
