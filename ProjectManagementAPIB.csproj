@@ -34,6 +34,8 @@
 	<ItemGroup>
 		<Folder Include="Migrations\" />
 		<Folder Include="Reports\" />
+		<Folder Include="wwwroot\uploads\docs\" />
+		<Folder Include="wwwroot\uploads\passports\" />
 	</ItemGroup>
 
 </Project>
