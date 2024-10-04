@@ -60,9 +60,9 @@ namespace ProjectManagementAPIB.Migrations
                 {
                     InstitutionID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     InstitutionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StageID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StatusID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AwardCTypeID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Stage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AwardCType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InstitutionEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InstitutionContact = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Region = table.Column<string>(type: "nvarchar(max)", nullable: false),

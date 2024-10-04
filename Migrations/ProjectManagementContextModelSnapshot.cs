@@ -143,7 +143,7 @@ namespace ProjectManagementAPIB.Migrations
                     b.Property<string>("InstitutionID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("AwardCTypeID")
+                    b.Property<string>("AwardCType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -193,11 +193,11 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StageID")
+                    b.Property<string>("Stage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StatusID")
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
