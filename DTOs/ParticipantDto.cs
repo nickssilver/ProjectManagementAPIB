@@ -1,11 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ProjectManagementAPIB.Models
+﻿namespace ProjectManagementAPIB.DTOs
 {
-    public class Participant
+    public class ParticipantDto
     {
-        [Key]
         public string AdminNumber { get; set; }
         public string Name { get; set; }
         public DateTime DOB { get; set; }
@@ -18,7 +14,6 @@ namespace ProjectManagementAPIB.Models
         public string Email { get; set; }
         public string InstitutionName { get; set; }
         public string Region { get; set; }
-
         public string County { get; set; }
         public string SubCounty { get; set; }
         public string GuardianName { get; set; }
@@ -29,11 +24,7 @@ namespace ProjectManagementAPIB.Models
         public string PaymentStatus { get; set; }
         public string Marginalised { get; set; }
         public string AtRisk { get; set; }
-        public string DocUpload { get; set; }
-
         public string Notes { get; set; }
-        public  string PassportPhoto { get; set; } 
-
     }
 
 }
