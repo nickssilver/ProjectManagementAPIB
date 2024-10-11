@@ -8,7 +8,7 @@ namespace ProjectManagementAPIB.Models
         [Key]
         public string AdminNumber { get; set; }
         public string Name { get; set; }
-        public DateTime DOB { get; set; }
+        public DateTime? DOB { get; set; }
         public string Gender { get; set; }
         public string Age { get; set; }
         public string Religion { get; set; }
