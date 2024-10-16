@@ -3,11 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProjectManagementAPIB.Models
 {
-    public class Settings
+    public class SettingsRequest
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
         public string Profile { get; set; }
         public string LegalName { get; set; }
         public string Address { get; set; }
@@ -15,7 +12,7 @@ namespace ProjectManagementAPIB.Models
         public string TaxNo { get; set; }
         public string Contact { get; set; }
         public string Footer { get; set; }
-        public string Logo { get; set; }
+        public IFormFile Logo { get; set; }
 
     }
 }

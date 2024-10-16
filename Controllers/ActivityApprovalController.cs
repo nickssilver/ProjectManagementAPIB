@@ -43,11 +43,58 @@ namespace ProjectManagementAPIB.Controllers
 
         // POST: api/ActivityApproval
         [HttpPost]
-        public async Task<ActionResult<ActivityApproval>> PostActivityApproval(ActivityApproval activityApproval)
+        public async Task<ActionResult<ActivityApproval>> PostActivityApproval([FromForm] ActivityApprovalRequest activityApprovalRequest)
         {
+            // Define the folder path for storing uploaded documents
+            var docsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "activity_forms");
+
+            // Ensure the directory exists for saving uploaded files
+            if (!Directory.Exists(docsFolder)) Directory.CreateDirectory(docsFolder);
+
+            // Create a new ActivityApproval instance to store the data
+            var activityApproval = new ActivityApproval
+            {
+                AwardCentre = activityApprovalRequest.AwardCentre,
+                AwardLeader = activityApprovalRequest.AwardLeader,
+                ActivityName = activityApprovalRequest.ActivityName,
+                ParticipantsNo = activityApprovalRequest.ParticipantsNo,
+                ApplyDate = activityApprovalRequest.ApplyDate,
+                ActivityDate = activityApprovalRequest.ActivityDate,
+                Region = activityApprovalRequest.Region,
+                Consent = activityApprovalRequest.Consent,
+                Assessors = activityApprovalRequest.Assessors ?? "Default Assessor",
+                Assessors2 = activityApprovalRequest.Assessors2 ?? "Default Assessor 2",
+                Assessors3 = activityApprovalRequest.Assessors3 ?? "Default Assessor 3",
+                Approval = activityApprovalRequest.Approval,
+                Notes = activityApprovalRequest.Notes,
+            };
+
+            // Handle Document Upload
+            if (activityApprovalRequest.UploadForm != null && activityApprovalRequest.UploadForm.Length > 0)
+            {
+                var originalDocFileName = activityApprovalRequest.UploadForm.FileName;
+
+                // Create a timestamped file name
+                var docTimestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                var docFileName = $"{Path.GetFileNameWithoutExtension(originalDocFileName)}_{docTimestamp}{Path.GetExtension(originalDocFileName)}";
+
+                var docFilePath = Path.Combine(docsFolder, docFileName);
+
+                // Save the file to the server
+                using (var stream = new FileStream(docFilePath, FileMode.Create))
+                {
+                    await activityApprovalRequest.UploadForm.CopyToAsync(stream);
+                }
+
+                // Store relative file path in the activityApproval model
+                activityApproval.UploadForm = $"/uploads/activity_forms/{docFileName}";
+            }
+
+            // Save activity approval to the database
             _context.ActivityApprovals.Add(activityApproval);
             await _context.SaveChangesAsync();
 
+            // Return created response
             return CreatedAtAction(nameof(GetActivityApproval), new { id = activityApproval.ID }, activityApproval);
         }
 
