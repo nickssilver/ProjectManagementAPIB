@@ -12,7 +12,6 @@ namespace ProjectManagementAPIB.Models
         public string Name { get; set; }
         public string AwardCenter { get; set; }
         public int RoleID { get; set; }
-        
         [ForeignKey("RoleID")]
         public Roles Role { get; set; }
         public string Gender { get; set; }
@@ -20,10 +19,8 @@ namespace ProjectManagementAPIB.Models
         public string PhoneNo { get; set; }
         public int ApprovalStatus { get; set; }
         public string Email { get; set; }
-
         public string Password { get; set; }
 
-      
     }
     public class PasswordResetRequestModel
     {

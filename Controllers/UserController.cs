@@ -44,6 +44,7 @@ namespace ProjectManagementAPIB.Controllers
         u.Name,
         u.Gender,
         u.IdNo,
+        u.AwardCenter,
         u.PhoneNo,
         u.Email,
         u.Username,
@@ -80,6 +81,7 @@ namespace ProjectManagementAPIB.Controllers
                     u.Name,
                     u.Gender,
                     u.IdNo,
+                    u.AwardCenter,
                     u.PhoneNo,
                     u.Email,
                     u.Username,
@@ -120,6 +122,7 @@ namespace ProjectManagementAPIB.Controllers
                     Username = userDto.Username,
                     Name = userDto.Name,
                     RoleID = userDto.RoleID,
+                    AwardCenter = userDto.AwardCenter,
                     Role = role,  // Setting up relationship
                     Gender = userDto.Gender,
                     IdNo = userDto.IdNo,
@@ -175,6 +178,7 @@ namespace ProjectManagementAPIB.Controllers
             {
                 existingUser.IdNo = userDto.IdNo;
             }
+
 
             if (!string.IsNullOrEmpty(userDto.PhoneNo))
             {
