@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectManagementAPIB.Migrations
 {
     /// <inheritdoc />
-    public partial class nicco99migration : Migration
+    public partial class newmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,8 +72,8 @@ namespace ProjectManagementAPIB.Migrations
                     County = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LicenseStartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LicenseEndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LicenseStartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LicenseEndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Source = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Marginalised = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -276,9 +276,9 @@ namespace ProjectManagementAPIB.Migrations
                     StudentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     InstitutionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LevelName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExpectedEndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ActualEndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ExpectedEndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ActualEndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CertNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -308,7 +308,7 @@ namespace ProjectManagementAPIB.Migrations
                 {
                     AdminNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DOB = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DOB = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Age = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Religion = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -486,7 +486,8 @@ namespace ProjectManagementAPIB.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TaxNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Contact = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Footer = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Footer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Logo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -640,6 +641,7 @@ namespace ProjectManagementAPIB.Migrations
                 {
                     Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AwardCenter = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RoleID = table.Column<int>(type: "int", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdNo = table.Column<string>(type: "nvarchar(max)", nullable: false),

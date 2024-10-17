@@ -12,13 +12,13 @@ namespace ProjectManagementAPIB.Models
         public string LevelName {  get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime ExpectedEndDate { get; set; }
+        public DateTime? ExpectedEndDate { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime ActualEndDate { get; set; }
+        public DateTime? ActualEndDate { get; set; }
         public string Status { get; set; }
         public string CertNo { get; set; }
 

@@ -12,8 +12,8 @@ using ProjectManagementAPIB.Data;
 namespace ProjectManagementAPIB.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    [Migration("20241011153539_nicco99-migration")]
-    partial class nicco99migration
+    [Migration("20241016225350_newmigration")]
+    partial class newmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,10 +183,10 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("LicenseEndDate")
+                    b.Property<DateTime?>("LicenseEndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("LicenseStartDate")
+                    b.Property<DateTime?>("LicenseStartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Marginalised")
@@ -502,7 +502,7 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DOB")
+                    b.Property<DateTime?>("DOB")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DocUpload")
@@ -636,7 +636,7 @@ namespace ProjectManagementAPIB.Migrations
                     b.Property<string>("AwardID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("ActualEndDate")
+                    b.Property<DateTime?>("ActualEndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("AdminNumber")
@@ -647,7 +647,7 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ExpectedEndDate")
+                    b.Property<DateTime?>("ExpectedEndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("InstitutionName")
@@ -662,7 +662,7 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
@@ -925,6 +925,10 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Logo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Profile")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1148,6 +1152,10 @@ namespace ProjectManagementAPIB.Migrations
 
                     b.Property<int>("ApprovalStatus")
                         .HasColumnType("int");
+
+                    b.Property<string>("AwardCenter")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()

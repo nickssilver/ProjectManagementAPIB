@@ -14,6 +14,9 @@ namespace ProjectManagementAPIB.DTOs
         public int RoleID { get; set; }
 
         [Required]
+        public string AwardCenter { get; set; }
+
+        [Required]
         public string Gender { get; set; }
 
         [Required]
@@ -22,7 +25,6 @@ namespace ProjectManagementAPIB.DTOs
         [Required]
         public string PhoneNo { get; set; }
         public int ApprovalStatus { get; set; } // Optional (nullable)
-
 
         [Required]
         [EmailAddress]

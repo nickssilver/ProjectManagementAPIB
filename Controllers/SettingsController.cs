@@ -41,7 +41,7 @@ namespace ProjectManagementAPIB.Controllers
         }
 
         // POST: api/Settings
-        // POST: api/Settings
+       
         [HttpPost]
         public async Task<ActionResult<Settings>> PostSettings([FromForm] SettingsRequest settingsRequest)
         {

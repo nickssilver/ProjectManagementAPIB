@@ -21,10 +21,10 @@ namespace ProjectManagementAPIB.Models
         public string ContactNumber { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime LicenseStartDate { get; set; }
+        public DateTime? LicenseStartDate { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime LicenseEndDate { get; set; }
+        public DateTime? LicenseEndDate { get; set; }
 
         public string Source { get; set; }
         public string Marginalised { get; set; }
