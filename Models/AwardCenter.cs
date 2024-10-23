@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ProjectManagementAPIB.Models
 {
@@ -9,6 +10,7 @@ namespace ProjectManagementAPIB.Models
         [Key]
         public string InstitutionID { get; set; }
         public string InstitutionName { get; set; }
+
         public string Stage { get; set; }
         public string Status { get; set; }
         public string AwardCType { get; set; }
@@ -29,6 +31,7 @@ namespace ProjectManagementAPIB.Models
         public string Source { get; set; }
         public string Marginalised { get; set; }
         public string Notes { get; set; }
-
+        [JsonIgnore]
+        public ICollection<User> Users { get; set; } = new List<User>();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using BCrypt.Net;
 using ProjectManagementAPIB.image.Models;
 
@@ -10,7 +11,9 @@ namespace ProjectManagementAPIB.Models
         [Key]
         public string Username { get; set; }
         public string Name { get; set; }
-        public string AwardCenter { get; set; }
+        public string? AwardCenter { get; set; }
+        [ForeignKey("AwardCenter")]
+        public AwardCenter AwardCenters { get; set; }
         public int RoleID { get; set; }
         [ForeignKey("RoleID")]
         public Roles Role { get; set; }
