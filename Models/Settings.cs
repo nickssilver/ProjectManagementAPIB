@@ -15,6 +15,7 @@ namespace ProjectManagementAPIB.Models
         public string TaxNo { get; set; }
         public string Contact { get; set; }
         public string Footer { get; set; }
-        
+        public string Logo { get; set; }
+
     }
 }

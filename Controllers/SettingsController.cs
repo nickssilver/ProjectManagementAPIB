@@ -41,44 +41,120 @@ namespace ProjectManagementAPIB.Controllers
         }
 
         // POST: api/Settings
+       
         [HttpPost]
-        public async Task<ActionResult<Settings>> PostSettings(Settings settings)
+        public async Task<ActionResult<Settings>> PostSettings([FromForm] SettingsRequest settingsRequest)
         {
+            // Define the folder path for storing uploaded logos
+            var logosFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "logos");
+
+            // Ensure the directory exists for saving uploaded files
+            if (!Directory.Exists(logosFolder))
+            {
+                Directory.CreateDirectory(logosFolder);
+            }
+
+            // Create a new Settings instance to store the data
+            var settings = new Settings
+            {
+                Profile = settingsRequest.Profile,
+                LegalName = settingsRequest.LegalName,
+                Address = settingsRequest.Address,
+                Email = settingsRequest.Email,
+                TaxNo = settingsRequest.TaxNo,
+                Contact = settingsRequest.Contact,
+                Footer = settingsRequest.Footer,
+            };
+
+            // Handle Logo Upload
+            if (settingsRequest.Logo != null && settingsRequest.Logo.Length > 0)
+            {
+                var originalLogoFileName = settingsRequest.Logo.FileName;
+
+                // Create a timestamped file name
+                var logoTimestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                var logoFileName = $"{Path.GetFileNameWithoutExtension(originalLogoFileName)}_{logoTimestamp}{Path.GetExtension(originalLogoFileName)}";
+
+                var logoFilePath = Path.Combine(logosFolder, logoFileName);
+
+                // Save the file to the server
+                using (var stream = new FileStream(logoFilePath, FileMode.Create))
+                {
+                    await settingsRequest.Logo.CopyToAsync(stream);
+                }
+
+                // Store relative file path in the settings model
+                settings.Logo = $"/uploads/logos/{logoFileName}";
+            }
+
+            // Save settings to the database
             _context.Settings.Add(settings);
             await _context.SaveChangesAsync();
 
+            // Return created response
             return CreatedAtAction(nameof(GetSettings), new { id = settings.ID }, settings);
         }
 
+
         // PUT: api/Settings/{id}
+        // PUT: api/Settings/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSettings(int id, Settings settings)
+        public async Task<IActionResult> PutSettings(int id, [FromForm] SettingsRequest settingsRequest)
         {
-            if (id != settings.ID)
+            // Find the existing settings
+            var settings = await _context.Settings.FindAsync(id);
+            if (settings == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
+            // Update the settings fields
+            settings.Profile = settingsRequest.Profile;
+            settings.LegalName = settingsRequest.LegalName;
+            settings.Address = settingsRequest.Address;
+            settings.Email = settingsRequest.Email;
+            settings.TaxNo = settingsRequest.TaxNo;
+            settings.Contact = settingsRequest.Contact;
+            settings.Footer = settingsRequest.Footer;
+
+            // Define the folder path for storing uploaded logos
+            var logosFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "logos");
+
+            // Ensure the directory exists for saving uploaded files
+            if (!Directory.Exists(logosFolder))
+            {
+                Directory.CreateDirectory(logosFolder);
+            }
+
+            // Handle Logo Upload
+            if (settingsRequest.Logo != null && settingsRequest.Logo.Length > 0)
+            {
+                var originalLogoFileName = settingsRequest.Logo.FileName;
+
+                // Create a timestamped file name
+                var logoTimestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                var logoFileName = $"{Path.GetFileNameWithoutExtension(originalLogoFileName)}_{logoTimestamp}{Path.GetExtension(originalLogoFileName)}";
+
+                var logoFilePath = Path.Combine(logosFolder, logoFileName);
+
+                // Save the file to the server
+                using (var stream = new FileStream(logoFilePath, FileMode.Create))
+                {
+                    await settingsRequest.Logo.CopyToAsync(stream);
+                }
+
+                // Store relative file path in the settings model
+                settings.Logo = $"/uploads/logos/{logoFileName}";
+            }
+
+            // Save changes to the database
             _context.Entry(settings).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SettingsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            // Return no content response
             return NoContent();
         }
+
 
         // DELETE: api/Settings/{id}
         [HttpDelete("{id}")]
