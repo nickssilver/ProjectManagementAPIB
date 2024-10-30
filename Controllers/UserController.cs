@@ -64,9 +64,6 @@ namespace ProjectManagementAPIB.Controllers
     .ToListAsync();
 
             return Ok(usersWithPermissions);
-
-
-
         }
 
         // GET: api/User/{username}
@@ -117,7 +114,7 @@ namespace ProjectManagementAPIB.Controllers
                 return NotFound();
             }
 
-            return Ok(user); // Return the user wrapped in Ok()
+            return Ok(user); // Return the user wrapped in Ok()
         }
 
         // POST: api/User
