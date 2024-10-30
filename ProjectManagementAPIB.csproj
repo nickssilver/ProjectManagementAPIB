@@ -33,8 +33,7 @@
 
 	<ItemGroup>
 		<Folder Include="Reports\" />
-		<Folder Include="wwwroot\uploads\docs\" />
-		<Folder Include="wwwroot\uploads\passports\" />
+		<Folder Include="wwwroot\" />
 	</ItemGroup>
 
 </Project>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectManagementAPIB.Data;
+using ProjectManagementAPIB.DTOs;
 using ProjectManagementAPIB.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,7 @@ namespace ProjectManagementAPIB.Controllers
         public async Task<ActionResult<ActivityApproval>> PostActivityApproval([FromForm] ActivityApprovalRequest activityApprovalRequest)
         {
             // Define the folder path for storing uploaded documents
-            var docsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "activity_forms");
+            var docsFolder = Path.Combine(Directory.GetCurrentDirectory(),  "uploads", "activity_forms");
 
             // Ensure the directory exists for saving uploaded files
             if (!Directory.Exists(docsFolder)) Directory.CreateDirectory(docsFolder);
@@ -100,14 +101,92 @@ namespace ProjectManagementAPIB.Controllers
 
         // PUT: api/ActivityApproval/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutActivityApproval(int id, ActivityApproval activityApproval)
+        public async Task<IActionResult> PatchActivityApproval(int id, [FromForm] ActivityApprovalDTO updateDto)
         {
-            if (id != activityApproval.ID)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest("Invalid activity approval data.");
             }
 
-            _context.Entry(activityApproval).State = EntityState.Modified;
+            // Find the existing activity approval in the database
+            var existingActivityApproval = await _context.ActivityApprovals.FirstOrDefaultAsync(a => a.ID == id);
+            if (existingActivityApproval == null)
+            {
+                return NotFound("Activity approval not found.");
+            }
+
+            // Conditionally update fields if they are provided in the DTO
+            if (!string.IsNullOrEmpty(updateDto.AwardCentre))
+            {
+                existingActivityApproval.AwardCentre = updateDto.AwardCentre;
+            }
+
+            if (!string.IsNullOrEmpty(updateDto.AwardLeader))
+            {
+                existingActivityApproval.AwardLeader = updateDto.AwardLeader;
+            }
+
+            if (!string.IsNullOrEmpty(updateDto.ActivityName))
+            {
+                existingActivityApproval.ActivityName = updateDto.ActivityName;
+            }
+
+            if (!string.IsNullOrEmpty(updateDto.ParticipantsNo))
+            {
+                existingActivityApproval.ParticipantsNo = updateDto.ParticipantsNo;
+            }
+
+            if (updateDto.ApplyDate.HasValue)
+            {
+                existingActivityApproval.ApplyDate = updateDto.ApplyDate.Value;
+            }
+
+            if (updateDto.ActivityDate.HasValue)
+            {
+                existingActivityApproval.ActivityDate = updateDto.ActivityDate.Value;
+            }
+
+            if (!string.IsNullOrEmpty(updateDto.Region))
+            {
+                existingActivityApproval.Region = updateDto.Region;
+            }
+
+            if (updateDto.Consent.HasValue)
+            {
+                existingActivityApproval.Consent = updateDto.Consent.Value;
+            }
+
+            if (!string.IsNullOrEmpty(updateDto.Assessors))
+            {
+                existingActivityApproval.Assessors = updateDto.Assessors;
+            }
+
+            if (!string.IsNullOrEmpty(updateDto.Assessors2))
+            {
+                existingActivityApproval.Assessors2 = updateDto.Assessors2;
+            }
+
+            if (!string.IsNullOrEmpty(updateDto.Assessors3))
+            {
+                existingActivityApproval.Assessors3 = updateDto.Assessors3;
+            }
+
+            if (!string.IsNullOrEmpty(updateDto.UploadForm))
+            {
+                existingActivityApproval.UploadForm = updateDto.UploadForm;
+            }
+
+            if (!string.IsNullOrEmpty(updateDto.Approval))
+            {
+                existingActivityApproval.Approval = updateDto.Approval;
+            }
+
+            if (!string.IsNullOrEmpty(updateDto.Notes))
+            {
+                existingActivityApproval.Notes = updateDto.Notes;
+            }
+
+            _context.Entry(existingActivityApproval).State = EntityState.Modified;
 
             try
             {

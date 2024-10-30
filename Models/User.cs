@@ -10,7 +10,9 @@ namespace ProjectManagementAPIB.Models
         [Key]
         public string Username { get; set; }
         public string Name { get; set; }
-        public string AwardCenter { get; set; }
+        public string? AwardCenter { get; set; }
+        [ForeignKey("AwardCenter")]
+        public AwardCenter AwardCenters { get; set; }
         public int RoleID { get; set; }
         [ForeignKey("RoleID")]
         public Roles Role { get; set; }

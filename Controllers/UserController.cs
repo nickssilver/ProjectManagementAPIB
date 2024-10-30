@@ -76,12 +76,29 @@ namespace ProjectManagementAPIB.Controllers
         {
             var user = await _context.Users
                 .Include(u => u.Role) // Include the Role of the User
+                .Include(u => u.AwardCenters) // Include the Award Center
                 .Select(u => new
                 {
                     u.Name,
                     u.Gender,
                     u.IdNo,
-                    u.AwardCenter,
+                    AwardCenter = u.AwardCenter != null ? new
+                    {
+                        u.AwardCenters.InstitutionID,
+                        u.AwardCenters.InstitutionName,
+                        u.AwardCenters.InstitutionContact,
+                        u.AwardCenters.InstitutionEmail,
+                        u.AwardCenters.County,
+                        u.AwardCenters.AwardCType,
+                        u.AwardCenters.ContactNumber,
+                        u.AwardCenters.ContactPerson,
+                        u.AwardCenters.Marginalised,
+                        u.AwardCenters.LicenseEndDate,
+                        u.AwardCenters.LicenseStartDate,
+                        u.AwardCenters.Region,
+                        u.AwardCenters.Notes,
+
+                    } : null,
                     u.PhoneNo,
                     u.Email,
                     u.Username,

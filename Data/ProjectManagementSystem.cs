@@ -81,6 +81,14 @@ namespace ProjectManagementAPIB.Data
                .WithMany(r => r.Users)
                .HasForeignKey(u => u.RoleID);
 
+            // for more on user 
+            modelBuilder.Entity<User>()
+              .HasOne(u => u.AwardCenters)
+              .WithMany(a => a.Users)
+              .HasForeignKey(u => u.AwardCenter);
+
+            //for participats
+
             // PermissionRole: Many-to-many relationship between Permission and Role
             modelBuilder.Entity<PermissionRoles>()
                 .HasKey(pr => new { pr.PermissionId, pr.RoleId });

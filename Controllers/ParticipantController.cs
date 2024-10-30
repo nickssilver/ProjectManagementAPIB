@@ -49,8 +49,8 @@ public class ParticipantsController : ControllerBase
     {
         
         // Define the folder paths for storing passport photos and documents
-        var passportFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "passports");
-        var docsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "docs");
+        var passportFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads", "passports");
+        var docsFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads", "docs");
 
         // Ensure directories exist for saving uploaded files
         if (!Directory.Exists(passportFolder)) Directory.CreateDirectory(passportFolder);
