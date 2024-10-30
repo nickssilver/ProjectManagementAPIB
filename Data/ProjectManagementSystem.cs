@@ -80,12 +80,13 @@ namespace ProjectManagementAPIB.Data
                .HasOne(u => u.Role)
                .WithMany(r => r.Users)
                .HasForeignKey(u => u.RoleID);
-
+               
             // To reference the award center to the user
             modelBuilder.Entity<User>()
            .HasOne(u => u.AwardCenters)
            .WithMany(a => a.Users)
            .HasForeignKey(u => u.AwardCenter);
+
 
             // PermissionRole: Many-to-many relationship between Permission and Role
             modelBuilder.Entity<PermissionRoles>()

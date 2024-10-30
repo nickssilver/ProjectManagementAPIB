@@ -46,7 +46,7 @@ namespace ProjectManagementAPIB.Controllers
         public async Task<ActionResult<Settings>> PostSettings([FromForm] SettingsRequest settingsRequest)
         {
             // Define the folder path for storing uploaded logos
-            var logosFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "logos");
+            var logosFolder = Path.Combine(Directory.GetCurrentDirectory(),"uploads", "logos");
 
             // Ensure the directory exists for saving uploaded files
             if (!Directory.Exists(logosFolder))
@@ -118,7 +118,7 @@ namespace ProjectManagementAPIB.Controllers
             settings.Footer = settingsRequest.Footer;
 
             // Define the folder path for storing uploaded logos
-            var logosFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "logos");
+            var logosFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads", "logos");
 
             // Ensure the directory exists for saving uploaded files
             if (!Directory.Exists(logosFolder))
