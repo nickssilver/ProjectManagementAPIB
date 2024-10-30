@@ -1152,7 +1152,7 @@ namespace ProjectManagementAPIB.Migrations
 
                     b.Property<string>("AwardCenter")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -1183,6 +1183,8 @@ namespace ProjectManagementAPIB.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Username");
+
+                    b.HasIndex("AwardCenter");
 
                     b.HasIndex("RoleID");
 
@@ -1255,11 +1257,19 @@ namespace ProjectManagementAPIB.Migrations
 
             modelBuilder.Entity("ProjectManagementAPIB.Models.User", b =>
                 {
+                    b.HasOne("ProjectManagementAPIB.Models.AwardCenter", "AwardCenters")
+                        .WithMany("Users")
+                        .HasForeignKey("AwardCenter")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ProjectManagementAPIB.image.Models.Roles", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AwardCenters");
 
                     b.Navigation("Role");
                 });
@@ -1281,6 +1291,11 @@ namespace ProjectManagementAPIB.Migrations
                     b.Navigation("Permission");
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("ProjectManagementAPIB.Models.AwardCenter", b =>
+                {
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("ProjectManagementAPIB.Models.County", b =>

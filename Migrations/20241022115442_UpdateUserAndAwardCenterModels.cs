@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectManagementAPIB.Migrations
 {
     /// <inheritdoc />
-    public partial class newmigration : Migration
+    public partial class UpdateUserAndAwardCenterModels : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -641,7 +641,7 @@ namespace ProjectManagementAPIB.Migrations
                 {
                     Username = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AwardCenter = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AwardCenter = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RoleID = table.Column<int>(type: "int", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -653,6 +653,12 @@ namespace ProjectManagementAPIB.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Username);
+                    table.ForeignKey(
+                        name: "FK_Users_AwardCenters_AwardCenter",
+                        column: x => x.AwardCenter,
+                        principalTable: "AwardCenters",
+                        principalColumn: "InstitutionID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Users_Roles_RoleID",
                         column: x => x.RoleID,
@@ -672,6 +678,11 @@ namespace ProjectManagementAPIB.Migrations
                 column: "CountyID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Users_AwardCenter",
+                table: "Users",
+                column: "AwardCenter");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleID",
                 table: "Users",
                 column: "RoleID");
@@ -685,9 +696,6 @@ namespace ProjectManagementAPIB.Migrations
 
             migrationBuilder.DropTable(
                 name: "ActivityReporting");
-
-            migrationBuilder.DropTable(
-                name: "AwardCenters");
 
             migrationBuilder.DropTable(
                 name: "AwardCenterStages");
@@ -787,6 +795,9 @@ namespace ProjectManagementAPIB.Migrations
 
             migrationBuilder.DropTable(
                 name: "Counties");
+
+            migrationBuilder.DropTable(
+                name: "AwardCenters");
 
             migrationBuilder.DropTable(
                 name: "Roles");
