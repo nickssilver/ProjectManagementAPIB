@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ProjectManagementAPIB.Data;
 using ProjectManagementAPIB.Models;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,12 +44,44 @@ namespace ProjectManagementAPIB.Controllers
 
         // POST: api/ActivityReporting
         [HttpPost]
-        public async Task<ActionResult<ActivityReporting>> PostActivityReport(ActivityReporting activityReport)
-        {
-            _context.ActivityReporting.Add(activityReport);
-            await _context.SaveChangesAsync();
+        public async Task<ActionResult<ActivityReporting>> PostActivityReport([FromForm] ActivityReportingRequest activityReportRequest)
+        { 
+              var uploadReportFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads", "upload-report");
 
-            return CreatedAtAction(nameof(GetActivityReport), new { id = activityReport.ID }, activityReport);
+            // Ensure directories exist for saving uploaded files
+            if (!Directory.Exists(uploadReportFolder)) Directory.CreateDirectory(uploadReportFolder);
+
+                var activityReporting = new ActivityReporting
+                {
+                    AwardCentre = activityReportRequest.AwardCentre,
+                    AwardLeader = activityReportRequest.AwardLeader,
+                    ActivityName = activityReportRequest.ActivityName,
+                    ParticipantsNo = activityReportRequest.ParticipantsNo,
+                    Region = activityReportRequest.Region,
+                    Notes = activityReportRequest.Notes,
+                };
+
+            if (activityReportRequest.UploadReport != null && activityReportRequest.UploadReport.Length > 0)
+            {
+                var originalFileName = activityReportRequest.UploadReport.FileName;
+                    var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                    var uploadReportFileName = $"{Path.GetFileNameWithoutExtension(originalFileName)}_{timestamp}{Path.GetExtension(originalFileName)}";
+                    var uploadReport = Path.Combine(uploadReportFolder, uploadReportFileName);
+
+                // Save file to server
+                using (var stream = new FileStream(uploadReport, FileMode.Create))
+                    {
+                    await activityReportRequest.UploadReport.CopyToAsync(stream);
+                    }
+
+                activityReporting.UploadReport = $"/uploads/upload-report/{uploadReportFileName}";
+
+            }
+                _context.ActivityReporting.Add(activityReporting);
+                await _context.SaveChangesAsync();
+
+                // Return created response
+                return CreatedAtAction("GetActivityReport", new { id = activityReporting.ID }, activityReporting);
         }
 
         // PUT: api/ActivityReporting/5
