@@ -42,12 +42,43 @@ namespace ProjectManagementAPIB.Controllers
 
         // POST: api/ParticipantActivity
         [HttpPost]
-        public async Task<ActionResult<ParticipantActivity>> PostParticipantProject(ParticipantActivity participantProject)
+        public async Task<ActionResult<ParticipantActivity>> PostParticipantProject([FromForm] ParticipantActivityRequest participantActivityRequest)
         {
-            _context.ParticipantActivity.Add(participantProject);
+            var medicalFormFolder = Path.Combine(Directory.GetCurrentDirectory(), "uploads", "medical-forms");
+
+            // Ensure directories exist for saving uploaded files
+            if (!Directory.Exists(medicalFormFolder)) Directory.CreateDirectory(medicalFormFolder);
+
+            var participantActivity = new ParticipantActivity
+            {
+                AdminNumber = participantActivityRequest.AdminNumber,
+                StudentName = participantActivityRequest.StudentName,
+                AwardLevel = participantActivityRequest.StudentName,
+                AwardCenter = participantActivityRequest.AwardCenter,
+                ActivityName = participantActivityRequest.ActivityName,
+                Notes = participantActivityRequest.Notes,
+            };
+
+            if (participantActivityRequest.MedicalForm != null && participantActivityRequest.MedicalForm.Length > 0)
+            {
+                var originalFileName = participantActivityRequest.MedicalForm.FileName;
+                var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                var medicalFormFileName = $"{Path.GetFileNameWithoutExtension(originalFileName)}_{timestamp}{Path.GetExtension(originalFileName)}";
+                var medicalFormtFilePath = Path.Combine(medicalFormFolder, medicalFormFileName);
+
+                // Save file to server
+                using (var stream = new FileStream(medicalFormtFilePath, FileMode.Create))
+                {
+                    await participantActivityRequest.MedicalForm.CopyToAsync(stream);
+                }
+                participantActivity.MedicalForm = $"/uploads/passports/{medicalFormFileName}";
+
+            }
+            _context.ParticipantActivity.Add(participantActivity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetParticipantProject), new { id = participantProject.ID }, participantProject);
+            // Return created response
+            return CreatedAtAction("GetParticipantProject", new { id = participantActivity.AdminNumber }, participantActivity);
         }
 
         // PUT: api/ParticipantActivity/{id}
