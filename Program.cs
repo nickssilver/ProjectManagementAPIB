@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using ProjectManagementAPIB.Data;
-//using ProjectManagementAPIB.Services; 
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,9 +11,6 @@ builder.Services.AddDbContext<ProjectManagementContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectManagementConnection")));
 
 builder.Services.AddControllers();
-
-// Register ISynchronizationService and its implementation
-//builder.Services.AddScoped<ISynchronizationService, SynchronizationService>();
 
 // CORS Configuration
 builder.Services.AddCors(options =>
@@ -71,10 +67,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Enable HTTPS redirection in non-development environments
+if (!app.Environment.IsDevelopment())
+{
+    //app.UseHttpsRedirection();
+}
+
 app.UseCors("AllowAll");
 
-// Commented out for HTTP use only
-// app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
