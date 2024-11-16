@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProjectManagementAPIB.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateUserAndAwardCenterModels : Migration
+    public partial class finalmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,6 +29,8 @@ namespace ProjectManagementAPIB.Migrations
                     Assessors2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Assessors3 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UploadForm = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UploadForm2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UploadForm3 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Approval = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -49,6 +51,8 @@ namespace ProjectManagementAPIB.Migrations
                     ParticipantsNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UploadReport = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UploadReport2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UploadReport3 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>

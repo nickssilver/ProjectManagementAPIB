@@ -91,6 +91,48 @@ namespace ProjectManagementAPIB.Controllers
                 activityApproval.UploadForm = $"/uploads/activity_forms/{docFileName}";
             }
 
+            //second document upload
+            if (activityApprovalRequest.UploadForm2 != null && activityApprovalRequest.UploadForm2.Length > 0)
+            {
+                var originalDocFileName = activityApprovalRequest.UploadForm2.FileName;
+
+                // Create a timestamped file name
+                var docTimestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                var docFileName = $"{Path.GetFileNameWithoutExtension(originalDocFileName)}_{docTimestamp}{Path.GetExtension(originalDocFileName)}";
+
+                var docFilePath = Path.Combine(docsFolder, docFileName);
+
+                // Save the file to the server
+                using (var stream = new FileStream(docFilePath, FileMode.Create))
+                {
+                    await activityApprovalRequest.UploadForm2.CopyToAsync(stream);
+                }
+
+                // Store relative file path in the activityApproval model
+                activityApproval.UploadForm = $"/uploads/activity_forms/{docFileName}";
+            }
+
+            //third upload
+            if (activityApprovalRequest.UploadForm3 != null && activityApprovalRequest.UploadForm3.Length > 0)
+            {
+                var originalDocFileName = activityApprovalRequest.UploadForm3.FileName;
+
+                // Create a timestamped file name
+                var docTimestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                var docFileName = $"{Path.GetFileNameWithoutExtension(originalDocFileName)}_{docTimestamp}{Path.GetExtension(originalDocFileName)}";
+
+                var docFilePath = Path.Combine(docsFolder, docFileName);
+
+                // Save the file to the server
+                using (var stream = new FileStream(docFilePath, FileMode.Create))
+                {
+                    await activityApprovalRequest.UploadForm3.CopyToAsync(stream);
+                }
+
+                // Store relative file path in the activityApproval model
+                activityApproval.UploadForm3 = $"/uploads/activity_forms/{docFileName}";
+            }
+
             // Save activity approval to the database
             _context.ActivityApprovals.Add(activityApproval);
             await _context.SaveChangesAsync();
