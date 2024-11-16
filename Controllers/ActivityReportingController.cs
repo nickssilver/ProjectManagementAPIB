@@ -77,7 +77,41 @@ namespace ProjectManagementAPIB.Controllers
                 activityReporting.UploadReport = $"/uploads/upload-report/{uploadReportFileName}";
 
             }
-                _context.ActivityReporting.Add(activityReporting);
+            if (activityReportRequest.UploadReport2 != null && activityReportRequest.UploadReport2.Length > 0)
+            {
+                var originalFileName = activityReportRequest.UploadReport2.FileName;
+                var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                var uploadReportFileName = $"{Path.GetFileNameWithoutExtension(originalFileName)}_{timestamp}{Path.GetExtension(originalFileName)}";
+                var uploadReport = Path.Combine(uploadReportFolder, uploadReportFileName);
+
+                // Save file to server
+                using (var stream = new FileStream(uploadReport, FileMode.Create))
+                {
+                    await activityReportRequest.UploadReport2.CopyToAsync(stream);
+                }
+
+                activityReporting.UploadReport2 = $"/uploads/upload-report/{uploadReportFileName}";
+
+            }
+
+            if (activityReportRequest.UploadReport3 != null && activityReportRequest.UploadReport3.Length > 0)
+            {
+                var originalFileName = activityReportRequest.UploadReport3.FileName;
+                var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                var uploadReportFileName = $"{Path.GetFileNameWithoutExtension(originalFileName)}_{timestamp}{Path.GetExtension(originalFileName)}";
+                var uploadReport = Path.Combine(uploadReportFolder, uploadReportFileName);
+
+                // Save file to server
+                using (var stream = new FileStream(uploadReport, FileMode.Create))
+                {
+                    await activityReportRequest.UploadReport3.CopyToAsync(stream);
+                }
+
+                activityReporting.UploadReport3 = $"/uploads/upload-report/{uploadReportFileName}";
+
+            }
+
+            _context.ActivityReporting.Add(activityReporting);
                 await _context.SaveChangesAsync();
 
                 // Return created response

@@ -12,8 +12,8 @@ using ProjectManagementAPIB.Data;
 namespace ProjectManagementAPIB.Migrations
 {
     [DbContext(typeof(ProjectManagementContext))]
-    [Migration("20241022115442_UpdateUserAndAwardCenterModels")]
-    partial class UpdateUserAndAwardCenterModels
+    [Migration("20241116083341_finalmigration")]
+    partial class finalmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,6 +86,14 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UploadForm2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UploadForm3")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ID");
 
                     b.ToTable("ActivityApprovals");
@@ -124,6 +132,14 @@ namespace ProjectManagementAPIB.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UploadReport")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UploadReport2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UploadReport3")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
