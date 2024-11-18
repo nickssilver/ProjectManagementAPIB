@@ -14,6 +14,8 @@ namespace ProjectManagementAPIB.Models
         public string ParticipantsNo { get; set; }
         public string Region { get; set; }
         public string UploadReport { get; set; }
+        public string UploadReport2 { get; set; }
+        public string UploadReport3 { get; set; }
         public string Notes { get; set; }
     }
 }

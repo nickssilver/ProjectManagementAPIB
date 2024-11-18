@@ -83,6 +83,14 @@ namespace ProjectManagementAPIB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UploadForm2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UploadForm3")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ID");
 
                     b.ToTable("ActivityApprovals");
@@ -121,6 +129,14 @@ namespace ProjectManagementAPIB.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UploadReport")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UploadReport2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UploadReport3")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

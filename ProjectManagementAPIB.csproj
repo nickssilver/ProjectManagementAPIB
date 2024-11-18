@@ -33,11 +33,7 @@
 
 	<ItemGroup>
 		<Folder Include="Reports\" />
-		<Folder Include="uploads\activity_forms\" />
-		<Folder Include="uploads\docs\" />
-		<Folder Include="uploads\medical-forms\" />
-		<Folder Include="uploads\passports\" />
-		<Folder Include="uploads\upload-report\" />
+		<Folder Include="uploads\" />
 		<Folder Include="wwwroot\" />
 	</ItemGroup>
 
