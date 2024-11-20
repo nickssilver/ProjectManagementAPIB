@@ -24,7 +24,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://62.24.112.15:81", // HTTPS on port 81
+      "applicationUrl": "http://192.168.100.28:5248", // HTTPS on port 81
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       }
