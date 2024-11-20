@@ -109,7 +109,7 @@ namespace ProjectManagementAPIB.Controllers
                 }
 
                 // Store relative file path in the activityApproval model
-                activityApproval.UploadForm = $"/uploads/activity_forms/{docFileName}";
+                activityApproval.UploadForm2 = $"/uploads/activity_forms/{docFileName}";
             }
 
             //third upload
