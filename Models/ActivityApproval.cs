@@ -23,8 +23,8 @@ namespace ProjectManagementAPIB.Models
         public string Assessors2 { get; set; }
         public string Assessors3 { get; set; }
         public string UploadForm { get; set; }
-        public string UploadForm2 { get; set; }
-        public string UploadForm3 { get; set; }
+        public string? UploadForm2 { get; set; }
+        public string? UploadForm3 { get; set; }
         public string Approval { get; set; }
         public string Notes { get; set; }
     }
