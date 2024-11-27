@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProjectManagementAPIB.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("Api/[controller]")]
     [ApiController]
     public class ActivityApprovalController : ControllerBase
     {
