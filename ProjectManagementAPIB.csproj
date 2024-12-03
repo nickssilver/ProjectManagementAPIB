@@ -18,6 +18,72 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="wwwroot\uploads\activity_forms\20240724_211611_0000_20241120_130454.png" />
+	  <None Remove="wwwroot\uploads\activity_forms\20240724_211611_0000_20241120_130847.png" />
+	  <None Remove="wwwroot\uploads\activity_forms\20240724_211611_0000_20241120_131357.png" />
+	  <None Remove="wwwroot\uploads\activity_forms\20240724_211611_0000_20241120_131630.png" />
+	  <None Remove="wwwroot\uploads\activity_forms\20240724_213747_0000_20241120_130454.png" />
+	  <None Remove="wwwroot\uploads\activity_forms\20240724_213747_0000_20241120_130847.png" />
+	  <None Remove="wwwroot\uploads\activity_forms\20240724_213747_0000_20241120_131357.png" />
+	  <None Remove="wwwroot\uploads\activity_forms\20240724_213747_0000_20241120_131630.png" />
+	  <None Remove="wwwroot\uploads\activity_forms\20240724_214036_0000_20241120_131357.png" />
+	  <None Remove="wwwroot\uploads\activity_forms\20240724_214036_0000_20241120_131630.png" />
+	  <None Remove="wwwroot\uploads\activity_forms\ajs_20241203_123224.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\apartment-1_20241120_130454.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\apartment-1_20241120_130847.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\Award Centers_20241112_114351.xlsx" />
+	  <None Remove="wwwroot\uploads\activity_forms\back_20241122_103537.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\back_20241122_104307.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\back_20241125_165505.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\crm dashboard_20241203_123223.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\EASTERN REGION AWARD CENTRES REPORTING%281%29_20241111_232027.docx" />
+	  <None Remove="wwwroot\uploads\activity_forms\EASTERN REGION AWARD CENTRES REPORTING_20241111_223011.docx" />
+	  <None Remove="wwwroot\uploads\activity_forms\Email Banner Director_20241122_103537.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\Email Banner Director_20241125_165505.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\Email Banner_20241122_103432.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\Email Banner_20241122_103537.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\ffmpeg_20241120_132917.dll" />
+	  <None Remove="wwwroot\uploads\activity_forms\ffmpeg_20241120_141925.dll" />
+	  <None Remove="wwwroot\uploads\activity_forms\ffmpeg_20241125_165156.dll" />
+	  <None Remove="wwwroot\uploads\activity_forms\ffmpeg_20241125_165229.dll" />
+	  <None Remove="wwwroot\uploads\activity_forms\front_20241122_103432.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\front_20241122_104307.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\front_20241125_165505.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\icudtl_20241120_132917.dat" />
+	  <None Remove="wwwroot\uploads\activity_forms\icudtl_20241120_141925.dat" />
+	  <None Remove="wwwroot\uploads\activity_forms\icudtl_20241125_165156.dat" />
+	  <None Remove="wwwroot\uploads\activity_forms\icudtl_20241125_165229.dat" />
+	  <None Remove="wwwroot\uploads\activity_forms\Kelvin Huria CV_20241122_104307.pdf" />
+	  <None Remove="wwwroot\uploads\activity_forms\libGLESv2_20241120_132917.dll" />
+	  <None Remove="wwwroot\uploads\activity_forms\libGLESv2_20241120_141925.dll" />
+	  <None Remove="wwwroot\uploads\activity_forms\libGLESv2_20241125_165156.dll" />
+	  <None Remove="wwwroot\uploads\activity_forms\libGLESv2_20241125_165229.dll" />
+	  <None Remove="wwwroot\uploads\activity_forms\logbook_20241112_003322.pdf" />
+	  <None Remove="wwwroot\uploads\activity_forms\modals_20241203_123223.jpg" />
+	  <None Remove="wwwroot\uploads\activity_forms\newlogo_20241120_131703.png" />
+	  <None Remove="wwwroot\uploads\activity_forms\profile_20241120_131703.jpeg" />
+	  <None Remove="wwwroot\uploads\activity_forms\SDH.eng.HI_20241031_100816.srt" />
+	  <None Remove="wwwroot\uploads\activity_forms\SOUTH RIFT-2024- FOR DASHBOARD %281%29_20241112_102835.xlsx" />
+	  <None Remove="wwwroot\uploads\activity_forms\SOUTH RIFT-2024- FOR DASHBOARD %281%29_20241112_123841.xlsx" />
+	  <None Remove="wwwroot\uploads\activity_forms\STATISTICAL RETURNS FOR CENTRAL REGION 22ND JULY 2024[1]%282%29_20241111_224128.docx" />
+	  <None Remove="wwwroot\uploads\docs\back_20241115_105211.jpg" />
+	  <None Remove="wwwroot\uploads\docs\back_20241203_054811.jpg" />
+	  <None Remove="wwwroot\uploads\docs\ParticipantAwards%281%29_20241112_122855.xlsx" />
+	  <None Remove="wwwroot\uploads\docs\RP-M8QTWK3RE-RECEIPT_20241115_103450.pdf" />
+	  <None Remove="wwwroot\uploads\docs\view ticket_20241203_115934.jpg" />
+	  <None Remove="wwwroot\uploads\medical-forms\crm dashboard_20241127_222702.jpg" />
+	  <None Remove="wwwroot\uploads\medical-forms\ParticipantAwards%281%29_20241112_113449.xlsx" />
+	  <None Remove="wwwroot\uploads\medical-forms\ParticipantAwards_20241112_124832.xlsx" />
+	  <None Remove="wwwroot\uploads\medical-forms\partici_20241203_092855.jpg" />
+	  <None Remove="wwwroot\uploads\medical-forms\users crm_20241203_101102.jpg" />
+	  <None Remove="wwwroot\uploads\passports\back_20241115_103450.jpg" />
+	  <None Remove="wwwroot\uploads\passports\Black Gold Elegant Personal Profile Linkedin Banner_20241112_122855.png" />
+	  <None Remove="wwwroot\uploads\passports\front_20241115_105211.jpg" />
+	  <None Remove="wwwroot\uploads\upload-report\ParticipantAwards%283%29_20241112_125107.xlsx" />
+	  <None Remove="wwwroot\uploads\upload-report\ParticipantAwards_20241112_113854.xlsx" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.17" />
@@ -33,8 +99,17 @@
 
 	<ItemGroup>
 		<Folder Include="Reports\" />
-		<Folder Include="uploads\" />
-		<Folder Include="wwwroot\" />
+		<Folder Include="wwwroot\uploads\" />
+		<Folder Include="wwwroot\uploads\docs\" />
+		<Folder Include="wwwroot\uploads\medical-forms\" />
+		<Folder Include="wwwroot\uploads\passports\" />
+		<Folder Include="wwwroot\uploads\upload-report\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\uploads\activity_forms\5-Year-Warranty-Email-Banner_20241203_123846.png" />
+	  <None Include="wwwroot\uploads\activity_forms\COP-JKBSJJM8-Memorandum_20241203_123846.pdf" />
+	  <None Include="wwwroot\uploads\activity_forms\LOGBOOK_20241203_123846.jpg" />
 	</ItemGroup>
 
 </Project>
