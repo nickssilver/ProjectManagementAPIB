@@ -33,8 +33,12 @@
 
 	<ItemGroup>
 		<Folder Include="Reports\" />
-		<Folder Include="uploads\" />
-		<Folder Include="wwwroot\" />
+		<Folder Include="Uploads\" />
+		<Folder Include="Uploads\activity_forms\" />
+		<Folder Include="Uploads\docs\" />
+		<Folder Include="Uploads\medical-forms\" />
+		<Folder Include="Uploads\passports\" />
+		<Folder Include="Uploads\upload-report\" />
 	</ItemGroup>
 
 </Project>

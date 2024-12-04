@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using ProjectManagementAPIB.Data;
 using System.Text;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,6 +60,13 @@ builder.Services.AddSwaggerGen();
 
 // Build the app
 var app = builder.Build();
+
+// Serve static files from the "Uploads" directory
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
+    RequestPath = "/Uploads" // Matches the stored relative path in the database
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
