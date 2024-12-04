@@ -195,6 +195,10 @@ namespace ProjectManagementAPIB.Controllers
                 existingUser.Name = userDto.Name;
             }
 
+            if (!string.IsNullOrEmpty(userDto.AwardCenter))
+            {
+                existingUser.AwardCenter = userDto.AwardCenter;
+            }
             if (userDto.ApprovalStatus >= 0) // Assuming 0 and positive numbers are valid
             {
                 existingUser.ApprovalStatus = userDto.ApprovalStatus;

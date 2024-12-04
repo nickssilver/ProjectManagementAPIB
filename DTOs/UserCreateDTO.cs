@@ -43,6 +43,7 @@ namespace ProjectManagementAPIB.DTOs
         public int? RoleID { get; set; } // Optional (nullable)
 
         public string? Gender { get; set; } // Optional (nullable)
+        public string? AwardCenter { get; set; } // Optional (nullable)
 
         public string? IdNo { get; set; } // Optional (nullable)
 
