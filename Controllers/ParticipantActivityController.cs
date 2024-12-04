@@ -71,7 +71,7 @@ namespace ProjectManagementAPIB.Controllers
                 {
                     await participantActivityRequest.MedicalForm.CopyToAsync(stream);
                 }
-                participantActivity.MedicalForm = $"/uploads/passports/{medicalFormFileName}";
+                participantActivity.MedicalForm = $"/Uploads/passports/{medicalFormFileName}";
 
             }
             _context.ParticipantActivity.Add(participantActivity);

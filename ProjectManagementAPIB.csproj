@@ -99,17 +99,12 @@
 
 	<ItemGroup>
 		<Folder Include="Reports\" />
-		<Folder Include="wwwroot\uploads\" />
-		<Folder Include="wwwroot\uploads\docs\" />
-		<Folder Include="wwwroot\uploads\medical-forms\" />
-		<Folder Include="wwwroot\uploads\passports\" />
-		<Folder Include="wwwroot\uploads\upload-report\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="wwwroot\uploads\activity_forms\5-Year-Warranty-Email-Banner_20241203_123846.png" />
-	  <None Include="wwwroot\uploads\activity_forms\COP-JKBSJJM8-Memorandum_20241203_123846.pdf" />
-	  <None Include="wwwroot\uploads\activity_forms\LOGBOOK_20241203_123846.jpg" />
+		<Folder Include="Uploads\" />
+		<Folder Include="Uploads\activity_forms\" />
+		<Folder Include="Uploads\docs\" />
+		<Folder Include="Uploads\medical-forms\" />
+		<Folder Include="Uploads\passports\" />
+		<Folder Include="Uploads\upload-report\" />
 	</ItemGroup>
 
 </Project>

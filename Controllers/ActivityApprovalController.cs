@@ -47,7 +47,7 @@ namespace ProjectManagementAPIB.Controllers
         public async Task<ActionResult<ActivityApproval>> PostActivityApproval([FromForm] ActivityApprovalRequest activityApprovalRequest)
         {
             // Define the folder path for storing uploaded documents
-            var docsFolder = Path.Combine(Directory.GetCurrentDirectory(),  "uploads", "activity_forms");
+            var docsFolder = Path.Combine(Directory.GetCurrentDirectory(),  "Uploads", "activity_forms");
 
             // Ensure the directory exists for saving uploaded files
             if (!Directory.Exists(docsFolder)) Directory.CreateDirectory(docsFolder);
@@ -88,7 +88,7 @@ namespace ProjectManagementAPIB.Controllers
                 }
 
                 // Store relative file path in the activityApproval model
-                activityApproval.UploadForm = $"/uploads/activity_forms/{docFileName}";
+                activityApproval.UploadForm = $"/Uploads/activity_forms/{docFileName}";
             }
 
             //second document upload
@@ -109,7 +109,7 @@ namespace ProjectManagementAPIB.Controllers
                 }
 
                 // Store relative file path in the activityApproval model
-                activityApproval.UploadForm2 = $"/uploads/activity_forms/{docFileName}";
+                activityApproval.UploadForm2 = $"/Uploads/activity_forms/{docFileName}";
             }
 
             //third upload
@@ -130,7 +130,7 @@ namespace ProjectManagementAPIB.Controllers
                 }
 
                 // Store relative file path in the activityApproval model
-                activityApproval.UploadForm3 = $"/uploads/activity_forms/{docFileName}";
+                activityApproval.UploadForm3 = $"/Uploads/activity_forms/{docFileName}";
             }
 
             // Save activity approval to the database
