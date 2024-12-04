@@ -39,12 +39,29 @@ namespace ProjectManagementAPIB.Controllers
     .Include(u => u.Role)                       // Include the Role of the User
         .ThenInclude(r => r.PermissionRoles)    // Include the PermissionRoles of the Role
             .ThenInclude(pr => pr.Permission)   // Include the Permissions of the PermissionRoles
+    .Include(u => u.AwardCenters)
     .Select(u => new
     {
         u.Name,
         u.Gender,
         u.IdNo,
-        u.AwardCenter,
+        AwardCenter = u.AwardCenter != null ? new
+        {
+            u.AwardCenters.InstitutionID,
+            u.AwardCenters.InstitutionName,
+            u.AwardCenters.InstitutionContact,
+            u.AwardCenters.InstitutionEmail,
+            u.AwardCenters.County,
+            u.AwardCenters.AwardCType,
+            u.AwardCenters.ContactNumber,
+            u.AwardCenters.ContactPerson,
+            u.AwardCenters.Marginalised,
+            u.AwardCenters.LicenseEndDate,
+            u.AwardCenters.LicenseStartDate,
+            u.AwardCenters.Region,
+            u.AwardCenters.Notes,
+
+        } : null,
         u.PhoneNo,
         u.Email,
         u.Username,
