@@ -63,6 +63,7 @@ namespace ProjectManagementAPIB.Controllers
             participantAward.ExpectedEndDate = updatedParticipantAward.ExpectedEndDate;
             participantAward.ActualEndDate = updatedParticipantAward.ActualEndDate;
             participantAward.Status = updatedParticipantAward.Status;
+            participantAward.CertNo = updatedParticipantAward.CertNo;
             participantAward.Notes = updatedParticipantAward.Notes;
 
             _context.ParticipantAwards.Update(participantAward);

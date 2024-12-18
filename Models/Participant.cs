@@ -29,6 +29,7 @@ namespace ProjectManagementAPIB.Models
         public string PaymentStatus { get; set; }
         public string Marginalised { get; set; }
         public string AtRisk { get; set; }
+        public string? Orb { get; set; }
         public string DocUpload { get; set; }
 
         public string Notes { get; set; }
